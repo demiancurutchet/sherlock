@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>UX Agent</title>
+<title>Sherlock · UX Agent</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -12,30 +13,42 @@
   --text:#1a1a1a;--text2:#6b6b6b;--text3:#9b9b9b;
   --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
   --accent:#4f46e5;--accent-light:#eef2ff;--accent-mid:#c7d2fe;
-  --radius:8px;--radius-lg:12px;
-  --success:#059669;
+  --radius:8px;--radius-lg:12px;--success:#059669;
 }
-@media(prefers-color-scheme:dark){:root{
+.dark{
   --bg:#1c1c1c;--bg2:#242424;--bg3:#2c2c2c;
   --text:#e8e8e8;--text2:#a0a0a0;--text3:#606060;
   --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
   --accent-light:#1e1b4b;--accent-mid:#3730a3;
-}}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);height:100vh;display:flex;align-items:center;justify-content:center;padding:12px}
-.shell{display:flex;width:100%;max-width:1100px;height:660px;border:0.5px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.08)}
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);height:100vh;display:flex;align-items:center;justify-content:center;padding:12px;transition:background 0.2s,color 0.2s}
+.shell{display:flex;width:100%;max-width:1100px;height:680px;border:0.5px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.08)}
 
 /* SIDEBAR */
-.sidebar{width:220px;min-width:220px;border-right:0.5px solid var(--border);display:flex;flex-direction:column;background:var(--bg2)}
-.sidebar-header{padding:16px 14px 12px;border-bottom:0.5px solid var(--border)}
+.sidebar{width:230px;min-width:230px;border-right:0.5px solid var(--border);display:flex;flex-direction:column;background:var(--bg2)}
+.sidebar-header{padding:14px 14px 10px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .logo{font-size:14px;font-weight:600;color:var(--text);letter-spacing:-0.02em}
 .logo span{color:var(--accent)}
-.logo-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.logo-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.dark-toggle{background:none;border:0.5px solid var(--border2);border-radius:6px;padding:5px 7px;cursor:pointer;color:var(--text2);font-size:15px;display:flex;align-items:center}
+.dark-toggle:hover{background:var(--bg3)}
 .sidebar-section{padding:12px 10px 4px;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em}
-.proj-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text2);margin:1px 6px;transition:background 0.12s}
+.proj-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text2);margin:1px 6px;transition:background 0.12s;position:relative}
 .proj-item:hover{background:var(--bg)}
 .proj-item.active{background:var(--bg);color:var(--text);font-weight:500}
 .proj-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.proj-conn{font-size:10px;color:var(--text3);margin-left:auto}
+.proj-name-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proj-edit-btn{opacity:0;background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:0 2px}
+.proj-item:hover .proj-edit-btn{opacity:1}
+.proj-name-input{flex:1;background:var(--bg);border:0.5px solid var(--accent);border-radius:4px;padding:2px 5px;font-size:13px;color:var(--text);font-family:inherit;outline:none}
+
+.proj-chats{margin:0 6px 2px 24px}
+.chat-item{display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:5px;cursor:pointer;font-size:12px;color:var(--text3);transition:background 0.1s}
+.chat-item:hover{background:var(--bg);color:var(--text2)}
+.chat-item.active-chat{color:var(--accent);font-weight:500}
+.new-chat-btn{display:flex;align-items:center;gap:4px;padding:3px 8px;font-size:11px;color:var(--text3);cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.new-chat-btn:hover{color:var(--accent)}
+
 .new-proj-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;margin:4px 6px;border-radius:6px;font-size:12px;color:var(--text3);cursor:pointer;border:none;background:none;width:calc(100% - 12px);text-align:left;transition:all 0.12s}
 .new-proj-btn:hover{background:var(--bg);color:var(--text2)}
 .sidebar-footer{margin-top:auto;padding:10px;border-top:0.5px solid var(--border);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px}
@@ -43,15 +56,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .topbar{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:0.5px solid var(--border);background:var(--bg)}
-.proj-name{font-size:14px;font-weight:500;color:var(--text)}
-.proj-sub{font-size:12px;color:var(--text3);margin-left:4px}
+.proj-title{font-size:14px;font-weight:500;color:var(--text)}
+.chat-title{font-size:12px;color:var(--text3);margin-left:6px}
 .topbar-right{margin-left:auto;display:flex;gap:6px}
 .btn{font-size:12px;padding:6px 11px;border-radius:6px;border:0.5px solid var(--border2);background:none;color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.12s;font-family:inherit}
 .btn:hover{background:var(--bg2)}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn-primary:hover{background:#4338ca;border-color:#4338ca}
+.btn-ghost{border-color:transparent}
+.btn-ghost:hover{background:var(--bg2);border-color:var(--border)}
 
-/* STEPS NAV */
+/* STEPS */
 .steps-nav{display:flex;align-items:center;padding:0 4px;border-bottom:0.5px solid var(--border);background:var(--bg);overflow-x:auto}
 .step-tab{display:flex;align-items:center;gap:6px;padding:10px 11px;font-size:12px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color 0.12s}
 .step-tab:hover{color:var(--text2)}
@@ -68,14 +83,19 @@ textarea,.txt-in{width:100%;border:0.5px solid var(--border2);border-radius:var(
 textarea:focus,.txt-in:focus{border-color:var(--accent)}
 
 /* UPLOAD */
-.upload-zone{border:0.5px dashed var(--border2);border-radius:var(--radius);padding:18px;text-align:center;cursor:pointer;position:relative;transition:background 0.12s}
+.upload-zone{border:0.5px dashed var(--border2);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;position:relative;transition:background 0.12s}
 .upload-zone:hover{background:var(--bg2)}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-zone.has-files{border-color:var(--success);background:rgba(5,150,105,0.04)}
+
 .file-list{display:flex;flex-direction:column;gap:6px;margin-top:10px}
 .file-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg2);border-radius:6px;border:0.5px solid var(--border)}
-.file-name{font-size:12px;color:var(--text);flex:0 0 auto;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-item.uploaded{border-color:var(--success);background:rgba(5,150,105,0.06)}
+.file-badge{font-size:10px;padding:2px 6px;border-radius:10px;background:rgba(5,150,105,0.15);color:var(--success);font-weight:600;flex-shrink:0}
+.file-name{font-size:12px;color:var(--text);flex:0 0 auto;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-note{font-size:11px;border:none;background:none;color:var(--text2);outline:none;flex:1;font-family:inherit}
 .file-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:15px;padding:0 2px;line-height:1}
+.file-size{font-size:10px;color:var(--text3);flex-shrink:0}
 
 /* LIMITS */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -89,24 +109,42 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .link-type{font-size:11px;padding:7px 8px;border:0.5px solid var(--border);border-radius:6px;background:var(--bg2);color:var(--text2);cursor:pointer;white-space:nowrap;font-family:inherit}
 .link-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:15px}
 
-/* KPI TAGS */
+/* KPI */
 .kpi-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .kpi-tag{padding:5px 12px;border-radius:20px;font-size:12px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border);cursor:pointer;transition:all 0.12s;user-select:none}
 .kpi-tag:hover{border-color:var(--accent-mid)}
 .kpi-tag.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 
 /* ANALYSIS */
-.chat-wrap{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-.agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;font-size:13px;line-height:1.75;color:var(--text)}
+.chat-wrap{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
 .agent-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;font-size:13px;line-height:1.8;color:var(--text)}
+.agent-bubble h3{font-size:15px;font-weight:600;color:var(--text);margin:12px 0 4px;line-height:1.4}
+.agent-bubble h3:first-child{margin-top:0}
+.agent-bubble strong{font-weight:600;color:var(--text)}
+.agent-bubble ul{padding-left:16px;margin:6px 0}
+.agent-bubble li{margin-bottom:3px}
+.agent-bubble p{margin-bottom:8px}
+.agent-bubble p:last-child{margin-bottom:0}
+
+.suggestion-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{padding:5px 12px;border-radius:20px;font-size:12px;background:var(--accent-light);color:var(--accent);border:0.5px solid var(--accent-mid);cursor:pointer;transition:all 0.12s;line-height:1.4}
+.chip:hover{background:var(--accent);color:#fff}
+
 .user-bubble{background:var(--accent-light);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:10px 14px;font-size:13px;color:var(--accent);align-self:flex-end;max-width:75%;line-height:1.6}
 .chat-bar{border-top:0.5px solid var(--border);padding:10px 14px;display:flex;gap:8px;align-items:flex-end;background:var(--bg)}
 .chat-bar textarea{resize:none;min-height:36px;max-height:120px;flex:1;overflow-y:auto}
-.send-btn{padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:13px;cursor:pointer;flex-shrink:0;font-family:inherit;transition:background 0.12s}
+.send-btn{padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:13px;cursor:pointer;flex-shrink:0;font-family:inherit}
 .send-btn:hover{background:#4338ca}
-.send-btn:disabled{background:var(--border2);cursor:not-allowed}
+.recalc-btn{padding:8px 12px;background:none;color:var(--text2);border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;cursor:pointer;flex-shrink:0;font-family:inherit;display:flex;align-items:center;gap:4px}
+.recalc-btn:hover{background:var(--bg2)}
+
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;color:var(--text3);font-size:13px;text-align:center}
-.empty-icon{font-size:32px;margin-bottom:4px}
+.thinking{color:var(--text3);font-style:italic;font-size:13px;padding:10px 0;display:flex;align-items:center;gap:6px}
+.thinking-dot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:blink 1.2s infinite}
+.thinking-dot:nth-child(2){animation-delay:0.2s}
+.thinking-dot:nth-child(3){animation-delay:0.4s}
+@keyframes blink{0%,80%,100%{opacity:0.2}40%{opacity:1}}
 
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center}
@@ -117,32 +155,37 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .conn-item:hover{border-color:var(--border2)}
 .conn-item.linked{border-color:var(--accent-mid);background:var(--accent-light);color:var(--accent)}
 
-/* NAV BUTTONS */
 .nav-btns{display:flex;justify-content:space-between;margin-top:18px}
 .section-gap{margin-top:16px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--success);color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;z-index:300;opacity:0;transition:opacity 0.3s;pointer-events:none;display:flex;align-items:center;gap:6px}
+.toast.show{opacity:1}
 </style>
 </head>
 <body>
+<div id="toast" class="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
 
-<div class="shell">
+<div class="shell" id="shell">
   <div class="sidebar">
     <div class="sidebar-header">
-      <div class="logo">UX <span>Agent</span></div>
-      <div class="logo-sub">Farmacity · workspace</div>
+      <div>
+        <div class="logo">🔍 <span>Sherlock</span></div>
+        <div class="logo-sub">UX Agent · Farmacity</div>
+      </div>
+      <button class="dark-toggle" onclick="toggleDark()" id="dark-btn" title="Toggle dark mode">
+        <i class="ti ti-moon" id="dark-icon"></i>
+      </button>
     </div>
     <div class="sidebar-section">Proyectos</div>
     <div id="proj-list"></div>
-    <button class="new-proj-btn" onclick="newProject()">
-      <i class="ti ti-plus"></i> Nuevo proyecto
-    </button>
-    <div class="sidebar-footer"><i class="ti ti-sparkles"></i> Llama 4 · Groq</div>
+    <button class="new-proj-btn" onclick="newProject()"><i class="ti ti-plus"></i> Nuevo proyecto</button>
+    <div class="sidebar-footer"><i class="ti ti-sparkles"></i> Llama 4 · Groq · gratis</div>
   </div>
 
   <div class="main">
     <div class="topbar">
-      <div>
-        <span class="proj-name" id="t-name">—</span>
-        <span class="proj-sub" id="t-sub"></span>
+      <div style="display:flex;align-items:baseline;gap:6px">
+        <span class="proj-title" id="t-name">—</span>
+        <span class="chat-title" id="t-chat"></span>
       </div>
       <div class="topbar-right">
         <button class="btn" onclick="showModal()"><i class="ti ti-link"></i> Conectar</button>
@@ -160,121 +203,170 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
       <span class="modal-title">Conectar proyectos</span>
       <button onclick="closeModal()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:18px"><i class="ti ti-x"></i></button>
     </div>
-    <p style="font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.5">El agente considerará el trabajo previo de los proyectos que conectes.</p>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.5">El agente considerará el trabajo previo de los proyectos conectados.</p>
     <div id="modal-list"></div>
     <button class="btn btn-primary" onclick="closeModal()" style="margin-top:12px;width:100%;justify-content:center">Guardar</button>
   </div>
 </div>
 
 <script>
-const STORE = 'uxagent_v3';
-const ACTIVE = 'uxagent_active_v3';
-const KPI_LIST = ['Tasa de conversión','Drop en checkout','Tiempo en tarea','Tasa de error','NPS / CSAT','Bounce rate','Click-through rate','Tasa de abandono','Time to first action','Tasa de retención'];
-const COLORS = ['#4f46e5','#0d9488','#d97706','#dc2626','#7c3aed','#059669'];
-const STEPS = ['Materiales','Contexto','Limitantes','Referencias','Objetivo & KPIs','Análisis'];
+const STORE='sherlock_v5';const ACTIVE='sherlock_active_v5';const ACTIVE_CHAT='sherlock_chat_v5';
+const DARK_KEY='sherlock_dark';
+const KPI_LIST=['Tasa de conversión','Drop en checkout','Tiempo en tarea','Tasa de error','NPS / CSAT','Bounce rate','Click-through rate','Tasa de abandono','Time to first action','Tasa de retención'];
+const COLORS=['#4f46e5','#0d9488','#d97706','#dc2626','#7c3aed','#059669'];
+const STEPS=['Objetivo & KPIs','Contexto','Materiales','Limitantes','Referencias','Análisis'];
 
-let projects, activeId, step = 0;
+let projects,activeId,activeChatId,step=0,darkMode=false;
 
-function load() {
-  try { projects = JSON.parse(localStorage.getItem(STORE)) || defaultProjects(); } catch { projects = defaultProjects(); }
-  activeId = localStorage.getItem(ACTIVE) || projects[0].id;
+function load(){
+  try{projects=JSON.parse(localStorage.getItem(STORE))||defaultProjects();}catch{projects=defaultProjects();}
+  activeId=localStorage.getItem(ACTIVE)||projects[0].id;
+  activeChatId=localStorage.getItem(ACTIVE_CHAT)||null;
+  darkMode=localStorage.getItem(DARK_KEY)==='1';
+  applyDark();
+  if(!activeChatId){const p=active();activeChatId=p.chats?.[0]?.id||null;}
 }
-function save() {
-  try { localStorage.setItem(STORE, JSON.stringify(projects)); localStorage.setItem(ACTIVE, activeId); } catch {}
+function save(){
+  try{localStorage.setItem(STORE,JSON.stringify(projects));localStorage.setItem(ACTIVE,activeId);if(activeChatId)localStorage.setItem(ACTIVE_CHAT,activeChatId);}catch{}
 }
-function defaultProjects() {
-  return [
-    mk('Checkout Friction Q2','Farmacity · ecommerce',COLORS[0]),
-    mk('Home & Categorías','Farmacity · navegación',COLORS[1]),
-  ];
+function defaultProjects(){
+  const p1=mkProject('Checkout Friction Q2','Farmacity · ecommerce',COLORS[0]);
+  const p2=mkProject('Home & Categorías','Farmacity · navegación',COLORS[1]);
+  return[p1,p2];
 }
-function mk(name, desc, color) {
-  return { id:'p'+Date.now()+Math.random(), name, desc, color, materials:[], context:'', limitTech:'', limitCtx:'', links:[], objective:'', kpis:[], kpiCustom:'', connectedTo:[], messages:[] };
+function mkProject(name,desc,color){
+  const chat=mkChat('Análisis inicial');
+  return{id:'p'+Date.now()+Math.random(),name,desc,color,materials:[],context:'',limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],chats:[chat]};
 }
-function active() { return projects.find(p => p.id === activeId) || projects[0]; }
+function mkChat(name){return{id:'c'+Date.now()+Math.random(),name,messages:[]};}
+function active(){return projects.find(p=>p.id===activeId)||projects[0];}
+function activeChat(){const p=active();return p.chats?.find(c=>c.id===activeChatId)||p.chats?.[0]||null;}
 
-function renderSidebar() {
-  const proj = active();
-  document.getElementById('t-name').textContent = proj.name;
-  document.getElementById('t-sub').textContent = proj.desc;
-  document.getElementById('proj-list').innerHTML = projects.map(p => `
+function toggleDark(){darkMode=!darkMode;localStorage.setItem(DARK_KEY,darkMode?'1':'0');applyDark();}
+function applyDark(){
+  document.body.classList.toggle('dark',darkMode);
+  const icon=document.getElementById('dark-icon');
+  if(icon)icon.className=darkMode?'ti ti-sun':'ti ti-moon';
+}
+
+function renderSidebar(){
+  const proj=active();const chat=activeChat();
+  document.getElementById('t-name').textContent=proj.name;
+  document.getElementById('t-chat').textContent=chat?`· ${chat.name}`:'';
+  document.getElementById('proj-list').innerHTML=projects.map(p=>`
     <div class="proj-item ${p.id===activeId?'active':''}" onclick="switchProj('${p.id}')">
       <span class="proj-dot" style="background:${p.color}"></span>
-      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px">${p.name}</span>
-      ${p.connectedTo?.length ? '<i class="ti ti-link proj-conn"></i>' : ''}
-    </div>`).join('');
-  const nav = document.getElementById('steps-nav');
-  nav.innerHTML = STEPS.map((s,i) => `
+      <span class="proj-name-text" id="pnt-${p.id}">${p.name}</span>
+      <button class="proj-edit-btn" onclick="startEditProj(event,'${p.id}')" title="Renombrar"><i class="ti ti-pencil"></i></button>
+    </div>
+    ${p.id===activeId?`
+    <div class="proj-chats">
+      ${(p.chats||[]).map(c=>`
+        <div class="chat-item ${c.id===activeChatId?'active-chat':''}" onclick="switchChat('${c.id}')">
+          <i class="ti ti-message" style="font-size:11px"></i>${c.name}
+        </div>`).join('')}
+      <button class="new-chat-btn" onclick="newChat()"><i class="ti ti-plus" style="font-size:11px"></i> Nuevo análisis</button>
+    </div>`:''}`).join('');
+  const nav=document.getElementById('steps-nav');
+  nav.innerHTML=STEPS.map((s,i)=>`
     <div class="step-tab ${i===step?'active':''}" onclick="goStep(${i})">
-      <span class="step-num" id="sn${i}">${i+1}</span>${s}
+      <span class="step-num">${i+1}</span>${s}
     </div>`).join('');
 }
 
-function switchProj(id) { activeId = id; step = 0; save(); renderSidebar(); renderStep(); }
-
-function newProject() {
-  const name = prompt('Nombre del proyecto:');
-  if (!name) return;
-  const p = mk(name, 'Farmacity', COLORS[projects.length % COLORS.length]);
-  projects.push(p); activeId = p.id; step = 0; save(); renderSidebar(); renderStep();
+function startEditProj(e,id){
+  e.stopPropagation();
+  const span=document.getElementById('pnt-'+id);
+  const p=projects.find(x=>x.id===id);
+  if(!span||!p)return;
+  const inp=document.createElement('input');
+  inp.className='proj-name-input';inp.value=p.name;
+  span.replaceWith(inp);inp.focus();inp.select();
+  const done=()=>{p.name=inp.value.trim()||p.name;save();renderSidebar();renderStep();};
+  inp.addEventListener('blur',done);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){inp.value=p.name;inp.blur();}});
 }
 
-function goStep(n) { collectCurrent(); step = n; save(); renderSidebar(); renderStep(); }
+function switchProj(id){
+  collectCurrent();activeId=id;
+  const p=active();activeChatId=p.chats?.[0]?.id||null;
+  step=0;save();renderSidebar();renderStep();
+}
+function switchChat(id){activeChatId=id;save();renderSidebar();if(step===5)renderStep();}
+function newChat(){
+  const p=active();
+  const name=prompt('Nombre del análisis:','Análisis '+(p.chats.length+1));
+  if(!name)return;
+  const c=mkChat(name);p.chats.push(c);activeChatId=c.id;save();renderSidebar();goStep(5);
+}
+function newProject(){
+  const name=prompt('Nombre del proyecto:');if(!name)return;
+  const p=mkProject(name,'Farmacity',COLORS[projects.length%COLORS.length]);
+  projects.push(p);activeId=p.id;activeChatId=p.chats[0].id;step=0;save();renderSidebar();renderStep();
+}
 
-function collectCurrent() {
-  const p = active();
-  const v = id => document.getElementById(id)?.value;
-  if (step===1 && v('ctx')) p.context = v('ctx');
-  if (step===2) { if(v('lt')) p.limitTech=v('lt'); if(v('lc')) p.limitCtx=v('lc'); }
-  if (step===4) { if(v('obj')) p.objective=v('obj'); if(v('kc')) p.kpiCustom=v('kc'); }
+function goStep(n){collectCurrent();step=n;save();renderSidebar();renderStep();}
+
+function collectCurrent(){
+  const p=active();
+  const v=id=>{const el=document.getElementById(id);return el?el.value:null;};
+  if(step===0){if(v('obj')!==null)p.objective=v('obj');if(v('kc')!==null)p.kpiCustom=v('kc');}
+  if(step===1&&v('ctx')!==null)p.context=v('ctx');
+  if(step===3){if(v('lt')!==null)p.limitTech=v('lt');if(v('lc')!==null)p.limitCtx=v('lc');}
   save();
 }
 
-function renderStep() {
-  const p = active();
-  const body = document.getElementById('step-body');
-  if (step===0) body.innerHTML = stepMaterials(p);
-  else if (step===1) body.innerHTML = stepContext(p);
-  else if (step===2) body.innerHTML = stepLimits(p);
-  else if (step===3) body.innerHTML = stepRefs(p);
-  else if (step===4) body.innerHTML = stepObjective(p);
-  else body.innerHTML = stepAnalysis(p);
+function renderStep(){
+  const p=active();const body=document.getElementById('step-body');
+  if(step===0)body.innerHTML=stepObjective(p);
+  else if(step===1)body.innerHTML=stepContext(p);
+  else if(step===2)body.innerHTML=stepMaterials(p);
+  else if(step===3)body.innerHTML=stepLimits(p);
+  else if(step===4)body.innerHTML=stepRefs(p);
+  else body.innerHTML=stepAnalysis(p);
   attachStep(p);
 }
 
-function stepMaterials(p) {
-  return `<div class="content">
-    <div class="s-label">Materiales</div>
-    <div class="s-desc">Subí archivos relevantes: planillas de métricas, exports de Analytics o Clarity, bitácoras, grabaciones resumidas. Podés añadir una nota aclaratoria a cada uno.</div>
-    <div class="upload-zone">
-      <input type="file" multiple id="finput" />
-      <div style="font-size:22px;color:var(--text3);margin-bottom:6px"><i class="ti ti-upload"></i></div>
-      <div style="font-size:12px;color:var(--text2)">Arrastrá archivos o hacé click para seleccionar</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">CSV, XLSX, PDF, PNG · múltiples archivos</div>
+function stepObjective(p){
+  const sel=p.kpis||[];
+  return`<div class="content">
+    <div class="s-label">Objetivo principal</div>
+    <div class="s-desc">Definí qué querés lograr. Esto orienta todo el análisis de Sherlock.</div>
+    <textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago del checkout web un 15% para Q3 2025...">${p.objective||''}</textarea>
+    <div class="s-label" style="margin-top:16px">KPIs a impactar</div>
+    <div class="s-desc">Seleccioná las métricas sobre las que querés ver impacto.</div>
+    <div class="kpi-grid">
+      ${KPI_LIST.map(k=>`<div class="kpi-tag ${sel.includes(k)?'on':''}" onclick="toggleKpi(this,'${k}')">${k}</div>`).join('')}
+      <div class="kpi-tag" onclick="toggleCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div>
     </div>
-    <div class="file-list" id="flist">
-      ${(p.materials||[]).map((f,i)=>`
-        <div class="file-item">
-          <i class="ti ti-file" style="font-size:15px;color:var(--text3)"></i>
-          <span class="file-name">${f.name}</span>
-          <input class="file-note" placeholder="nota aclaratoria..." value="${f.note||''}" data-fi="${i}" />
-          <button class="file-del" data-fd="${i}"><i class="ti ti-x"></i></button>
-        </div>`).join('')}
-    </div>
+    <input id="kc" class="txt-in" style="margin-top:10px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}" />
     <div class="nav-btns"><div></div><button class="btn btn-primary" onclick="goStep(1)">Siguiente <i class="ti ti-arrow-right"></i></button></div>
   </div>`;
 }
 
-function stepContext(p) {
-  return `<div class="content">
+function stepContext(p){
+  const hasFiles=p.contextFiles&&p.contextFiles.length>0;
+  return`<div class="content">
     <div class="s-label">Contexto</div>
-    <div class="s-desc">Todo lo que el agente necesita saber para interpretar los datos correctamente: negocio, audiencia, estado actual, hipótesis previas, lo que ya se intentó.</div>
-    <textarea id="ctx" rows="8" placeholder="Ej: Farmacity es la cadena de farmacias líder en Argentina. El flujo de checkout fue rediseñado en marzo 2024. Nuestro usuario principal es mujer, 35-55 años, urbana, con intención de compra clara pero baja tolerancia a fricciones digitales...">${p.context||''}</textarea>
+    <div class="s-desc">Todo lo que Sherlock necesita saber para interpretar los datos correctamente: negocio, audiencia, estado actual, hipótesis previas, lo que ya se intentó.</div>
+    <textarea id="ctx" rows="7" placeholder="Ej: Farmacity es la cadena de farmacias líder en Argentina. El flujo de checkout fue rediseñado en marzo 2024. Nuestro usuario principal es mujer, 35-55 años, urbana, con intención de compra clara pero baja tolerancia a fricciones digitales...">${p.context||''}</textarea>
     <div class="section-gap">
-      <div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div>
-      <div class="upload-zone" style="padding:12px">
-        <input type="file" multiple />
-        <div style="font-size:12px;color:var(--text3)"><i class="ti ti-file-text"></i> Briefs, personas, research previo</div>
+      <div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional — briefs, personas, research previo)</span></div>
+      <div class="upload-zone ${hasFiles?'has-files':''}" id="ctx-zone">
+        <input type="file" multiple id="ctx-finput" accept=".csv,.xlsx,.xls,.pdf,.txt,.md,.png,.jpg" />
+        ${hasFiles
+          ?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} cargado${p.contextFiles.length>1?'s':''}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Arrastrá más para agregar</div>`
+          :`<div style="font-size:22px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Arrastrá archivos o hacé click</div>`}
+      </div>
+      <div class="file-list" id="ctx-flist">
+        ${(p.contextFiles||[]).map((f,i)=>`
+          <div class="file-item uploaded">
+            <i class="ti ti-file" style="font-size:15px;color:var(--success)"></i>
+            <span class="file-name">${f.name}</span>
+            <span class="file-badge">✓ listo</span>
+            <span class="file-size">${fmtSize(f.size)}</span>
+            <button class="file-del" onclick="delCtxFile(${i})"><i class="ti ti-x"></i></button>
+          </div>`).join('')}
       </div>
     </div>
     <div class="nav-btns">
@@ -284,19 +376,27 @@ function stepContext(p) {
   </div>`;
 }
 
-function stepLimits(p) {
-  return `<div class="content">
-    <div class="s-label">Limitantes</div>
-    <div class="s-desc">Delimitá el campo de acción para que las recomendaciones sean realistas y accionables dentro de tu contexto real.</div>
-    <div class="split">
-      <div class="sub-block">
-        <div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div>
-        <textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4. El design system usa Material 2. Sin acceso a A/B testing en prod...">${p.limitTech||''}</textarea>
-      </div>
-      <div class="sub-block">
-        <div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div>
-        <textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios en el flujo de consentimiento. No podemos eliminar el registro obligatorio...">${p.limitCtx||''}</textarea>
-      </div>
+function stepMaterials(p){
+  const hasFiles=p.materials&&p.materials.length>0;
+  return`<div class="content">
+    <div class="s-label">Materiales</div>
+    <div class="s-desc">Subí los datos clave: exports de Analytics, planillas de métricas, CSVs, grabaciones resumidas. Sherlock va a leer el contenido real de los archivos.</div>
+    <div class="upload-zone ${hasFiles?'has-files':''}" id="mat-zone">
+      <input type="file" multiple id="mat-finput" accept=".csv,.xlsx,.xls,.pdf,.txt,.md" />
+      ${hasFiles
+        ?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.materials.length} archivo${p.materials.length>1?'s':''} cargado${p.materials.length>1?'s':''}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Arrastrá más para agregar</div>`
+        :`<div style="font-size:22px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Arrastrá archivos o hacé click</div><div style="font-size:11px;color:var(--text3);margin-top:2px">CSV, XLSX, TXT, PDF · múltiples archivos</div>`}
+    </div>
+    <div class="file-list" id="mat-flist">
+      ${(p.materials||[]).map((f,i)=>`
+        <div class="file-item uploaded">
+          <i class="ti ti-file-spreadsheet" style="font-size:15px;color:var(--success)"></i>
+          <span class="file-name">${f.name}</span>
+          <span class="file-badge">✓ listo</span>
+          <input class="file-note" placeholder="nota aclaratoria..." value="${f.note||''}" data-fi="${i}" />
+          <span class="file-size">${fmtSize(f.size)}</span>
+          <button class="file-del" onclick="delMatFile(${i})"><i class="ti ti-x"></i></button>
+        </div>`).join('')}
     </div>
     <div class="nav-btns">
       <button class="btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i> Atrás</button>
@@ -305,11 +405,32 @@ function stepLimits(p) {
   </div>`;
 }
 
-function stepRefs(p) {
-  const links = p.links || [];
-  return `<div class="content">
+function stepLimits(p){
+  return`<div class="content">
+    <div class="s-label">Limitantes</div>
+    <div class="s-desc">Delimitá el campo de acción para que las recomendaciones sean realistas.</div>
+    <div class="split">
+      <div class="sub-block">
+        <div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div>
+        <textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4. El design system usa Material 2...">${p.limitTech||''}</textarea>
+      </div>
+      <div class="sub-block">
+        <div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div>
+        <textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios en consentimiento...">${p.limitCtx||''}</textarea>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button>
+      <button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>`;
+}
+
+function stepRefs(p){
+  const links=p.links||[];
+  return`<div class="content">
     <div class="s-label">Referencias</div>
-    <div class="s-desc">Links que el agente debe considerar: competidores, benchmarks, prototipos en Figma, o flujos de referencia visual/funcional.</div>
+    <div class="s-desc">Links que Sherlock debe considerar: competidores, benchmarks, prototipos en Figma, flujos de referencia.</div>
     <div id="llist">
       ${links.map((l,i)=>`
         <div class="link-row">
@@ -325,198 +446,271 @@ function stepRefs(p) {
     </div>
     <button class="btn" onclick="addLink()" style="margin-top:6px"><i class="ti ti-plus"></i> Agregar link</button>
     <div class="nav-btns">
-      <button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button>
-      <button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button>
-    </div>
-  </div>`;
-}
-
-function stepObjective(p) {
-  const sel = p.kpis || [];
-  return `<div class="content">
-    <div class="s-label">Objetivo & KPIs</div>
-    <div class="s-desc">Definí qué querés lograr y sobre qué métricas querés impactar. Esto orienta las recomendaciones del agente.</div>
-    <div class="s-label">Objetivo principal</div>
-    <textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago del checkout web un 15% para Q3 2025...">${p.objective||''}</textarea>
-    <div class="s-label" style="margin-top:14px">KPIs a impactar</div>
-    <div class="kpi-grid" id="kpi-grid">
-      ${KPI_LIST.map(k=>`<div class="kpi-tag ${sel.includes(k)?'on':''}" onclick="toggleKpi(this,'${k}')">${k}</div>`).join('')}
-      <div class="kpi-tag" onclick="toggleCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div>
-    </div>
-    <input id="kc" class="txt-in" style="margin-top:10px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}" />
-    <div class="nav-btns">
       <button class="btn" onclick="goStep(3)"><i class="ti ti-arrow-left"></i> Atrás</button>
-      <button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Analizar ahora</button>
+      <button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Ir al análisis</button>
     </div>
   </div>`;
 }
 
-function stepAnalysis(p) {
-  const msgs = p.messages || [];
-  return `
+function stepAnalysis(p){
+  const chat=activeChat();
+  const msgs=chat?.messages||[];
+  return`
     <div class="chat-wrap" id="chat-wrap">
-      ${msgs.length === 0
-        ? `<div class="empty-state"><div class="empty-icon"><i class="ti ti-brain"></i></div><span>Generando análisis inicial...</span></div>`
-        : msgs.map(m => m.role === 'agent'
-            ? `<div><div class="agent-label"><i class="ti ti-sparkles"></i> Agente UX</div><div class="agent-bubble">${m.content.replace(/\n/g,'<br>')}</div></div>`
-            : `<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${m.content}</div></div>`
-          ).join('')}
+      ${msgs.length===0
+        ?`<div class="empty-state"><div style="font-size:32px;margin-bottom:4px">🔍</div><span>Sherlock va a analizar todo el contexto del proyecto.</span><button class="btn btn-primary" onclick="runAnalysis()" style="margin-top:8px"><i class="ti ti-sparkles"></i> Generar análisis</button></div>`
+        :msgs.map(m=>m.role==='agent'
+          ?`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${formatMsg(m.content)}</div>${m.chips?`<div class="suggestion-chips">${m.chips.map(c=>`<div class="chip" onclick="sendChip('${c.replace(/'/g,"\\'")}')">↗ ${c}</div>`).join('')}</div>`:''}</div>`
+          :`<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${m.content}</div></div>`
+        ).join('')}
     </div>
     <div class="chat-bar">
-      <textarea id="chat-in" placeholder="Seguí refinando con el agente..." onkeydown="chatKey(event)" rows="1"></textarea>
-      <button class="send-btn" onclick="sendChat()" id="sbtn"><i class="ti ti-send"></i></button>
+      <button class="recalc-btn" onclick="runAnalysis()" title="Recalcular con los datos actuales"><i class="ti ti-refresh"></i> Recalcular</button>
+      <textarea id="chat-in" placeholder="Seguí refinando con Sherlock..." onkeydown="chatKey(event)" rows="1"></textarea>
+      <button class="send-btn" onclick="sendChat()"><i class="ti ti-send"></i></button>
     </div>`;
 }
 
-function attachStep(p) {
-  const fi = document.getElementById('finput');
-  if (fi) fi.addEventListener('change', e => {
-    Array.from(e.target.files).forEach(f => p.materials.push({ name: f.name, note: '' }));
-    save(); renderStep();
-  });
-  document.querySelectorAll('[data-fi]').forEach(inp => {
-    inp.addEventListener('input', e => { p.materials[+e.target.dataset.fi].note = e.target.value; save(); });
-  });
-  document.querySelectorAll('[data-fd]').forEach(btn => {
-    btn.addEventListener('click', () => { p.materials.splice(+btn.dataset.fd, 1); save(); renderStep(); });
-  });
-  document.querySelectorAll('[data-lu]').forEach(inp => {
-    inp.addEventListener('input', e => { p.links[+e.target.dataset.lu].url = e.target.value; save(); });
-  });
-  document.querySelectorAll('[data-lt]').forEach(sel => {
-    sel.addEventListener('change', e => { p.links[+e.target.dataset.lt].type = e.target.value; save(); });
-  });
-  document.querySelectorAll('[data-ld]').forEach(btn => {
-    btn.addEventListener('click', () => { p.links.splice(+btn.dataset.ld, 1); save(); renderStep(); });
-  });
-  if (step === 5 && (p.messages || []).length === 0) setTimeout(runAnalysis, 400);
+function formatMsg(text){
+  return text
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^# (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^- (.+)$/gm,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/gs,'<ul>$1</ul>')
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/^(?!<[hul])/gm,'')
+    .replace(/\n/g,' ')
+    .replace(/<\/ul><ul>/g,'');
 }
 
-function toggleKpi(el, k) {
-  const p = active(); if (!p.kpis) p.kpis = [];
-  if (p.kpis.includes(k)) { p.kpis = p.kpis.filter(x => x !== k); el.classList.remove('on'); }
-  else { p.kpis.push(k); el.classList.add('on'); }
+function fmtSize(bytes){if(!bytes)return'';if(bytes<1024)return bytes+'B';if(bytes<1048576)return Math.round(bytes/1024)+'KB';return(bytes/1048576).toFixed(1)+'MB';}
+
+function attachStep(p){
+  const mfi=document.getElementById('mat-finput');
+  if(mfi)mfi.addEventListener('change',e=>handleMatFiles(e.target.files));
+  const cfi=document.getElementById('ctx-finput');
+  if(cfi)cfi.addEventListener('change',e=>handleCtxFiles(e.target.files));
+  document.querySelectorAll('[data-fi]').forEach(inp=>{
+    inp.addEventListener('input',e=>{p.materials[+e.target.dataset.fi].note=e.target.value;save();});
+  });
+  document.querySelectorAll('[data-lu]').forEach(inp=>{
+    inp.addEventListener('input',e=>{p.links[+e.target.dataset.lu].url=e.target.value;save();});
+  });
+  document.querySelectorAll('[data-lt]').forEach(sel=>{
+    sel.addEventListener('change',e=>{p.links[+e.target.dataset.lt].type=e.target.value;save();});
+  });
+  document.querySelectorAll('[data-ld]').forEach(btn=>{
+    btn.addEventListener('click',()=>{p.links.splice(+btn.dataset.ld,1);save();renderStep();});
+  });
+  if(step===5&&(activeChat()?.messages||[]).length===0){setTimeout(runAnalysis,400);}
+  const cw=document.getElementById('chat-wrap');if(cw)cw.scrollTop=cw.scrollHeight;
+}
+
+async function readFileContent(file){
+  return new Promise(resolve=>{
+    const name=file.name.toLowerCase();
+    if(name.endsWith('.xlsx')||name.endsWith('.xls')){
+      const reader=new FileReader();
+      reader.onload=e=>{
+        try{
+          const wb=XLSX.read(e.target.result,{type:'array'});
+          let out='';
+          wb.SheetNames.forEach(sn=>{
+            const ws=wb.Sheets[sn];
+            const csv=XLSX.utils.sheet_to_csv(ws);
+            if(csv.trim())out+=`[Hoja: ${sn}]\n${csv}\n\n`;
+          });
+          resolve(out.slice(0,12000));
+        }catch{resolve('[Error leyendo Excel]');}
+      };
+      reader.readAsArrayBuffer(file);
+    }else if(name.endsWith('.csv')||name.endsWith('.txt')||name.endsWith('.md')){
+      const reader=new FileReader();
+      reader.onload=e=>resolve((e.target.result||'').slice(0,12000));
+      reader.readAsText(file);
+    }else{
+      resolve(`[Archivo: ${file.name} — tipo no textual, considerá el nombre y la nota aclaratoria]`);
+    }
+  });
+}
+
+function handleMatFiles(files){
+  const p=active();
+  let pending=files.length;
+  Array.from(files).forEach(async f=>{
+    const content=await readFileContent(f);
+    p.materials.push({name:f.name,note:'',size:f.size,content});
+    pending--;if(pending===0){save();renderStep();showToast(`${files.length} archivo${files.length>1?'s':''} cargado${files.length>1?'s':''}`);}
+  });
+}
+function handleCtxFiles(files){
+  const p=active();
+  if(!p.contextFiles)p.contextFiles=[];
+  let pending=files.length;
+  Array.from(files).forEach(async f=>{
+    const content=await readFileContent(f);
+    p.contextFiles.push({name:f.name,size:f.size,content});
+    pending--;if(pending===0){save();renderStep();showToast(`${files.length} archivo${files.length>1?'s':''} de contexto cargado${files.length>1?'s':''}`);}
+  });
+}
+function delMatFile(i){const p=active();p.materials.splice(i,1);save();renderStep();}
+function delCtxFile(i){const p=active();p.contextFiles.splice(i,1);save();renderStep();}
+
+function toggleKpi(el,k){
+  const p=active();if(!p.kpis)p.kpis=[];
+  if(p.kpis.includes(k)){p.kpis=p.kpis.filter(x=>x!==k);el.classList.remove('on');}
+  else{p.kpis.push(k);el.classList.add('on');}
   save();
 }
-function toggleCustom() {
-  const inp = document.getElementById('kc');
-  if (inp) { inp.style.display = inp.style.display === 'none' ? 'block' : 'none'; if (inp.style.display === 'block') inp.focus(); }
+function toggleCustom(){
+  const inp=document.getElementById('kc');
+  if(inp){inp.style.display=inp.style.display==='none'?'block':'none';if(inp.style.display==='block')inp.focus();}
 }
-function addLink() {
-  const p = active(); p.links.push({ url: '', type: 'bench' }); save(); renderStep();
-}
+function addLink(){const p=active();p.links.push({url:'',type:'bench'});save();renderStep();}
 
-function buildPrompt(p, userMsg) {
-  const connNames = projects.filter(x => p.connectedTo?.includes(x.id)).map(x => `"${x.name}"`).join(', ');
-  const history = (p.messages || []).slice(-6).map(m => `${m.role === 'agent' ? 'Agente' : 'Usuario'}: ${m.content}`).join('\n');
-  return `=== PROYECTO: ${p.name} ===
+const SYSTEM=`Sos Sherlock, un agente especialista en UX/UI con obsesión por los datos y las métricas. Tu perfil:
+- Experto en usabilidad, diseño de interacción y research de usuarios
+- Analista riguroso de métricas: conversión, funnel, comportamiento, retención
+- Pensás en términos de impacto medible: siempre conectás hallazgos con números
+- Tono directo, colega-a-colega, sin preambulosidad
+- Recomendaciones siempre acotadas a las limitantes declaradas
+- Cuando tenés datos reales los citás con precisión
 
-CONTEXTO:
-${p.context || '(no especificado)'}
+FORMATO DE RESPUESTA:
+- Usá ### para títulos de sección (ej: ### Hallazgos clave)
+- Usá **negrita** para destacar métricas, cifras y conceptos clave
+- Usá listas con - para enumerar items
+- Análisis inicial: máximo 2-3 secciones bien definidas
+- Al final de CADA respuesta incluí exactamente este bloque JSON (sin markdown extra):
+CHIPS:["acción sugerida 1","acción sugerida 2","pregunta de profundización"]
+(3 chips: 2 acciones concretas + 1 pregunta que abre un nuevo ángulo)`;
 
-MATERIALES DISPONIBLES:
-${(p.materials||[]).length ? p.materials.map(f=>`- ${f.name}${f.note?' ('+f.note+')':''}`).join('\n') : '(sin archivos — inferir desde el contexto escrito)'}
-
-LIMITANTES TÉCNICAS:
-${p.limitTech || '(ninguna)'}
-
-LIMITANTES CONTEXTUALES / POLÍTICAS:
-${p.limitCtx || '(ninguna)'}
-
-REFERENCIAS:
-${(p.links||[]).length ? p.links.map(l=>`- [${l.type}] ${l.url}`).join('\n') : '(ninguna)'}
+function buildPrompt(p,chat,userMsg){
+  const connNames=projects.filter(x=>p.connectedTo?.includes(x.id)).map(x=>`"${x.name}"`).join(', ');
+  const history=(chat?.messages||[]).slice(-8).map(m=>`${m.role==='agent'?'Sherlock':('Usuario')}: ${m.content}`).join('\n');
+  const matContent=(p.materials||[]).map(f=>`--- ARCHIVO: ${f.name} ${f.note?'('+f.note+')':''} ---\n${f.content||'[sin contenido extraído]'}`).join('\n\n');
+  const ctxContent=(p.contextFiles||[]).map(f=>`--- CONTEXTO: ${f.name} ---\n${f.content||'[sin contenido extraído]'}`).join('\n\n');
+  return`=== PROYECTO: ${p.name} ===
 
 OBJETIVO:
-${p.objective || '(no especificado)'}
+${p.objective||'(no especificado)'}
 
 KPIs A IMPACTAR:
-${[...(p.kpis||[]), p.kpiCustom].filter(Boolean).join(', ') || '(no especificados)'}
-${connNames ? `\nPROYECTOS CONECTADOS (considerá aprendizajes transferibles de): ${connNames}` : ''}
-${history ? `\nCONVERSACIÓN PREVIA:\n${history}` : ''}
-${userMsg ? `\nMENSAJE DEL USUARIO:\n${userMsg}` : '\nINSTRUCCIÓN: Generá el análisis inicial.'}`;
+${[...(p.kpis||[]),p.kpiCustom].filter(Boolean).join(', ')||'(no especificados)'}
+
+CONTEXTO:
+${p.context||'(no especificado)'}
+${ctxContent?`\nARCHIVOS DE CONTEXTO:\n${ctxContent}`:''}
+
+DATOS Y MATERIALES:
+${matContent||'(sin archivos — analizá desde el contexto escrito)'}
+
+LIMITANTES TÉCNICAS:
+${p.limitTech||'(ninguna)'}
+
+LIMITANTES CONTEXTUALES:
+${p.limitCtx||'(ninguna)'}
+
+REFERENCIAS:
+${(p.links||[]).length?p.links.map(l=>`- [${l.type}] ${l.url}`).join('\n'):'(ninguna)'}
+${connNames?`\nPROYECTOS CONECTADOS (considerá aprendizajes de): ${connNames}`:''}
+${history?`\nCONVERSACIÓN:\n${history}`:''}
+${userMsg?`\nUSUARIO: ${userMsg}`:'\nINSTRUCCIÓN: Generá el análisis inicial del proyecto.'}`;
 }
 
-const SYSTEM = `Sos un agente UX senior especializado en retail digital y e-commerce latinoamericano. Trabajás con el equipo de UX de Farmacity Argentina.
+function parseChips(text){
+  const match=text.match(/CHIPS:\[(.+?)\]/s);
+  if(!match)return[];
+  try{return JSON.parse('['+match[1]+']');}catch{return[];}
+}
+function cleanText(text){return text.replace(/CHIPS:\[.+?\]/s,'').trim();}
 
-Tu forma de responder:
-- En el análisis inicial: máximo 2 párrafos. Primero las claves que encontrás en los datos/contexto. Segundo qué sugerís hacer y por qué, justificado con lo que te dieron.
-- En el chat de refinamiento: respuestas directas, concretas, en tono colega-a-colega. Sin preambulosad ni frases de relleno.
-- Siempre anclar recomendaciones en los datos o contexto provistos. Si algo no está claro, pedilo.
-- Considerá siempre las limitantes antes de recomendar algo.`;
-
-async function callGroq(userContent) {
-  const res = await fetch('/api/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ system: SYSTEM, messages: [{ role: 'user', content: userContent }] })
-  });
-  const data = await res.json();
-  if (data.error) throw new Error(data.error);
+async function callGroq(content){
+  const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:SYSTEM,messages:[{role:'user',content}]})});
+  const data=await res.json();
+  if(data.error)throw new Error(data.error);
   return data.text;
 }
 
-async function runAnalysis() {
-  const p = active();
-  if (!p.messages) p.messages = [];
-  const wrap = document.getElementById('chat-wrap');
-  if (wrap) wrap.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="ti ti-sparkles"></i></div><span>Analizando...</span></div>`;
-  try {
-    const text = await callGroq(buildPrompt(p, null));
-    p.messages.push({ role: 'agent', content: text });
-    save(); renderStep();
-  } catch (e) {
-    if (wrap) wrap.innerHTML = `<div class="agent-bubble" style="color:red">Error: ${e.message}</div>`;
+function addThinking(){
+  const wrap=document.getElementById('chat-wrap');if(!wrap)return null;
+  const div=document.createElement('div');
+  div.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="thinking-dot"></span><span class="thinking-dot"></span><span class="thinking-dot"></span> Analizando...</div>`;
+  wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;
+  return div;
+}
+
+async function runAnalysis(){
+  collectCurrent();
+  const p=active();const chat=activeChat();if(!chat)return;
+  chat.messages=[];save();
+  const wrap=document.getElementById('chat-wrap');
+  if(wrap)wrap.innerHTML='';
+  const thinking=addThinking();
+  try{
+    const raw=await callGroq(buildPrompt(p,chat,null));
+    const chips=parseChips(raw);const text=cleanText(raw);
+    chat.messages.push({role:'agent',content:text,chips});
+    save();renderStep();
+    setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
+  }catch(e){
+    if(thinking)thinking.innerHTML=`<div class="agent-bubble" style="color:red">Error: ${e.message}</div>`;
   }
 }
 
-async function sendChat() {
-  const p = active();
-  const inp = document.getElementById('chat-in');
-  const msg = inp?.value?.trim();
-  if (!msg) return;
-  if (!p.messages) p.messages = [];
-  p.messages.push({ role: 'user', content: msg });
-  inp.value = '';
-  save(); renderStep();
-  const wrap = document.getElementById('chat-wrap');
-  const loading = document.createElement('div');
-  loading.innerHTML = `<div class="agent-label"><i class="ti ti-sparkles"></i> Agente UX</div><div class="agent-bubble" style="color:var(--text3)">Pensando...</div>`;
-  wrap?.appendChild(loading);
-  wrap.scrollTop = wrap.scrollHeight;
-  try {
-    const text = await callGroq(buildPrompt(p, msg));
-    p.messages.push({ role: 'agent', content: text });
-    save(); renderStep();
-    setTimeout(() => { const w = document.getElementById('chat-wrap'); if(w) w.scrollTop = w.scrollHeight; }, 100);
-  } catch (e) {
-    loading.innerHTML = `<div class="agent-bubble" style="color:red">Error: ${e.message}</div>`;
+async function sendChat(msg){
+  const p=active();const chat=activeChat();if(!chat)return;
+  const inp=document.getElementById('chat-in');
+  const text=msg||(inp?.value?.trim());
+  if(!text)return;
+  chat.messages.push({role:'user',content:text});
+  if(inp)inp.value='';
+  save();renderStep();
+  const thinking=addThinking();
+  const wrap=document.getElementById('chat-wrap');if(wrap)wrap.scrollTop=wrap.scrollHeight;
+  try{
+    const raw=await callGroq(buildPrompt(p,chat,text));
+    const chips=parseChips(raw);const clean=cleanText(raw);
+    chat.messages.push({role:'agent',content:clean,chips});
+    save();renderStep();
+    setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
+  }catch(e){
+    if(thinking)thinking.innerHTML=`<div class="agent-bubble" style="color:red">Error: ${e.message}</div>`;
   }
 }
 
-function chatKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } }
+function sendChip(text){sendChat(text);}
+function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
 
-function showModal() {
-  const p = active();
-  const others = projects.filter(x => x.id !== activeId);
-  document.getElementById('modal-list').innerHTML = others.length
-    ? others.map(x => `
-        <div class="conn-item ${p.connectedTo?.includes(x.id)?'linked':''}" onclick="toggleConn('${x.id}',this)">
-          <span class="proj-dot" style="background:${x.color}"></span>
-          <span style="flex:1">${x.name}</span>
-          <i class="ti ti-link"></i>
-        </div>`).join('')
-    : `<p style="font-size:12px;color:var(--text3)">No hay otros proyectos aún.</p>`;
-  document.getElementById('modal').style.display = 'flex';
+function showToast(msg){
+  const t=document.getElementById('toast');const m=document.getElementById('toast-msg');
+  if(!t||!m)return;m.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
-function toggleConn(id, el) {
-  const p = active(); if (!p.connectedTo) p.connectedTo = [];
-  if (p.connectedTo.includes(id)) { p.connectedTo = p.connectedTo.filter(x=>x!==id); el.classList.remove('linked'); }
-  else { p.connectedTo.push(id); el.classList.add('linked'); }
-  save(); renderSidebar();
-}
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-load(); renderSidebar(); renderStep();
+function showModal(){
+  const p=active();const others=projects.filter(x=>x.id!==activeId);
+  document.getElementById('modal-list').innerHTML=others.length
+    ?others.map(x=>`
+      <div class="conn-item ${p.connectedTo?.includes(x.id)?'linked':''}" onclick="toggleConn('${x.id}',this)">
+        <span class="proj-dot" style="background:${x.color}"></span>
+        <span style="flex:1">${x.name}</span>
+        <i class="ti ti-link"></i>
+      </div>`).join('')
+    :`<p style="font-size:12px;color:var(--text3)">No hay otros proyectos aún.</p>`;
+  document.getElementById('modal').style.display='flex';
+}
+function toggleConn(id,el){
+  const p=active();if(!p.connectedTo)p.connectedTo=[];
+  if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}
+  else{p.connectedTo.push(id);el.classList.add('linked');}
+  save();renderSidebar();
+}
+function closeModal(){document.getElementById('modal').style.display='none';}
+
+load();renderSidebar();renderStep();
 </script>
 </body>
 </html>
