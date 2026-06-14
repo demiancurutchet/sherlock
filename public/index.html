@@ -28,59 +28,63 @@
 body{font-family:'Inter',sans-serif;background:var(--bg3);color:var(--text);height:100vh;display:flex;align-items:center;justify-content:center;padding:12px;transition:background .2s,color .2s}
 .shell{display:flex;width:100%;max-width:1140px;height:700px;border:0.5px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg);box-shadow:0 4px 32px rgba(0,0,0,0.1)}
 
-/* ── SIDEBAR ── */
+/* SIDEBAR */
 .sidebar{width:240px;min-width:240px;border-right:0.5px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden}
-.sb-top{padding:14px 12px 10px;border-bottom:0.5px solid var(--border)}
-.logo{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.02em;display:flex;align-items:center;gap:6px}
-.logo-pipe{font-size:18px}
+.sb-top{padding:14px 14px 12px;border-bottom:0.5px solid var(--border)}
+.logo{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.02em;display:flex;align-items:center;gap:7px}
 .logo span{color:var(--accent)}
 .logo-sub{font-size:11px;color:var(--text3);margin-top:2px;padding-left:24px}
-.focus-select{width:100%;margin-top:10px;border:0.5px solid var(--border2);border-radius:var(--radius);padding:6px 8px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;cursor:pointer}
+.focus-wrap{margin-top:10px;position:relative}
+.focus-select{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 32px 7px 10px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
 .focus-select:focus{border-color:var(--accent)}
+.focus-arrow{position:absolute;right:9px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;font-size:13px}
 .sb-section{padding:10px 10px 3px;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;justify-content:space-between}
-.sb-section button{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:1px 3px;border-radius:4px}
+.sb-section button{background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;padding:2px 4px;border-radius:4px}
 .sb-section button:hover{color:var(--accent);background:var(--bg3)}
 .sb-scroll{flex:1;overflow-y:auto;padding-bottom:4px}
-.proj-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text2);margin:1px 6px;transition:background .12s;position:relative;group:true}
+.proj-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--text2);margin:1px 6px;transition:background .12s}
 .proj-item:hover{background:var(--bg3)}
 .proj-item.active{background:var(--bg);color:var(--text);font-weight:500}
-.proj-icon{font-size:15px;flex-shrink:0;width:20px;text-align:center}
-.proj-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
-.proj-actions{display:none;gap:2px}
+.proj-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text3)}
+.proj-item.active .proj-icon{color:var(--accent)}
+.proj-label{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proj-actions{display:none;gap:2px;flex-shrink:0}
 .proj-item:hover .proj-actions{display:flex}
-.proj-act-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;padding:2px 3px;border-radius:3px}
-.proj-act-btn:hover{color:var(--text);background:var(--border)}
-.chat-sub{margin:0 6px 2px 32px}
-.chat-item{display:flex;align-items:center;justify-content:space-between;padding:4px 8px;border-radius:5px;cursor:pointer;font-size:11px;color:var(--text3);transition:background .1s}
+.proj-act-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;padding:2px 3px;border-radius:3px;line-height:1}
+.proj-act-btn:hover{color:var(--text)}
+.proj-act-btn.del:hover{color:var(--danger)}
+.chat-sub{margin:0 6px 3px 34px}
+.chat-item{display:flex;align-items:center;padding:4px 8px;border-radius:5px;cursor:pointer;font-size:11px;color:var(--text3);transition:background .1s;gap:4px}
 .chat-item:hover{background:var(--bg);color:var(--text2)}
 .chat-item.active-chat{color:var(--accent);font-weight:500}
-.chat-item-actions{display:none;gap:2px}
-.chat-item:hover .chat-item-actions{display:flex}
-.chat-act-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;padding:1px 3px;border-radius:3px}
+.chat-item-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chat-item-acts{display:none;gap:1px;flex-shrink:0}
+.chat-item:hover .chat-item-acts{display:flex}
+.chat-act-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;padding:1px 3px;border-radius:3px;line-height:1}
 .chat-act-btn:hover{color:var(--danger)}
-.new-chat-btn{display:flex;align-items:center;gap:4px;padding:3px 8px;font-size:11px;color:var(--text3);cursor:pointer;border:none;background:none;width:100%}
+.new-chat-btn{display:flex;align-items:center;gap:4px;padding:3px 8px;font-size:11px;color:var(--text3);cursor:pointer;border:none;background:none;width:100%;margin-top:1px}
 .new-chat-btn:hover{color:var(--accent)}
-.new-proj-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;margin:2px 6px;border-radius:6px;font-size:12px;color:var(--text3);cursor:pointer;border:none;background:none;width:calc(100% - 12px);text-align:left}
+.new-proj-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;margin:2px 6px;border-radius:6px;font-size:12px;color:var(--text3);cursor:pointer;border:none;background:none;width:calc(100% - 12px)}
 .new-proj-btn:hover{background:var(--bg);color:var(--text2)}
-.sb-bottom{border-top:0.5px solid var(--border);padding:8px 10px}
-.quick-chat-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:var(--radius);font-size:12px;color:var(--text2);cursor:pointer;border:0.5px solid var(--border2);background:none;width:100%;font-family:'Inter',sans-serif;transition:all .12s;margin-bottom:8px}
-.quick-chat-btn:hover{background:var(--bg3);border-color:var(--accent);color:var(--accent)}
-.dark-row{display:flex;align-items:center;justify-content:space-between;padding:4px 2px}
+.sb-bottom{border-top:0.5px solid var(--border);padding:10px 12px}
+.quick-chat-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:var(--radius);font-size:12px;color:var(--text2);cursor:pointer;border:0.5px solid var(--border2);background:none;width:100%;font-family:'Inter',sans-serif;transition:all .12s;margin-bottom:10px}
+.quick-chat-btn:hover{border-color:var(--accent);color:var(--accent)}
+.dark-row{display:flex;align-items:center;justify-content:space-between;padding:2px 0 6px}
 .dark-label{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px}
-.toggle-sw{position:relative;width:34px;height:18px;cursor:pointer}
-.toggle-sw input{opacity:0;width:0;height:0}
+.toggle-sw{position:relative;width:34px;height:18px;cursor:pointer;flex-shrink:0}
+.toggle-sw input{opacity:0;width:0;height:0;position:absolute}
 .toggle-track{position:absolute;inset:0;background:var(--bg3);border:0.5px solid var(--border2);border-radius:9px;transition:background .2s}
-.toggle-thumb{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--text3);transition:all .2s}
+.toggle-thumb{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--text3);transition:all .2s;z-index:1}
 .toggle-sw input:checked+.toggle-track{background:var(--accent);border-color:var(--accent)}
-.toggle-sw input:checked~.toggle-thumb,.toggle-sw input:checked+.toggle-track+.toggle-thumb{left:18px;background:#fff}
-.sb-ver{font-size:10px;color:var(--text3);margin-top:6px;display:flex;align-items:center;justify-content:space-between}
-.settings-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;display:flex;align-items:center;gap:4px;font-family:'Inter',sans-serif;font-size:11px;padding:2px 4px;border-radius:4px}
+.toggle-sw input:checked+.toggle-track+.toggle-thumb{left:18px;background:#fff}
+.sb-ver{font-size:10px;color:var(--text3);display:flex;align-items:center;justify-content:space-between;padding-top:4px;border-top:0.5px solid var(--border);margin-top:4px}
+.settings-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-family:'Inter',sans-serif;font-size:11px;padding:2px 4px;border-radius:4px;display:flex;align-items:center;gap:3px}
 .settings-btn:hover{color:var(--text2);background:var(--bg3)}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:0.5px solid var(--border);background:var(--bg);min-height:48px}
-.topbar-title{font-size:14px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:6px}
+.topbar-title{font-size:14px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:7px}
 .topbar-chat{font-size:12px;color:var(--text3)}
 .topbar-right{margin-left:auto;display:flex;gap:6px}
 .btn{font-size:12px;padding:5px 10px;border-radius:6px;border:0.5px solid var(--border2);background:none;color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .12s;font-family:'Inter',sans-serif}
@@ -88,27 +92,26 @@ body{font-family:'Inter',sans-serif;background:var(--bg3);color:var(--text);heig
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .btn-primary:hover{background:#4338ca}
 .btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
-.btn-danger:hover{background:#b91c1c}
 .steps-nav{display:flex;padding:0 4px;border-bottom:0.5px solid var(--border);background:var(--bg);overflow-x:auto}
-.step-tab{display:flex;align-items:center;gap:5px;padding:9px 10px;font-size:12px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .12s}
+.step-tab{display:flex;align-items:center;gap:5px;padding:9px 10px;font-size:12px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .step-tab:hover{color:var(--text2)}
 .step-tab.active{color:var(--text);border-bottom-color:var(--accent);font-weight:500}
 .step-num{width:17px;height:17px;border-radius:50%;background:var(--bg3);font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--text3);flex-shrink:0}
 .step-tab.active .step-num{background:var(--accent);color:#fff}
 
-/* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;padding:20px}
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:22px}
 .s-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-.s-desc{font-size:12px;color:var(--text3);margin-bottom:11px;line-height:1.6}
-textarea,.txt-in{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:9px 11px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);resize:vertical;line-height:1.65;outline:none;transition:border-color .12s}
+.s-desc{font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.6}
+textarea,.txt-in{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:10px 12px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);resize:vertical;line-height:1.65;outline:none;transition:border-color .12s}
 textarea:focus,.txt-in:focus{border-color:var(--accent)}
-.upload-zone{border:0.5px dashed var(--border2);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;position:relative;transition:background .12s}
+.upload-zone{border:0.5px dashed var(--border2);border-radius:var(--radius);padding:18px;text-align:center;cursor:pointer;position:relative;transition:background .12s}
 .upload-zone:hover{background:var(--bg2)}
 .upload-zone.has-files{border-color:var(--success);background:rgba(5,150,105,.04)}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.file-list{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.file-list{display:flex;flex-direction:column;gap:5px;margin-top:9px}
 .file-item{display:flex;align-items:center;gap:7px;padding:7px 10px;background:var(--bg2);border-radius:6px;border:0.5px solid var(--border)}
-.file-item.ok{border-color:var(--success);background:rgba(5,150,105,.05)}
+.file-item.ok{border-color:var(--success);background:rgba(5,150,105,.04)}
 .file-badge{font-size:10px;padding:2px 6px;border-radius:10px;background:rgba(5,150,105,.15);color:var(--success);font-weight:600;flex-shrink:0}
 .file-name{font-size:12px;color:var(--text);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
 .file-note{font-size:11px;border:none;background:none;color:var(--text2);outline:none;flex:1;font-family:'Inter',sans-serif}
@@ -118,84 +121,105 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .sub-block{border:0.5px solid var(--border);border-radius:var(--radius);padding:12px}
 .sub-title{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:7px;display:flex;align-items:center;gap:5px}
 .link-row{display:flex;gap:6px;margin-bottom:6px;align-items:center}
-.link-row input{flex:1;border:0.5px solid var(--border2);border-radius:6px;padding:6px 9px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none}
+.link-row input{flex:1;border:0.5px solid var(--border2);border-radius:6px;padding:7px 10px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none}
 .link-row input:focus{border-color:var(--accent)}
-.ltype{font-size:11px;padding:6px 7px;border:0.5px solid var(--border);border-radius:6px;background:var(--bg2);color:var(--text2);font-family:'Inter',sans-serif}
+.ltype{font-size:11px;padding:6px 8px;border:0.5px solid var(--border);border-radius:6px;background:var(--bg2);color:var(--text2);font-family:'Inter',sans-serif}
 .link-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px}
-.kpi-grid{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
-.kpi-tag{padding:4px 11px;border-radius:20px;font-size:12px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border);cursor:pointer;transition:all .12s;user-select:none}
+.kpi-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.kpi-tag{padding:5px 12px;border-radius:20px;font-size:12px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border);cursor:pointer;transition:all .12s;user-select:none}
 .kpi-tag:hover{border-color:var(--accent-mid)}
 .kpi-tag.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-.nav-btns{display:flex;justify-content:space-between;margin-top:16px}
-.gap-top{margin-top:14px}
+.nav-btns{display:flex;justify-content:space-between;margin-top:18px}
+.gap-top{margin-top:16px}
 
-/* ── CHAT ── */
-.chat-wrap{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:13px}
-.agent-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;display:flex;align-items:center;gap:4px}
-.agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:13px 15px;font-size:13px;line-height:1.8;color:var(--text)}
-.agent-bubble h3{font-size:14px;font-weight:600;color:var(--text);margin:11px 0 3px}
-.agent-bubble h3:first-child{margin-top:0}
-.agent-bubble strong{font-weight:600}
-.agent-bubble ul{padding-left:15px;margin:5px 0}
-.agent-bubble li{margin-bottom:2px}
-.agent-bubble p{margin-bottom:7px}
-.agent-bubble p:last-child{margin-bottom:0}
-.chips-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chip{padding:5px 12px;border-radius:20px;font-size:12px;background:var(--accent-light);color:var(--accent);border:0.5px solid var(--accent-mid);cursor:pointer;transition:all .12s;line-height:1.4}
+/* CHAT */
+.chat-wrap{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
+.agent-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+
+/* RICH BUBBLE */
+.agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;color:var(--text);line-height:1}
+.bubble-section{margin-bottom:20px}
+.bubble-section:last-child{margin-bottom:0}
+.bubble-h{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:7px}
+.bubble-h i{color:var(--accent);font-size:16px}
+.bubble-p{font-size:13px;line-height:1.75;color:var(--text2);margin-bottom:10px}
+.bubble-p:last-child{margin-bottom:0}
+.bubble-p strong{color:var(--text);font-weight:600}
+.bubble-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.bubble-list li{display:flex;gap:9px;font-size:13px;line-height:1.65;color:var(--text2)}
+.bubble-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0}
+.bubble-list li strong{color:var(--text);font-weight:600}
+.bubble-stat{display:inline-flex;align-items:baseline;gap:4px;background:var(--accent-light);border:0.5px solid var(--accent-mid);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:600;color:var(--accent);margin:0 2px}
+
+/* QUESTION BUBBLE */
+.question-bubble{background:var(--bg);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:18px 20px}
+.question-bubble .q-header{font-size:13px;font-weight:500;color:var(--text);margin-bottom:14px;line-height:1.55}
+.q-item{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start}
+.q-num{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.q-text{font-size:13px;color:var(--text2);line-height:1.6;flex:1}
+.q-answer{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:9px 11px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);resize:none;line-height:1.6;outline:none;margin-top:6px;min-height:60px}
+.q-answer:focus{border-color:var(--accent)}
+.q-submit{margin-top:12px;display:flex;justify-content:flex-end}
+
+.chips-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{padding:6px 14px;border-radius:20px;font-size:12px;background:var(--accent-light);color:var(--accent);border:0.5px solid var(--accent-mid);cursor:pointer;transition:all .12s;line-height:1.4;font-family:'Inter',sans-serif}
 .chip:hover{background:var(--accent);color:#fff}
-.user-bubble{background:var(--accent-light);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:9px 13px;font-size:13px;color:var(--accent);align-self:flex-end;max-width:75%;line-height:1.6}
-.chat-bar{border-top:0.5px solid var(--border);padding:9px 13px;display:flex;gap:7px;align-items:flex-end;background:var(--bg)}
-.chat-bar textarea{resize:none;min-height:34px;max-height:110px;flex:1;overflow-y:auto}
-.send-btn{padding:7px 12px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:13px;cursor:pointer;flex-shrink:0;font-family:'Inter',sans-serif}
+.user-bubble{background:var(--accent-light);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:10px 14px;font-size:13px;color:var(--accent);align-self:flex-end;max-width:72%;line-height:1.65}
+.chat-bar{border-top:0.5px solid var(--border);padding:10px 14px;display:flex;gap:7px;align-items:flex-end;background:var(--bg)}
+.chat-bar textarea{resize:none;min-height:36px;max-height:110px;flex:1;overflow-y:auto}
+.send-btn{padding:8px 13px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:13px;cursor:pointer;flex-shrink:0;font-family:'Inter',sans-serif}
 .send-btn:hover{background:#4338ca}
-.recalc-btn{padding:7px 10px;background:none;color:var(--text2);border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;cursor:pointer;flex-shrink:0;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:4px}
+.recalc-btn{padding:8px 10px;background:none;color:var(--text2);border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;cursor:pointer;flex-shrink:0;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:4px}
 .recalc-btn:hover{background:var(--bg2)}
-.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;color:var(--text3);font-size:13px;text-align:center}
-.thinking{color:var(--text3);font-size:13px;display:flex;align-items:center;gap:6px;padding:4px 0}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;color:var(--text3);font-size:13px;text-align:center}
+.thinking{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text3);padding:6px 0}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:blink 1.2s infinite}
 .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
-/* ── QUICK CHAT PANEL ── */
+/* QUICK PANEL */
 .quick-panel{position:fixed;bottom:0;left:240px;width:380px;background:var(--bg);border:0.5px solid var(--border2);border-bottom:none;border-radius:var(--radius-lg) var(--radius-lg) 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.12);z-index:400;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);max-height:480px}
 .quick-panel.open{transform:translateY(0)}
 .qp-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:0.5px solid var(--border)}
 .qp-title{font-size:13px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:6px}
 .qp-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px}
-.qp-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;min-height:200px}
-.qp-agent{background:var(--bg2);border-radius:var(--radius);padding:10px 12px;font-size:12px;line-height:1.7;color:var(--text)}
-.qp-user{background:var(--accent-light);border-radius:var(--radius);padding:8px 12px;font-size:12px;color:var(--accent);align-self:flex-end;max-width:80%}
+.qp-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:200px}
+.qp-agent{background:var(--bg2);border-radius:var(--radius);padding:10px 13px;font-size:12px;line-height:1.7;color:var(--text)}
+.qp-user{background:var(--accent-light);border-radius:var(--radius);padding:8px 12px;font-size:12px;color:var(--accent);align-self:flex-end;max-width:80%;line-height:1.6}
 .qp-bar{display:flex;gap:6px;padding:10px 12px;border-top:0.5px solid var(--border)}
 .qp-bar input{flex:1;border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 10px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none}
 .qp-bar input:focus{border-color:var(--accent)}
-.qp-send{padding:7px 11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:12px;cursor:pointer;font-family:'Inter',sans-serif}
+.qp-send{padding:7px 11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:12px;cursor:pointer}
 
-/* ── MODALS ── */
+/* MODALS */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;align-items:center;justify-content:center}
 .overlay.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border2);padding:20px;width:360px;max-height:520px;overflow-y:auto}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.modal{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border2);padding:22px;width:360px;max-height:540px;overflow-y:auto}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .modal-title{font-size:14px;font-weight:600;color:var(--text)}
 .modal-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:17px}
-.modal-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 5px}
-.modal-input{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:8px 10px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;margin-bottom:8px}
+.modal-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px}
+.modal-input{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:8px 10px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;margin-bottom:6px}
 .modal-input:focus{border-color:var(--accent)}
-.emoji-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-bottom:10px}
-.emoji-opt{font-size:20px;padding:5px;border-radius:6px;cursor:pointer;text-align:center;transition:background .1s;border:0.5px solid transparent}
-.emoji-opt:hover{background:var(--bg2)}
-.emoji-opt.selected{border-color:var(--accent);background:var(--accent-light)}
+
+/* ICON PICKER */
+.icon-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:12px}
+.icon-opt{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;border:0.5px solid transparent;color:var(--text3);font-size:18px;transition:all .1s}
+.icon-opt:hover{background:var(--bg2);color:var(--text)}
+.icon-opt.sel{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
+
 .conn-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;border:0.5px solid var(--border);font-size:12px;color:var(--text2);cursor:pointer;margin-bottom:6px;transition:all .12s;background:var(--bg)}
 .conn-item:hover{border-color:var(--border2)}
 .conn-item.linked{border-color:var(--accent-mid);background:var(--accent-light);color:var(--accent)}
-.confirm-msg{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+.confirm-msg{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:18px}
 .confirm-btns{display:flex;gap:8px;justify-content:flex-end}
-.settings-tabs{display:flex;gap:0;border-bottom:0.5px solid var(--border);margin-bottom:14px}
-.stab{padding:7px 12px;font-size:12px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.settings-tabs{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:16px}
+.stab{padding:7px 14px;font-size:12px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
 .stab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
-.focus-bg-block{background:var(--bg2);border-radius:var(--radius);padding:10px;margin-bottom:8px}
-.focus-bg-name{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.focus-bg-block{background:var(--bg2);border-radius:var(--radius);padding:11px;margin-bottom:8px}
+.focus-bg-name{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px}
 
-/* ── TOAST ── */
+/* TOAST */
 .toast{position:fixed;bottom:20px;right:20px;background:#1a1a1a;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;z-index:600;opacity:0;transition:opacity .25s;pointer-events:none;display:flex;align-items:center;gap:6px}
 .dark .toast{background:#e8e8e8;color:#1a1a1a}
 .toast.show{opacity:1}
@@ -204,43 +228,34 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 <body>
 <div id="toast" class="toast"><i class="ti ti-check"></i><span id="toast-msg"></span></div>
 
-<div class="shell" id="shell">
- <!-- SIDEBAR -->
+<div class="shell">
  <div class="sidebar">
   <div class="sb-top">
-   <div class="logo"><span class="logo-pipe">🔍</span> <span>Sherlock</span></div>
+   <div class="logo"><i class="ti ti-search" style="color:var(--accent);font-size:16px"></i> <span>Sherlock</span></div>
    <div class="logo-sub">UX Agent</div>
-   <select class="focus-select" id="focus-sel" onchange="switchFocus(this.value)"></select>
+   <div class="focus-wrap">
+    <select class="focus-select" id="focus-sel" onchange="switchFocus(this.value)"></select>
+    <i class="ti ti-chevron-down focus-arrow"></i>
+   </div>
   </div>
-  <div class="sb-section">
-   Proyectos
-   <button onclick="newProject()" title="Nuevo proyecto"><i class="ti ti-plus"></i></button>
-  </div>
+  <div class="sb-section">Proyectos<button onclick="newProject()" title="Nuevo proyecto"><i class="ti ti-plus"></i></button></div>
   <div class="sb-scroll" id="proj-list"></div>
   <div class="sb-bottom">
-   <button class="quick-chat-btn" onclick="toggleQuick()">
-    <i class="ti ti-message-circle"></i> Chat rápido
-   </button>
+   <button class="quick-chat-btn" onclick="toggleQuick()"><i class="ti ti-message-circle"></i> Chat rápido</button>
    <div class="dark-row">
-    <span class="dark-label"><i class="ti ti-moon" id="dark-icon"></i> Modo oscuro</span>
-    <label class="toggle-sw">
-     <input type="checkbox" id="dark-chk" onchange="toggleDark()"/>
-     <div class="toggle-track"></div>
-     <div class="toggle-thumb"></div>
-    </label>
+    <span class="dark-label"><i class="ti ti-moon"></i> Modo oscuro</span>
+    <label class="toggle-sw"><input type="checkbox" id="dark-chk" onchange="toggleDark()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
    </div>
-   <div class="sb-ver">
-    <span>v1.1.2</span>
-    <button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button>
-   </div>
+   <div class="sb-ver"><span>v1.1.3</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
   </div>
  </div>
 
- <!-- MAIN -->
  <div class="main">
   <div class="topbar">
-   <div class="topbar-title" id="t-title">—</div>
-   <span class="topbar-chat" id="t-chat"></span>
+   <div style="display:flex;align-items:center;gap:8px">
+    <div class="topbar-title" id="t-title">—</div>
+    <span class="topbar-chat" id="t-chat"></span>
+   </div>
    <div class="topbar-right">
     <button class="btn" onclick="openConnect()"><i class="ti ti-link"></i> Conectar</button>
     <button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Analizar</button>
@@ -257,300 +272,180 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
   <div class="qp-title"><i class="ti ti-message-circle"></i> Chat rápido · Sherlock</div>
   <button class="qp-close" onclick="toggleQuick()"><i class="ti ti-x"></i></button>
  </div>
- <div class="qp-msgs" id="qp-msgs"><div style="font-size:12px;color:var(--text3);text-align:center;padding:20px 10px">Hacé una pregunta rápida de UX, métricas o benchmarks.</div></div>
- <div class="qp-bar">
-  <input id="qp-in" placeholder="Ej: ¿Cuánto es el benchmark de conversión en e-commerce?" onkeydown="qpKey(event)"/>
-  <button class="qp-send" onclick="qpSend()"><i class="ti ti-send"></i></button>
- </div>
+ <div class="qp-msgs" id="qp-msgs"><div style="font-size:12px;color:var(--text3);text-align:center;padding:24px 10px">Preguntá sobre UX, métricas o benchmarks sin necesidad de cargar un proyecto.</div></div>
+ <div class="qp-bar"><input id="qp-in" placeholder="Ej: benchmark conversión e-commerce LATAM" onkeydown="qpKey(event)"/><button class="qp-send" onclick="qpSend()"><i class="ti ti-send"></i></button></div>
 </div>
 
-<!-- MODAL: PROYECTO EDIT -->
+<!-- MODAL PROYECTO -->
 <div class="overlay" id="proj-modal">
  <div class="modal">
   <div class="modal-hdr"><span class="modal-title" id="pm-title">Editar proyecto</span><button class="modal-close" onclick="closeModal('proj-modal')"><i class="ti ti-x"></i></button></div>
   <div class="modal-label">Nombre</div>
   <input class="modal-input" id="pm-name" placeholder="Nombre del proyecto"/>
   <div class="modal-label">Ícono</div>
-  <div class="emoji-grid" id="emoji-grid"></div>
-  <input class="modal-input" id="pm-emoji-custom" placeholder="O escribí un emoji..." maxlength="2" style="width:80px"/>
-  <div style="display:flex;gap:8px;margin-top:4px;justify-content:flex-end">
+  <div class="icon-grid" id="icon-grid"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
    <button class="btn" onclick="closeModal('proj-modal')">Cancelar</button>
    <button class="btn btn-primary" onclick="saveProjModal()">Guardar</button>
   </div>
  </div>
 </div>
 
-<!-- MODAL: CONFIRM DELETE -->
+<!-- MODAL CONFIRM -->
 <div class="overlay" id="confirm-modal">
  <div class="modal" style="width:320px">
   <div class="modal-hdr"><span class="modal-title">¿Confirmar eliminación?</span><button class="modal-close" onclick="closeModal('confirm-modal')"><i class="ti ti-x"></i></button></div>
   <p class="confirm-msg" id="confirm-msg"></p>
-  <div class="confirm-btns">
-   <button class="btn" onclick="closeModal('confirm-modal')">Cancelar</button>
-   <button class="btn btn-danger" onclick="confirmAction()">Eliminar</button>
-  </div>
+  <div class="confirm-btns"><button class="btn" onclick="closeModal('confirm-modal')">Cancelar</button><button class="btn btn-danger" onclick="confirmAction()">Eliminar</button></div>
  </div>
 </div>
 
-<!-- MODAL: CHAT RENAME -->
+<!-- MODAL RENAME CHAT -->
 <div class="overlay" id="chat-modal">
  <div class="modal" style="width:300px">
   <div class="modal-hdr"><span class="modal-title">Renombrar análisis</span><button class="modal-close" onclick="closeModal('chat-modal')"><i class="ti ti-x"></i></button></div>
   <input class="modal-input" id="chat-rename-in" placeholder="Nombre del análisis"/>
-  <div style="display:flex;gap:8px;justify-content:flex-end">
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
    <button class="btn" onclick="closeModal('chat-modal')">Cancelar</button>
    <button class="btn btn-primary" onclick="saveChatRename()">Guardar</button>
   </div>
  </div>
 </div>
 
-<!-- MODAL: CONNECT -->
+<!-- MODAL CONNECT -->
 <div class="overlay" id="connect-modal">
  <div class="modal">
   <div class="modal-hdr"><span class="modal-title">Conectar proyectos</span><button class="modal-close" onclick="closeModal('connect-modal')"><i class="ti ti-x"></i></button></div>
-  <p style="font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.5">Podés conectar proyectos de cualquier foco. Sherlock los considerará al analizar.</p>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.55">Podés conectar proyectos de cualquier foco. Sherlock los considerará en el análisis.</p>
   <div id="connect-list"></div>
-  <button class="btn btn-primary" onclick="closeModal('connect-modal')" style="margin-top:10px;width:100%;justify-content:center">Listo</button>
+  <button class="btn btn-primary" onclick="closeModal('connect-modal')" style="margin-top:12px;width:100%;justify-content:center">Listo</button>
  </div>
 </div>
 
-<!-- MODAL: SETTINGS -->
+<!-- MODAL SETTINGS -->
 <div class="overlay" id="settings-modal">
- <div class="modal" style="width:480px;max-height:580px">
-  <div class="modal-hdr"><span class="modal-title"><i class="ti ti-settings"></i> Configuración global</span><button class="modal-close" onclick="saveSettings();closeModal('settings-modal')"><i class="ti ti-x"></i></button></div>
-  <div class="settings-tabs">
-   <div class="stab active" onclick="stab(0)" id="stab0">Reglas máximas</div>
-   <div class="stab" onclick="stab(1)" id="stab1">Background por foco</div>
-  </div>
+ <div class="modal" style="width:500px;max-height:580px">
+  <div class="modal-hdr"><span class="modal-title">Configuración global</span><button class="modal-close" onclick="saveSettings();closeModal('settings-modal')"><i class="ti ti-x"></i></button></div>
+  <div class="settings-tabs"><div class="stab active" onclick="stab(0)" id="stab0">Reglas máximas</div><div class="stab" onclick="stab(1)" id="stab1">Background por foco</div></div>
   <div id="stab-body"></div>
-  <div style="display:flex;justify-content:flex-end;margin-top:14px">
-   <button class="btn btn-primary" onclick="saveSettings();closeModal('settings-modal')">Guardar y cerrar</button>
-  </div>
+  <div style="display:flex;justify-content:flex-end;margin-top:16px"><button class="btn btn-primary" onclick="saveSettings();closeModal('settings-modal')">Guardar y cerrar</button></div>
  </div>
 </div>
 
 <script>
-const VER='1.1.2';
-const STORE='sherlock_v6';
-const DARK_K='sh_dark';
-const SET_K='sh_settings';
 const FOCUSES=['Farmacity','Simplicity','Get The Look','The Food Market','Farmacity Uruguay'];
-const EMOJIS=['📊','🛒','💊','🏪','📱','🧪','🔬','💡','🎯','📈','📉','🗂️','🧭','🔍','💬','⚡','🌿','🎨','🧩','🛍️','📋','🔧','🏆','✨'];
 const KPI_LIST=['Tasa de conversión','Drop en checkout','Tiempo en tarea','Tasa de error','NPS / CSAT','Bounce rate','Click-through rate','Tasa de abandono','Time to first action','Tasa de retención'];
 const COLORS=['#4f46e5','#0d9488','#d97706','#dc2626','#7c3aed','#059669','#0891b2','#db2777'];
 const STEPS=['Objetivo & KPIs','Contexto','Materiales','Limitantes','Referencias','Análisis'];
+const PROJ_ICONS=['ti-shopping-cart','ti-pill','ti-device-mobile','ti-chart-bar','ti-users','ti-bulb','ti-microscope','ti-target','ti-trending-up','ti-folder','ti-map','ti-rocket','ti-star','ti-heart','ti-package','ti-tag','ti-brush','ti-layout','ti-database','ti-settings','ti-eye','ti-flask','ti-gift','ti-home','ti-truck','ti-camera','ti-mail','ti-globe'];
 
 let state,dark=false,activeFocus=0,activeId,activeChatId,step=0;
 let pendingConfirm=null,editingProjId=null,editingChatId=null,settingsTab=0;
 let qpOpen=false,qpMsgs=[];
 
 function load(){
-  try{state=JSON.parse(localStorage.getItem(STORE))||initState();}catch{state=initState();}
-  dark=localStorage.getItem(DARK_K)==='1';
-  applyDark();
+  try{state=JSON.parse(localStorage.getItem('sherlock_v7'))||initState();}catch{state=initState();}
+  dark=localStorage.getItem('sh_dark')==='1';applyDark();
   activeFocus=state.activeFocus||0;
   const fp=focusProjects();
   activeId=state.activeId&&fp.find(p=>p.id===state.activeId)?state.activeId:(fp[0]?.id||null);
   const proj=allProjects().find(p=>p.id===activeId);
   activeChatId=state.activeChatId&&proj?.chats?.find(c=>c.id===state.activeChatId)?state.activeChatId:(proj?.chats?.[0]?.id||null);
 }
-function save(){
-  state.activeFocus=activeFocus;state.activeId=activeId;state.activeChatId=activeChatId;
-  try{localStorage.setItem(STORE,JSON.stringify(state));}catch{}
-}
+function save(){state.activeFocus=activeFocus;state.activeId=activeId;state.activeChatId=activeChatId;try{localStorage.setItem('sherlock_v7',JSON.stringify(state));}catch{}}
 function initState(){
   const s={activeFocus:0,activeId:null,activeChatId:null,globalRules:'',focusBg:{},projects:{}};
   FOCUSES.forEach(f=>{s.projects[f]=[];s.focusBg[f]='';});
-  const p1=mkProj('Checkout Friction Q2','🛒');
-  const p2=mkProj('Home & Categorías','📱');
-  s.projects['Farmacity']=[p1,p2];
-  s.activeId=p1.id;s.activeChatId=p1.chats[0].id;
-  return s;
+  const p1=mkProj('Checkout Friction Q2','ti-shopping-cart');
+  const p2=mkProj('Home & Categorías','ti-layout');
+  s.projects['Farmacity']=[p1,p2];s.activeId=p1.id;s.activeChatId=p1.chats[0].id;return s;
 }
-function mkProj(name,icon='📊'){
-  const chat=mkChat('Análisis inicial');
-  return{id:'p'+Date.now()+Math.random().toString(36).slice(2),name,icon,color:COLORS[Math.floor(Math.random()*COLORS.length)],materials:[],contextFiles:[],context:'',limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],chats:[chat]};
-}
-function mkChat(name){return{id:'c'+Date.now()+Math.random().toString(36).slice(2),name,messages:[]};}
+function mkProj(name,icon='ti-folder'){const c=mkChat('Análisis inicial');return{id:'p'+Date.now()+Math.random().toString(36).slice(2),name,icon,color:COLORS[Math.floor(Math.random()*COLORS.length)],materials:[],contextFiles:[],context:'',limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],chats:[c]};}
+function mkChat(name){return{id:'c'+Date.now()+Math.random().toString(36).slice(2),name,messages:[],awaitingAnswers:false};}
 function allProjects(){return FOCUSES.flatMap(f=>state.projects[f]||[]);}
 function focusProjects(){return state.projects[FOCUSES[activeFocus]]||[];}
 function activeProj(){return allProjects().find(p=>p.id===activeId)||focusProjects()[0]||null;}
 function activeChat(){const p=activeProj();return p?.chats?.find(c=>c.id===activeChatId)||p?.chats?.[0]||null;}
 
-function applyDark(){
-  document.body.classList.toggle('dark',dark);
-  const chk=document.getElementById('dark-chk');if(chk)chk.checked=dark;
-}
-function toggleDark(){dark=!dark;localStorage.setItem(DARK_K,dark?'1':'0');applyDark();}
+function applyDark(){document.body.classList.toggle('dark',dark);const c=document.getElementById('dark-chk');if(c)c.checked=dark;}
+function toggleDark(){dark=!dark;localStorage.setItem('sh_dark',dark?'1':'0');applyDark();}
 
-function switchFocus(val){
-  collectCurrent();activeFocus=FOCUSES.indexOf(val);
-  const fp=focusProjects();
-  activeId=fp[0]?.id||null;
-  activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;
-  step=0;save();render();
-}
-
+function switchFocus(val){collectCurrent();activeFocus=FOCUSES.indexOf(val);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;step=0;save();render();}
 function render(){renderSidebar();renderStep();}
 
 function renderSidebar(){
   const sel=document.getElementById('focus-sel');
-  if(sel){sel.innerHTML=FOCUSES.map((f,i)=>`<option value="${f}" ${i===activeFocus?'selected':''}>${f}</option>`).join('');}
+  if(sel)sel.innerHTML=FOCUSES.map((f,i)=>`<option value="${f}"${i===activeFocus?' selected':''}>${f}</option>`).join('');
   const proj=activeProj();const chat=activeChat();
-  const titleEl=document.getElementById('t-title');
-  if(titleEl)titleEl.innerHTML=proj?`<span style="font-size:15px">${proj.icon||'📊'}</span> ${proj.name}`:'—';
-  const chatEl=document.getElementById('t-chat');
-  if(chatEl)chatEl.textContent=chat?`· ${chat.name}`:'';
+  const tt=document.getElementById('t-title');
+  if(tt)tt.innerHTML=proj?`<i class="ti ${proj.icon||'ti-folder'}" style="color:var(--accent);font-size:16px"></i> ${proj.name}`:'—';
+  const tc=document.getElementById('t-chat');if(tc)tc.textContent=chat?`· ${chat.name}`:'';
   const fp=focusProjects();
   document.getElementById('proj-list').innerHTML=fp.map(p=>`
-    <div class="proj-item ${p.id===activeId?'active':''}" onclick="switchProj('${p.id}')">
-      <span class="proj-icon">${p.icon||'📊'}</span>
+    <div class="proj-item${p.id===activeId?' active':''}" onclick="switchProj('${p.id}')">
+      <span class="proj-icon"><i class="ti ${p.icon||'ti-folder'}"></i></span>
       <span class="proj-label">${p.name}</span>
       <span class="proj-actions">
-        <button class="proj-act-btn" onclick="openEditProj(event,'${p.id}')" title="Editar"><i class="ti ti-pencil"></i></button>
-        <button class="proj-act-btn" onclick="askDeleteProj(event,'${p.id}')" title="Eliminar" style="color:var(--danger)"><i class="ti ti-trash"></i></button>
+        <button class="proj-act-btn" onclick="openEditProj(event,'${p.id}')"><i class="ti ti-pencil"></i></button>
+        <button class="proj-act-btn del" onclick="askDeleteProj(event,'${p.id}')"><i class="ti ti-trash"></i></button>
       </span>
     </div>
-    ${p.id===activeId?`<div class="chat-sub">
-      ${(p.chats||[]).map(c=>`
-        <div class="chat-item ${c.id===activeChatId?'active-chat':''}">
-          <span onclick="switchChat('${c.id}')" style="flex:1"><i class="ti ti-message" style="font-size:10px;margin-right:4px"></i>${c.name}</span>
-          <span class="chat-item-actions">
-            <button class="chat-act-btn" onclick="openRenameChat('${c.id}')" title="Renombrar"><i class="ti ti-pencil"></i></button>
-            <button class="chat-act-btn" onclick="askDeleteChat('${c.id}')" title="Eliminar"><i class="ti ti-trash"></i></button>
-          </span>
-        </div>`).join('')}
+    ${p.id===activeId?`<div class="chat-sub">${(p.chats||[]).map(c=>`
+      <div class="chat-item${c.id===activeChatId?' active-chat':''}">
+        <i class="ti ti-message" style="font-size:10px;flex-shrink:0"></i>
+        <span class="chat-item-name" onclick="switchChat('${c.id}')">${c.name}</span>
+        <span class="chat-item-acts">
+          <button class="chat-act-btn" onclick="openRenameChat('${c.id}')"><i class="ti ti-pencil"></i></button>
+          <button class="chat-act-btn" onclick="askDeleteChat('${c.id}')"><i class="ti ti-trash"></i></button>
+        </span>
+      </div>`).join('')}
       <button class="new-chat-btn" onclick="newChat()"><i class="ti ti-plus" style="font-size:10px"></i> Nuevo análisis</button>
     </div>`:''}`).join('');
   const nav=document.getElementById('steps-nav');
-  if(nav)nav.innerHTML=STEPS.map((s,i)=>`<div class="step-tab ${i===step?'active':''}" onclick="goStep(${i})"><span class="step-num">${i+1}</span>${s}</div>`).join('');
+  if(nav)nav.innerHTML=STEPS.map((s,i)=>`<div class="step-tab${i===step?' active':''}" onclick="goStep(${i})"><span class="step-num">${i+1}</span>${s}</div>`).join('');
 }
 
 function switchProj(id){collectCurrent();activeId=id;const p=activeProj();activeChatId=p?.chats?.[0]?.id||null;step=0;save();render();}
 function switchChat(id){activeChatId=id;save();renderSidebar();if(step===5)renderStep();}
+function newProject(){const name=prompt('Nombre del proyecto:');if(!name)return;const p=mkProj(name,'ti-folder');if(!state.projects[FOCUSES[activeFocus]])state.projects[FOCUSES[activeFocus]]=[];state.projects[FOCUSES[activeFocus]].push(p);activeId=p.id;activeChatId=p.chats[0].id;step=0;save();render();}
+function newChat(){const p=activeProj();if(!p)return;const name=prompt('Nombre del análisis:','Análisis '+(p.chats.length+1));if(!name)return;const c=mkChat(name);p.chats.push(c);activeChatId=c.id;save();renderSidebar();goStep(5);}
 
-function newProject(){
-  const name=prompt('Nombre del proyecto:');if(!name)return;
-  const p=mkProj(name,'📊');
-  if(!state.projects[FOCUSES[activeFocus]])state.projects[FOCUSES[activeFocus]]=[];
-  state.projects[FOCUSES[activeFocus]].push(p);
-  activeId=p.id;activeChatId=p.chats[0].id;step=0;save();render();
-}
-function newChat(){
-  const p=activeProj();if(!p)return;
-  const name=prompt('Nombre del análisis:','Análisis '+(p.chats.length+1));if(!name)return;
-  const c=mkChat(name);p.chats.push(c);activeChatId=c.id;save();renderSidebar();goStep(5);
-}
-
-/* ── EDIT PROJ MODAL ── */
 function openEditProj(e,id){
   e.stopPropagation();editingProjId=id;
   const p=allProjects().find(x=>x.id===id);if(!p)return;
-  document.getElementById('pm-title').textContent='Editar proyecto';
   document.getElementById('pm-name').value=p.name;
-  document.getElementById('pm-emoji-custom').value='';
-  const grid=document.getElementById('emoji-grid');
-  grid.innerHTML=EMOJIS.map(em=>`<div class="emoji-opt ${em===p.icon?'selected':''}" onclick="selectEmoji(this,'${em}')">${em}</div>`).join('');
+  document.getElementById('icon-grid').innerHTML=PROJ_ICONS.map(ic=>`<div class="icon-opt${ic===p.icon?' sel':''}" onclick="selectIcon(this,'${ic}')"><i class="ti ${ic}"></i></div>`).join('');
   openModal('proj-modal');
 }
-function selectEmoji(el,em){document.querySelectorAll('.emoji-opt').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');document.getElementById('pm-emoji-custom').value='';}
+function selectIcon(el,ic){document.querySelectorAll('.icon-opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
 function saveProjModal(){
   const p=allProjects().find(x=>x.id===editingProjId);if(!p)return;
   p.name=document.getElementById('pm-name').value.trim()||p.name;
-  const custom=document.getElementById('pm-emoji-custom').value.trim();
-  const sel=document.querySelector('.emoji-opt.selected');
-  p.icon=custom||sel?.textContent||p.icon;
+  const sel=document.querySelector('.icon-opt.sel i');if(sel){const cls=[...sel.classList].find(c=>c.startsWith('ti-'));if(cls)p.icon=cls;}
   save();closeModal('proj-modal');render();
 }
 
-/* ── DELETE CONFIRM ── */
-function askDeleteProj(e,id){
-  e.stopPropagation();
-  const p=allProjects().find(x=>x.id===id);if(!p)return;
-  document.getElementById('confirm-msg').textContent=`¿Querés eliminar el proyecto "${p.name}" y todos sus análisis? Esta acción no se puede deshacer.`;
-  pendingConfirm=()=>deleteProj(id);
-  openModal('confirm-modal');
-}
-function deleteProj(id){
-  FOCUSES.forEach(f=>{state.projects[f]=(state.projects[f]||[]).filter(p=>p.id!==id);});
-  const fp=focusProjects();
-  activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;
-  save();closeModal('confirm-modal');render();showToast('Proyecto eliminado');
-}
-function askDeleteChat(id){
-  const p=activeProj();const c=p?.chats?.find(x=>x.id===id);if(!c)return;
-  document.getElementById('confirm-msg').textContent=`¿Eliminar el análisis "${c.name}"? Esta acción no se puede deshacer.`;
-  pendingConfirm=()=>deleteChat(id);
-  openModal('confirm-modal');
-}
-function deleteChat(id){
-  const p=activeProj();if(!p)return;
-  p.chats=p.chats.filter(c=>c.id!==id);
-  if(p.chats.length===0){const c=mkChat('Análisis inicial');p.chats.push(c);}
-  activeChatId=p.chats[0].id;
-  save();closeModal('confirm-modal');renderSidebar();if(step===5)renderStep();showToast('Análisis eliminado');
-}
+function askDeleteProj(e,id){e.stopPropagation();const p=allProjects().find(x=>x.id===id);if(!p)return;document.getElementById('confirm-msg').textContent=`¿Querés eliminar el proyecto "${p.name}" y todos sus análisis? Esta acción no se puede deshacer.`;pendingConfirm=()=>deleteProj(id);openModal('confirm-modal');}
+function deleteProj(id){FOCUSES.forEach(f=>{state.projects[f]=(state.projects[f]||[]).filter(p=>p.id!==id);});const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;save();closeModal('confirm-modal');render();showToast('Proyecto eliminado');}
+function askDeleteChat(id){const p=activeProj();const c=p?.chats?.find(x=>x.id===id);if(!c)return;document.getElementById('confirm-msg').textContent=`¿Eliminar el análisis "${c.name}"?`;pendingConfirm=()=>deleteChat(id);openModal('confirm-modal');}
+function deleteChat(id){const p=activeProj();if(!p)return;p.chats=p.chats.filter(c=>c.id!==id);if(!p.chats.length){const c=mkChat('Análisis inicial');p.chats.push(c);}activeChatId=p.chats[0].id;save();closeModal('confirm-modal');renderSidebar();if(step===5)renderStep();showToast('Análisis eliminado');}
 function confirmAction(){if(pendingConfirm){pendingConfirm();pendingConfirm=null;}}
-
-/* ── RENAME CHAT ── */
-function openRenameChat(id){
-  editingChatId=id;
-  const p=activeProj();const c=p?.chats?.find(x=>x.id===id);
-  document.getElementById('chat-rename-in').value=c?.name||'';
-  openModal('chat-modal');
-}
-function saveChatRename(){
-  const p=activeProj();const c=p?.chats?.find(x=>x.id===editingChatId);
-  if(c){c.name=document.getElementById('chat-rename-in').value.trim()||c.name;}
-  save();closeModal('chat-modal');renderSidebar();if(step===5)renderStep();
-}
-
-/* ── CONNECT MODAL ── */
-function openConnect(){
-  const p=activeProj();if(!p)return;
-  const others=allProjects().filter(x=>x.id!==activeId);
-  document.getElementById('connect-list').innerHTML=others.length
-    ?others.map(x=>`<div class="conn-item ${p.connectedTo?.includes(x.id)?'linked':''}" onclick="toggleConn('${x.id}',this)"><span style="font-size:14px">${x.icon||'📊'}</span><span style="flex:1">${x.name}</span><i class="ti ti-link"></i></div>`).join('')
-    :'<p style="font-size:12px;color:var(--text3)">No hay otros proyectos.</p>';
-  openModal('connect-modal');
-}
-function toggleConn(id,el){
-  const p=activeProj();if(!p.connectedTo)p.connectedTo=[];
-  if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}
-  else{p.connectedTo.push(id);el.classList.add('linked');}
-  save();
-}
-
-/* ── SETTINGS ── */
+function openRenameChat(id){editingChatId=id;const p=activeProj();const c=p?.chats?.find(x=>x.id===id);document.getElementById('chat-rename-in').value=c?.name||'';openModal('chat-modal');}
+function saveChatRename(){const p=activeProj();const c=p?.chats?.find(x=>x.id===editingChatId);if(c){c.name=document.getElementById('chat-rename-in').value.trim()||c.name;}save();closeModal('chat-modal');renderSidebar();if(step===5)renderStep();}
+function openConnect(){const p=activeProj();if(!p)return;const others=allProjects().filter(x=>x.id!==activeId);document.getElementById('connect-list').innerHTML=others.length?others.map(x=>`<div class="conn-item${p.connectedTo?.includes(x.id)?' linked':''}" onclick="toggleConn('${x.id}',this)"><i class="ti ${x.icon||'ti-folder'}" style="font-size:14px"></i><span style="flex:1">${x.name}</span><i class="ti ti-link"></i></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No hay otros proyectos.</p>';openModal('connect-modal');}
+function toggleConn(id,el){const p=activeProj();if(!p.connectedTo)p.connectedTo=[];if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}else{p.connectedTo.push(id);el.classList.add('linked');}save();}
 function openSettings(){settingsTab=0;renderSettingsBody();openModal('settings-modal');}
 function stab(n){settingsTab=n;document.querySelectorAll('.stab').forEach((t,i)=>t.classList.toggle('active',i===n));renderSettingsBody();}
 function renderSettingsBody(){
   const body=document.getElementById('stab-body');
-  if(settingsTab===0){
-    body.innerHTML=`<div class="s-desc">Estas reglas se inyectan en TODOS los análisis, sin excepción. Son el primer filtro por el que Sherlock tamiza su razonamiento.</div>
-    <textarea id="global-rules" rows="8" placeholder="Ej: Siempre considerá las regulaciones de ANMAT para comunicaciones de salud. Las recomendaciones deben ser implementables en menos de 2 sprints. El usuario de Farmacity valora la claridad sobre la creatividad...">${state.globalRules||''}</textarea>`;
-  }else{
-    body.innerHTML=`<div class="s-desc">Cada foco tiene su propio background. Sherlock lo usa como base de conocimiento del negocio para ese foco específico.</div>
-    ${FOCUSES.map(f=>`<div class="focus-bg-block">
-      <div class="focus-bg-name"><span>${f}</span></div>
-      <textarea id="fbg-${f.replace(/\s/g,'_')}" rows="3" placeholder="Quién es el usuario, qué vende, cómo se comporta, métricas clave, aprendizajes del equipo...">${state.focusBg?.[f]||''}</textarea>
-    </div>`).join('')}`;
-  }
+  if(settingsTab===0){body.innerHTML=`<div class="s-desc">Estas reglas se inyectan en TODOS los análisis, sin excepción. Son el primer filtro por el que Sherlock tamiza su razonamiento.</div><textarea id="global-rules" rows="9" placeholder="Ej: Siempre considerá las regulaciones de ANMAT. Las recomendaciones deben ser implementables en menos de 2 sprints...">${state.globalRules||''}</textarea>`;}
+  else{body.innerHTML=`<div class="s-desc">Cada foco tiene su propio background. Sherlock lo usa como base de conocimiento del negocio.</div>${FOCUSES.map(f=>`<div class="focus-bg-block"><div class="focus-bg-name">${f}</div><textarea id="fbg-${f.replace(/\s/g,'_')}" rows="3" placeholder="Usuario, propuesta de valor, métricas clave, aprendizajes del equipo...">${state.focusBg?.[f]||''}</textarea></div>`).join('')}`;}
 }
-function saveSettings(){
-  const gr=document.getElementById('global-rules');if(gr)state.globalRules=gr.value;
-  FOCUSES.forEach(f=>{
-    const el=document.getElementById('fbg-'+f.replace(/\s/g,'_'));
-    if(el){if(!state.focusBg)state.focusBg={};state.focusBg[f]=el.value;}
-  });
-  save();showToast('Configuración guardada');
-}
-
-/* ── MODALS UTIL ── */
+function saveSettings(){const gr=document.getElementById('global-rules');if(gr)state.globalRules=gr.value;FOCUSES.forEach(f=>{const el=document.getElementById('fbg-'+f.replace(/\s/g,'_'));if(el){if(!state.focusBg)state.focusBg={};state.focusBg[f]=el.value;}});save();showToast('Configuración guardada');}
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 
-/* ── STEPS ── */
+/* STEPS */
 function goStep(n){collectCurrent();step=n;save();renderSidebar();renderStep();}
 function collectCurrent(){
   const p=activeProj();if(!p)return;
@@ -562,7 +457,7 @@ function collectCurrent(){
 }
 function renderStep(){
   const p=activeProj();const body=document.getElementById('step-body');if(!body)return;
-  if(!p){body.innerHTML='<div class="empty-state">Creá un proyecto para empezar.</div>';return;}
+  if(!p){body.innerHTML='<div class="empty-state"><i class="ti ti-folder" style="font-size:28px"></i><span>Creá un proyecto para empezar</span></div>';return;}
   if(step===0)body.innerHTML=stepObj(p);
   else if(step===1)body.innerHTML=stepCtx(p);
   else if(step===2)body.innerHTML=stepMat(p);
@@ -572,61 +467,96 @@ function renderStep(){
   attachStep(p);
 }
 
-function stepObj(p){
-  const sel=p.kpis||[];
-  return`<div class="content"><div class="s-label">Objetivo principal</div><div class="s-desc">Definí qué querés lograr. Esto orienta todo el análisis de Sherlock.</div>
-  <textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago un 15% para Q3 2025...">${p.objective||''}</textarea>
-  <div class="s-label gap-top">KPIs a impactar</div>
-  <div class="kpi-grid">${KPI_LIST.map(k=>`<div class="kpi-tag ${sel.includes(k)?'on':''}" onclick="toggleKpi(this,'${k}')">${k}</div>`).join('')}<div class="kpi-tag" onclick="toggleCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div></div>
-  <input id="kc" class="txt-in" style="margin-top:9px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}"/>
-  <div class="nav-btns"><div></div><button class="btn btn-primary" onclick="goStep(1)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;
-}
-function stepCtx(p){
-  const hf=(p.contextFiles||[]).length>0;
-  return`<div class="content"><div class="s-label">Contexto</div><div class="s-desc">Todo lo que Sherlock necesita saber: negocio, audiencia, estado actual, hipótesis previas, lo que ya se intentó.</div>
-  <textarea id="ctx" rows="6" placeholder="Ej: El flujo de checkout fue rediseñado en marzo 2024. Nuestro usuario principal es mujer, 35-55 años...">${p.context||''}</textarea>
-  <div class="gap-top"><div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div>
-  <div class="upload-zone ${hf?'has-files':''}" id="ctx-zone"><input type="file" multiple id="ctx-fi" accept=".csv,.xlsx,.xls,.txt,.md,.pdf"/>
-  ${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} cargado${p.contextFiles.length>1?'s':''}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Arrastrá más para agregar</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Briefs, personas, research previo</div>`}</div>
-  <div class="file-list">${(p.contextFiles||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delCtx(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div></div>
-  <div class="nav-btns"><button class="btn" onclick="goStep(0)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(2)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;
-}
-function stepMat(p){
-  const hf=(p.materials||[]).length>0;
-  return`<div class="content"><div class="s-label">Materiales</div><div class="s-desc">Subí los datos clave: exports de Analytics, planillas de métricas, CSVs. Sherlock lee el contenido real de los archivos.</div>
-  <div class="upload-zone ${hf?'has-files':''}" id="mat-zone"><input type="file" multiple id="mat-fi" accept=".csv,.xlsx,.xls,.txt,.md"/>
-  ${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.materials.length} archivo${p.materials.length>1?'s':''} cargado${p.materials.length>1?'s':''}</div><div style="font-size:11px;color:var(--text3);margin-top:2px">Arrastrá más para agregar</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">CSV, XLSX, TXT · múltiples archivos</div>`}</div>
-  <div class="file-list">${(p.materials||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file-spreadsheet" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><input class="file-note" placeholder="nota..." value="${f.note||''}" data-fi="${i}"/><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delMat(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div>
-  <div class="nav-btns"><button class="btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(3)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;
-}
-function stepLim(p){
-  return`<div class="content"><div class="s-label">Limitantes</div><div class="s-desc">Delimitá el campo de acción para recomendaciones realistas y accionables.</div>
-  <div class="split"><div class="sub-block"><div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div><textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4...">${p.limitTech||''}</textarea></div>
-  <div class="sub-block"><div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div><textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios...">${p.limitCtx||''}</textarea></div></div>
-  <div class="nav-btns"><button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;
-}
-function stepRef(p){
-  const links=p.links||[];
-  return`<div class="content"><div class="s-label">Referencias</div><div class="s-desc">Links que Sherlock debe considerar: benchmarks, Figma, competidores.</div>
-  <div id="llist">${links.map((l,i)=>`<div class="link-row"><select class="ltype" data-lt="${i}"><option ${l.type==='bench'?'selected':''} value="bench">Bench</option><option ${l.type==='figma'?'selected':''} value="figma">Figma</option><option ${l.type==='ref'?'selected':''} value="ref">Referencia</option><option ${l.type==='comp'?'selected':''} value="comp">Competidor</option></select><input placeholder="https://..." value="${l.url||''}" data-lu="${i}"/><button class="link-del" data-ld="${i}"><i class="ti ti-x"></i></button></div>`).join('')}</div>
-  <button class="btn" onclick="addLink()" style="margin-top:6px"><i class="ti ti-plus"></i> Agregar link</button>
-  <div class="nav-btns"><button class="btn" onclick="goStep(3)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Ir al análisis</button></div></div>`;
-}
+function stepObj(p){const sel=p.kpis||[];return`<div class="content"><div class="s-label">Objetivo principal</div><div class="s-desc">Definí qué querés lograr. Esto orienta todo el análisis de Sherlock.</div><textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago un 15% para Q3 2025...">${p.objective||''}</textarea><div class="s-label gap-top">KPIs a impactar</div><div class="kpi-grid">${KPI_LIST.map(k=>`<div class="kpi-tag${sel.includes(k)?' on':''}" onclick="toggleKpi(this,'${k}')">${k}</div>`).join('')}<div class="kpi-tag" onclick="toggleCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div></div><input id="kc" class="txt-in" style="margin-top:9px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}"/><div class="nav-btns"><div></div><button class="btn btn-primary" onclick="goStep(1)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function stepCtx(p){const hf=(p.contextFiles||[]).length>0;return`<div class="content"><div class="s-label">Contexto</div><div class="s-desc">Todo lo que Sherlock necesita saber para interpretar los datos correctamente.</div><textarea id="ctx" rows="6" placeholder="Ej: El flujo de checkout fue rediseñado en marzo 2024. Usuario principal: mujer, 35-55 años, urbana...">${p.context||''}</textarea><div class="gap-top"><div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div><div class="upload-zone${hf?' has-files':''}" id="ctx-zone"><input type="file" multiple id="ctx-fi" accept=".csv,.xlsx,.xls,.txt,.md,.pdf"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} cargado${p.contextFiles.length>1?'s':''}</div>` :`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Briefs, personas, research previo</div>`}</div><div class="file-list">${(p.contextFiles||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delCtx(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div></div><div class="nav-btns"><button class="btn" onclick="goStep(0)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(2)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function stepMat(p){const hf=(p.materials||[]).length>0;return`<div class="content"><div class="s-label">Materiales</div><div class="s-desc">Subí los datos clave: exports de Analytics, planillas de métricas, CSVs. Sherlock lee el contenido real.</div><div class="upload-zone${hf?' has-files':''}" id="mat-zone"><input type="file" multiple id="mat-fi" accept=".csv,.xlsx,.xls,.txt,.md"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.materials.length} archivo${p.materials.length>1?'s':''} cargado${p.materials.length>1?'s':''}</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">CSV, XLSX, TXT · múltiples archivos</div>`}</div><div class="file-list">${(p.materials||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file-spreadsheet" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><input class="file-note" placeholder="nota..." value="${f.note||''}" data-fi="${i}"/><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delMat(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div><div class="nav-btns"><button class="btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(3)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function stepLim(p){return`<div class="content"><div class="s-label">Limitantes</div><div class="s-desc">Delimitá el campo de acción para que las recomendaciones sean realistas.</div><div class="split"><div class="sub-block"><div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div><textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4...">${p.limitTech||''}</textarea></div><div class="sub-block"><div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div><textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios...">${p.limitCtx||''}</textarea></div></div><div class="nav-btns"><button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function stepRef(p){const links=p.links||[];return`<div class="content"><div class="s-label">Referencias</div><div class="s-desc">Links que Sherlock debe considerar: benchmarks, Figma, competidores.</div><div id="llist">${links.map((l,i)=>`<div class="link-row"><select class="ltype" data-lt="${i}"><option${l.type==='bench'?' selected':''} value="bench">Bench</option><option${l.type==='figma'?' selected':''} value="figma">Figma</option><option${l.type==='ref'?' selected':''} value="ref">Referencia</option><option${l.type==='comp'?' selected':''} value="comp">Competidor</option></select><input placeholder="https://..." value="${l.url||''}" data-lu="${i}"/><button class="link-del" data-ld="${i}"><i class="ti ti-x"></i></button></div>`).join('')}</div><button class="btn" onclick="addLink()" style="margin-top:6px"><i class="ti ti-plus"></i> Agregar link</button><div class="nav-btns"><button class="btn" onclick="goStep(3)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Ir al análisis</button></div></div>`;}
+
 function stepAnal(p){
   const chat=activeChat();const msgs=chat?.messages||[];
-  return`<div class="chat-wrap" id="chat-wrap">
-    ${msgs.length===0?`<div class="empty-state"><div style="font-size:32px;margin-bottom:6px">🔍</div><span>Sherlock está listo para analizar.</span><button class="btn btn-primary" onclick="runAnalysis()" style="margin-top:10px"><i class="ti ti-sparkles"></i> Generar análisis</button></div>`
-    :msgs.map(m=>m.role==='agent'
-      ?`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${fmt(m.content)}</div>${m.chips?`<div class="chips-row">${m.chips.map(c=>`<div class="chip" onclick="sendMsg('${esc(c)}')">↗ ${c}</div>`).join('')}</div>`:''}</div>`
-      :`<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${m.content}</div></div>`
-    ).join('')}
-  </div>
+  return`<div class="chat-wrap" id="chat-wrap">${
+    msgs.length===0
+      ?`<div class="empty-state"><i class="ti ti-search" style="font-size:32px;color:var(--accent)"></i><span>Sherlock está listo para analizar.</span><button class="btn btn-primary" onclick="runAnalysis()" style="margin-top:10px"><i class="ti ti-sparkles"></i> Generar análisis</button></div>`
+      :msgs.map(m=>{
+        if(m.role==='questions'){
+          return`<div><div class="agent-label"><i class="ti ti-help-circle"></i> Sherlock necesita más info</div>
+          <div class="question-bubble">
+            <div class="q-header">${m.intro}</div>
+            ${m.questions.map((q,i)=>`<div class="q-item"><span class="q-num">${i+1}</span><div style="flex:1"><div class="q-text">${q}</div><textarea class="q-answer" id="qa-${i}" placeholder="Tu respuesta..." rows="2"></textarea></div></div>`).join('')}
+            <div class="q-submit"><button class="btn btn-primary" onclick="submitAnswers()"><i class="ti ti-check"></i> Listo, analizá</button></div>
+          </div></div>`;
+        }
+        if(m.role==='agent'){
+          return`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${renderBubble(m.content)}</div>${m.chips?.length?`<div class="chips-row">${m.chips.map(c=>`<button class="chip" onclick="sendMsg(${JSON.stringify(c)})">${c}</button>`).join('')}</div>`:''}</div>`;
+        }
+        return`<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${escHtml(m.content)}</div></div>`;
+      }).join('')
+  }</div>
   <div class="chat-bar">
     <button class="recalc-btn" onclick="runAnalysis()"><i class="ti ti-refresh"></i> Recalcular</button>
     <textarea id="chat-in" placeholder="Seguí refinando con Sherlock..." onkeydown="chatKey(event)" rows="1"></textarea>
     <button class="send-btn" onclick="sendMsg()"><i class="ti ti-send"></i></button>
   </div>`;
 }
+
+/* RENDER BUBBLE — clean structured output */
+function renderBubble(text){
+  // Strip LaTeX and math blocks
+  text=text.replace(/\\\[[\s\S]*?\\\]/g,'').replace(/\\\(.*?\\\)/g,'').replace(/\$\$[\s\S]*?\$\$/g,'').replace(/\$.*?\$/g,'');
+  // Strip all # headings variants
+  text=text.replace(/^#{1,6}\s+/gm,'');
+  // Split into sections by **TITLE** patterns at line start or bold lines alone
+  const lines=text.split('\n');
+  let html='';let currentSection=null;let currentItems=[];
+  const flushSection=()=>{
+    if(currentSection!==null){
+      let inner='';
+      if(currentItems.length){
+        inner=`<ul class="bubble-list">${currentItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;
+        currentItems=[];
+      }
+      html+=`<div class="bubble-section"><div class="bubble-h">${currentSection}</div>${inner}</div>`;
+      currentSection=null;
+    }
+  };
+  const flushItems=()=>{
+    if(currentItems.length&&currentSection===null){
+      html+=`<ul class="bubble-list">${currentItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;
+      currentItems=[];
+    }
+  };
+  let paraLines=[];
+  const flushPara=()=>{if(paraLines.length){const t=paraLines.join(' ').trim();if(t)html+=`<p class="bubble-p">${fmtInline(t)}</p>`;paraLines=[];}};
+  for(let i=0;i<lines.length;i++){
+    const l=lines[i];const trim=l.trim();
+    if(!trim){flushPara();continue;}
+    // Bold-only line = section header
+    if(/^\*\*[^*]+\*\*:?\s*$/.test(trim)){
+      flushPara();flushItems();flushSection();
+      currentSection=trim.replace(/\*\*/g,'').replace(/:$/,'');
+      continue;
+    }
+    // List item
+    if(/^[-*•]\s+/.test(trim)||/^\d+\.\s+/.test(trim)){
+      flushPara();
+      const content=trim.replace(/^[-*•]\s+/,'').replace(/^\d+\.\s+/,'');
+      if(currentSection!==null)currentItems.push(content);
+      else{flushItems();currentItems.push(content);}
+      continue;
+    }
+    // Regular paragraph line
+    if(currentSection!==null&&currentItems.length){flushSection();}
+    else if(currentSection!==null){flushSection();}
+    paraLines.push(trim);
+  }
+  flushPara();flushItems();flushSection();
+  return html||`<p class="bubble-p">${fmtInline(text)}</p>`;
+}
+function fmtInline(t){
+  return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
+}
+function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function attachStep(p){
   const mfi=document.getElementById('mat-fi');if(mfi)mfi.addEventListener('change',e=>handleFiles(e.target.files,'mat'));
@@ -638,7 +568,6 @@ function attachStep(p){
   if(step===5&&(activeChat()?.messages||[]).length===0)setTimeout(runAnalysis,400);
   const cw=document.getElementById('chat-wrap');if(cw)cw.scrollTop=cw.scrollHeight;
 }
-
 function toggleKpi(el,k){const p=activeProj();if(!p.kpis)p.kpis=[];if(p.kpis.includes(k)){p.kpis=p.kpis.filter(x=>x!==k);el.classList.remove('on');}else{p.kpis.push(k);el.classList.add('on');}save();}
 function toggleCustom(){const i=document.getElementById('kc');if(i){i.style.display=i.style.display==='none'?'block':'none';if(i.style.display==='block')i.focus();}}
 function addLink(){const p=activeProj();if(!p)return;p.links.push({url:'',type:'bench'});save();renderStep();}
@@ -650,11 +579,11 @@ async function readFile(file){
     const n=file.name.toLowerCase();
     if(n.endsWith('.xlsx')||n.endsWith('.xls')){
       const r=new FileReader();
-      r.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});let out='';wb.SheetNames.forEach(s=>{const csv=XLSX.utils.sheet_to_csv(wb.Sheets[s]);if(csv.trim())out+=`[Hoja: ${s}]\n${csv}\n\n`;});res(out.slice(0,14000));}catch{res('[Error leyendo Excel]');}};
+      r.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});let out='';wb.SheetNames.forEach(s=>{const csv=XLSX.utils.sheet_to_csv(wb.Sheets[s]);if(csv.trim())out+=`[Hoja: ${s}]\n${csv}\n\n`;});res(out.slice(0,10000));}catch{res('[Error leyendo Excel]');}};
       r.readAsArrayBuffer(file);
     }else if(n.endsWith('.csv')||n.endsWith('.txt')||n.endsWith('.md')){
-      const r=new FileReader();r.onload=e=>res((e.target.result||'').slice(0,14000));r.readAsText(file);
-    }else res(`[Archivo binario: ${file.name}]`);
+      const r=new FileReader();r.onload=e=>res((e.target.result||'').slice(0,10000));r.readAsText(file);
+    }else res(`[${file.name} — tipo no soportado]`);
   });
 }
 function handleFiles(files,type){
@@ -667,64 +596,103 @@ function handleFiles(files,type){
   });
 }
 
-/* ── AI ── */
-const SYS=`Sos Sherlock, agente experto en UX/UI y métricas para e-commerce y retail. Tu perfil:
-- Especialista en usabilidad, diseño de interacción y research de usuarios
-- Analista obsesivo de métricas: conversión, funnel, comportamiento, retención — siempre conectás hallazgos con números concretos
-- Tono directo, colega-a-colega, sin preambulosidad ni frases de relleno
-- Siempre acotás recomendaciones a las limitantes declaradas
-- Cuando tenés datos reales, los citás con precisión
+/* AI */
+const MODEL='llama-3.3-70b-versatile';
+const SYS=`Sos Sherlock, agente experto en UX/UI y métricas para e-commerce y retail latinoamericano.
 
-FORMATO:
-- Usá ### para títulos de sección
-- Usá **negrita** para métricas, cifras y conceptos clave
-- Listas con - para items
-- Análisis inicial: 2-3 secciones bien definidas, máximo
-- Al final de CADA respuesta incluí exactamente:
-CHIPS:["acción concreta 1","acción concreta 2","pregunta que abre nuevo ángulo"]`;
+Tu perfil:
+- Especialista en usabilidad, diseño de interacción y research de usuarios
+- Analista obsesivo de métricas: conversión, funnel, comportamiento, retención
+- Siempre conectás hallazgos con números concretos y accionables
+- Tono directo, colega-a-colega, sin relleno ni frases de apertura
+
+REGLAS DE FORMATO (crítico):
+- Jamás uses #, ##, ### ni ####
+- Jamás uses LaTeX, fórmulas matemáticas ni notación \[ \] ni \( \)
+- Para títulos de sección usá solo **Título en negrita** en una línea sola
+- Para listas usá - item
+- Escribí los números y porcentajes directamente: "1.31%" no "\frac{7256}{553293}"
+- Dejá líneas en blanco entre secciones
+- Respuestas con estructura clara: secciones bien separadas
+
+FLUJO DE ANÁLISIS INICIAL:
+Antes de dar el análisis completo, SIEMPRE hacé 2-3 preguntas clave que te ayuden a afinar el análisis. Respondé en este formato JSON exacto al inicio:
+PREGUNTAS:{"intro":"frase breve que explique por qué necesitás más info","questions":["pregunta 1","pregunta 2","pregunta 3"]}
+
+Cuando el usuario responda las preguntas, ahí sí entregás el análisis completo.
+
+En el análisis y en respuestas de refinamiento, al final incluí:
+CHIPS:["sugerencia accionable 1","sugerencia accionable 2","pregunta que abre nuevo ángulo"]`;
+
+function truncateContent(content,maxChars=6000){if(!content)return'';return content.length>maxChars?content.slice(0,maxChars)+'\n[... truncado por longitud]':content;}
 
 function buildPrompt(p,chat,userMsg){
   const focus=FOCUSES[activeFocus];
   const focusBg=state.focusBg?.[focus]||'';
   const globalRules=state.globalRules||'';
-  const connectedCtx=allProjects().filter(x=>p.connectedTo?.includes(x.id)).map(x=>`[Proyecto conectado: ${x.name}]\nObjetivo: ${x.objective||'—'}\nContexto: ${x.context||'—'}`).join('\n\n');
-  const matContent=(p.materials||[]).map(f=>`--- ${f.name} ${f.note?'('+f.note+')':''} ---\n${f.content||'[sin contenido]'}`).join('\n\n');
-  const ctxContent=(p.contextFiles||[]).map(f=>`--- ${f.name} ---\n${f.content||'[sin contenido]'}`).join('\n\n');
-  const history=(chat?.messages||[]).slice(-8).map(m=>`${m.role==='agent'?'Sherlock':'Usuario'}: ${m.content}`).join('\n');
-  return`${globalRules?`=== REGLAS MÁXIMAS (aplicar siempre) ===\n${globalRules}\n\n`:''}${focusBg?`=== BACKGROUND DEL FOCO: ${focus} ===\n${focusBg}\n\n`:''}=== PROYECTO: ${p.name} (Foco: ${focus}) ===
+  const matContent=(p.materials||[]).map(f=>`--- ${f.name}${f.note?' ('+f.note+')':''} ---\n${truncateContent(f.content)}`).join('\n\n');
+  const ctxContent=(p.contextFiles||[]).map(f=>`--- ${f.name} ---\n${truncateContent(f.content,3000)}`).join('\n\n');
+  const connCtx=allProjects().filter(x=>p.connectedTo?.includes(x.id)).map(x=>`[Proyecto: ${x.name}] Objetivo: ${x.objective||'—'}`).join('\n');
+  const history=(chat?.messages||[]).filter(m=>m.role==='agent'||m.role==='user').slice(-6).map(m=>`${m.role==='agent'?'Sherlock':'Usuario'}: ${typeof m.content==='string'?m.content.slice(0,800):JSON.stringify(m.content).slice(0,400)}`).join('\n');
+  return`${globalRules?`REGLAS MÁXIMAS:\n${globalRules}\n\n`:''}${focusBg?`BACKGROUND ${focus}:\n${focusBg}\n\n`:''}PROYECTO: ${p.name} · Foco: ${focus}
 OBJETIVO: ${p.objective||'(no especificado)'}
 KPIs: ${[...(p.kpis||[]),p.kpiCustom].filter(Boolean).join(', ')||'(no especificados)'}
-CONTEXTO: ${p.context||'(no especificado)'}${ctxContent?'\n\nARCHIVOS DE CONTEXTO:\n'+ctxContent:''}
-DATOS Y MATERIALES:\n${matContent||'(sin archivos)'}
-LIMITANTES TÉCNICAS: ${p.limitTech||'(ninguna)'}
-LIMITANTES CONTEXTUALES: ${p.limitCtx||'(ninguna)'}
-REFERENCIAS: ${(p.links||[]).map(l=>`[${l.type}] ${l.url}`).join(', ')||'(ninguna)'}${connectedCtx?'\n\nPROYECTOS CONECTADOS:\n'+connectedCtx:''}${history?'\n\nCONVERSACIÓN:\n'+history:''}
-${userMsg?'USUARIO: '+userMsg:'INSTRUCCIÓN: Generá el análisis inicial.'}`;
+CONTEXTO: ${(p.context||'(no especificado)').slice(0,1500)}${ctxContent?'\n\n'+ctxContent:''}
+DATOS:\n${matContent||'(sin archivos)'}
+LIMITANTES TÉC: ${p.limitTech||'(ninguna)'}
+LIMITANTES CTX: ${p.limitCtx||'(ninguna)'}
+REFS: ${(p.links||[]).map(l=>`[${l.type}] ${l.url}`).join(', ')||'(ninguna)'}${connCtx?'\n\nCONECTADOS:\n'+connCtx:''}${history?'\n\nCONVERSACIÓN:\n'+history:''}
+${userMsg?'USUARIO: '+userMsg:'INSTRUCCIÓN: Iniciá el proceso de análisis con las preguntas previas.'}`;
 }
 
-function parseChips(t){const m=t.match(/CHIPS:\[(.+?)\]/s);if(!m)return[];try{return JSON.parse('['+m[1]+']');}catch{return[];}}
-function cleanText(t){return t.replace(/CHIPS:\[.+?\]/s,'').trim();}
+function parsePreguntas(raw){const m=raw.match(/PREGUNTAS:(\{[\s\S]*?\})/);if(!m)return null;try{return JSON.parse(m[1]);}catch{return null;}}
+function parseChips(raw){const m=raw.match(/CHIPS:\[(.+?)\]/s);if(!m)return[];try{return JSON.parse('['+m[1]+']');}catch{return[];}}
+function cleanRaw(raw){return raw.replace(/PREGUNTAS:\{[\s\S]*?\}/,'').replace(/CHIPS:\[.+?\]/s,'').trim();}
 
 async function callGroq(content){
-  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:SYS,messages:[{role:'user',content}]})});
+  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:SYS,messages:[{role:'user',content}]})});
   const d=await r.json();if(d.error)throw new Error(d.error);return d.text;
 }
 
-function addThinking(wrap){
+function addThinking(){
+  const wrap=document.getElementById('chat-wrap');if(!wrap)return null;
   const d=document.createElement('div');
   d.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Analizando...</div>`;
-  wrap?.appendChild(d);wrap.scrollTop=wrap.scrollHeight;return d;
+  wrap.appendChild(d);wrap.scrollTop=wrap.scrollHeight;return d;
 }
 
 async function runAnalysis(){
   collectCurrent();
   const p=activeProj();const chat=activeChat();if(!p||!chat)return;
-  chat.messages=[];save();
+  chat.messages=[];chat.awaitingAnswers=false;save();
   const wrap=document.getElementById('chat-wrap');if(wrap)wrap.innerHTML='';
-  const t=addThinking(wrap);
+  const t=addThinking();
   try{
     const raw=await callGroq(buildPrompt(p,chat,null));
-    chat.messages.push({role:'agent',content:cleanText(raw),chips:parseChips(raw)});
+    const preguntas=parsePreguntas(raw);
+    if(preguntas){
+      chat.messages.push({role:'questions',intro:preguntas.intro,questions:preguntas.questions});
+      chat.awaitingAnswers=true;
+    }else{
+      const chips=parseChips(raw);const text=cleanRaw(raw);
+      chat.messages.push({role:'agent',content:text,chips});
+    }
+    save();renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
+  }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
+}
+
+async function submitAnswers(){
+  const chat=activeChat();if(!chat)return;
+  const lastQ=chat.messages.findLast(m=>m.role==='questions');if(!lastQ)return;
+  const answers=lastQ.questions.map((_,i)=>{const el=document.getElementById('qa-'+i);return el?el.value.trim():'';});
+  const answersText=lastQ.questions.map((q,i)=>`${q}\nRespuesta: ${answers[i]||'(sin respuesta)'}`).join('\n\n');
+  chat.messages.push({role:'user',content:`Respuestas:\n${answersText}`});
+  chat.awaitingAnswers=false;save();renderStep();
+  const t=addThinking();
+  try{
+    const raw=await callGroq(buildPrompt(activeProj(),chat,`El usuario respondió las preguntas previas. Ahora entregá el análisis completo.\n\n${answersText}`));
+    const chips=parseChips(raw);const text=cleanRaw(raw);
+    chat.messages.push({role:'agent',content:text,chips});
     save();renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
   }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
@@ -735,53 +703,42 @@ async function sendMsg(msg){
   const text=msg||(inp?.value?.trim());if(!text)return;
   chat.messages.push({role:'user',content:text});
   if(inp)inp.value='';save();renderStep();
-  const wrap=document.getElementById('chat-wrap');
-  const t=addThinking(wrap);if(wrap)wrap.scrollTop=wrap.scrollHeight;
+  const t=addThinking();
+  const wrap=document.getElementById('chat-wrap');if(wrap)wrap.scrollTop=wrap.scrollHeight;
   try{
     const raw=await callGroq(buildPrompt(p,chat,text));
-    chat.messages.push({role:'agent',content:cleanText(raw),chips:parseChips(raw)});
+    const chips=parseChips(raw);const clean=cleanRaw(raw);
+    chat.messages.push({role:'agent',content:clean,chips});
     save();renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
   }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
 function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
 
-/* ── QUICK CHAT ── */
+/* QUICK CHAT */
 function toggleQuick(){qpOpen=!qpOpen;document.getElementById('qpanel').classList.toggle('open',qpOpen);}
 function qpKey(e){if(e.key==='Enter')qpSend();}
 async function qpSend(){
   const inp=document.getElementById('qp-in');const msg=inp?.value?.trim();if(!msg)return;
   inp.value='';qpMsgs.push({r:'user',t:msg});renderQP();
   const wrap=document.getElementById('qp-msgs');
-  const d=document.createElement('div');d.className='qp-agent';d.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+  const d=document.createElement('div');d.className='qp-agent';
+  d.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
   wrap?.appendChild(d);if(wrap)wrap.scrollTop=wrap.scrollHeight;
   const focus=FOCUSES[activeFocus];
-  const sysQ=`${SYS}\nFoco activo: ${focus}${state.globalRules?'\nReglas: '+state.globalRules:''}${state.focusBg?.[focus]?'\nBackground: '+state.focusBg[focus]:''}`;
+  const sys=`${SYS}\nFoco activo: ${focus}${state.globalRules?'\nReglas: '+state.globalRules:''}${state.focusBg?.[focus]?'\nBackground: '+state.focusBg[focus]:''}`;
   try{
-    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sysQ,messages:qpMsgs.slice(-6).map(m=>({role:m.r==='agent'?'assistant':'user',content:m.t})).concat([{role:'user',content:msg}])})});
-    const data=await r.json();const text=cleanText(data.text||'Sin respuesta');
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:sys,messages:[...qpMsgs.slice(-6).map(m=>({role:m.r==='agent'?'assistant':'user',content:m.t})),{role:'user',content:msg}]})});
+    const data=await r.json();const text=cleanRaw(data.text||'Sin respuesta');
     qpMsgs.push({r:'agent',t:text});renderQP();
   }catch(e){d.textContent='Error: '+e.message;}
 }
 function renderQP(){
   const wrap=document.getElementById('qp-msgs');if(!wrap)return;
-  wrap.innerHTML=qpMsgs.map(m=>m.r==='agent'?`<div class="qp-agent">${fmt(m.t)}</div>`:`<div class="qp-user">${m.t}</div>`).join('');
+  wrap.innerHTML=qpMsgs.map(m=>m.r==='agent'?`<div class="qp-agent">${renderBubble(m.t)}</div>`:`<div class="qp-user">${escHtml(m.t)}</div>`).join('');
   wrap.scrollTop=wrap.scrollHeight;
 }
 
-/* ── UTILS ── */
-function fmt(t){
-  return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
-    .replace(/^## (.+)$/gm,'<h3>$1</h3>')
-    .replace(/^- (.+)$/gm,'<li>$1</li>')
-    .replace(/(<li>[^<]*<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>')
-    .replace(/\n\n/g,'</p><p>')
-    .replace(/^(?![<\n])/gm,'')
-    .replace(/\n/g,' ')
-    .replace(/<\/ul><ul>/g,'')
-    .replace(/<p><\/p>/g,'');
-}
-function esc(s){return s.replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+/* UTILS */
 function fmtSz(b){if(!b)return'';if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
 function showToast(msg){const t=document.getElementById('toast');const m=document.getElementById('toast-msg');if(!t||!m)return;m.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
