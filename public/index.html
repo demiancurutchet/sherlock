@@ -12,23 +12,10 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E🔍%3C/text%3E%3C/svg%3E"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#fff;--bg2:#f7f7f6;--bg3:#f0f0ef;
-  --text:#1a1a1a;--text2:#6b6b6b;--text3:#9b9b9b;
-  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
-  --accent:#4f46e5;--accent-light:#eef2ff;--accent-mid:#c7d2fe;
-  --radius:8px;--radius-lg:12px;--success:#059669;--danger:#dc2626;
-}
-.dark{
-  --bg:#1c1c1c;--bg2:#242424;--bg3:#2e2e2e;
-  --text:#e8e8e8;--text2:#a0a0a0;--text3:#606060;
-  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);
-  --accent-light:#1e1b4b;--accent-mid:#3730a3;
-}
+:root{--bg:#fff;--bg2:#f7f7f6;--bg3:#f0f0ef;--text:#1a1a1a;--text2:#6b6b6b;--text3:#9b9b9b;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--accent:#4f46e5;--accent-light:#eef2ff;--accent-mid:#c7d2fe;--radius:8px;--radius-lg:12px;--success:#059669;--danger:#dc2626;}
+.dark{--bg:#1c1c1c;--bg2:#242424;--bg3:#2e2e2e;--text:#e8e8e8;--text2:#a0a0a0;--text3:#606060;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.16);--accent-light:#1e1b4b;--accent-mid:#3730a3;}
 body{font-family:'Inter',sans-serif;background:var(--bg3);color:var(--text);height:100vh;display:flex;align-items:center;justify-content:center;padding:12px;transition:background .2s,color .2s}
 .shell{display:flex;width:100%;max-width:1140px;height:700px;border:0.5px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg);box-shadow:0 4px 32px rgba(0,0,0,0.1)}
-
-/* SIDEBAR */
 .sidebar{width:240px;min-width:240px;border-right:0.5px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);overflow:hidden}
 .sb-top{padding:14px 14px 12px;border-bottom:0.5px solid var(--border)}
 .logo{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.02em;display:flex;align-items:center;gap:7px}
@@ -64,8 +51,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg3);color:var(--text);heig
 .chat-act-btn:hover{color:var(--danger)}
 .new-chat-btn{display:flex;align-items:center;gap:4px;padding:3px 8px;font-size:11px;color:var(--text3);cursor:pointer;border:none;background:none;width:100%;margin-top:1px}
 .new-chat-btn:hover{color:var(--accent)}
-.new-proj-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;margin:2px 6px;border-radius:6px;font-size:12px;color:var(--text3);cursor:pointer;border:none;background:none;width:calc(100% - 12px)}
-.new-proj-btn:hover{background:var(--bg);color:var(--text2)}
 .sb-bottom{border-top:0.5px solid var(--border);padding:10px 12px}
 .quick-chat-btn{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:var(--radius);font-size:12px;color:var(--text2);cursor:pointer;border:0.5px solid var(--border2);background:none;width:100%;font-family:'Inter',sans-serif;transition:all .12s;margin-bottom:10px}
 .quick-chat-btn:hover{border-color:var(--accent);color:var(--accent)}
@@ -77,11 +62,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg3);color:var(--text);heig
 .toggle-thumb{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--text3);transition:all .2s;z-index:1}
 .toggle-sw input:checked+.toggle-track{background:var(--accent);border-color:var(--accent)}
 .toggle-sw input:checked+.toggle-track+.toggle-thumb{left:18px;background:#fff}
-.sb-ver{font-size:10px;color:var(--text3);display:flex;align-items:center;justify-content:space-between;padding-top:4px;border-top:0.5px solid var(--border);margin-top:4px}
+.sb-ver{font-size:10px;color:var(--text3);display:flex;align-items:center;justify-content:space-between;padding-top:6px;border-top:0.5px solid var(--border);margin-top:4px}
 .settings-btn{background:none;border:none;cursor:pointer;color:var(--text3);font-family:'Inter',sans-serif;font-size:11px;padding:2px 4px;border-radius:4px;display:flex;align-items:center;gap:3px}
 .settings-btn:hover{color:var(--text2);background:var(--bg3)}
-
-/* MAIN */
+.sync-indicator{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:4px;padding:4px 0}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--success);flex-shrink:0}
+.sync-dot.syncing{background:var(--accent);animation:pulse 1s infinite}
+.sync-dot.error{background:var(--danger)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:0.5px solid var(--border);background:var(--bg);min-height:48px}
 .topbar-title{font-size:14px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:7px}
@@ -98,8 +86,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg3);color:var(--text);heig
 .step-tab.active{color:var(--text);border-bottom-color:var(--accent);font-weight:500}
 .step-num{width:17px;height:17px;border-radius:50%;background:var(--bg3);font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--text3);flex-shrink:0}
 .step-tab.active .step-num{background:var(--accent);color:#fff}
-
-/* CONTENT */
 .content{flex:1;overflow-y:auto;padding:22px}
 .s-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
 .s-desc{font-size:12px;color:var(--text3);margin-bottom:12px;line-height:1.6}
@@ -131,17 +117,12 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .kpi-tag.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 .nav-btns{display:flex;justify-content:space-between;margin-top:18px}
 .gap-top{margin-top:16px}
-
-/* CHAT */
 .chat-wrap{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
 .agent-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:flex;align-items:center;gap:5px}
-
-/* RICH BUBBLE */
-.agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;color:var(--text);line-height:1}
+.agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;color:var(--text)}
 .bubble-section{margin-bottom:20px}
 .bubble-section:last-child{margin-bottom:0}
 .bubble-h{font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:7px}
-.bubble-h i{color:var(--accent);font-size:16px}
 .bubble-p{font-size:13px;line-height:1.75;color:var(--text2);margin-bottom:10px}
 .bubble-p:last-child{margin-bottom:0}
 .bubble-p strong{color:var(--text);font-weight:600}
@@ -149,20 +130,15 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .bubble-list li{display:flex;gap:9px;font-size:13px;line-height:1.65;color:var(--text2)}
 .bubble-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0}
 .bubble-list li strong{color:var(--text);font-weight:600}
-.bubble-stat{display:inline-flex;align-items:baseline;gap:4px;background:var(--accent-light);border:0.5px solid var(--accent-mid);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:600;color:var(--accent);margin:0 2px}
-
-/* QUESTION BUBBLE */
 .question-bubble{background:var(--bg);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:18px 20px}
 .question-bubble .q-header{font-size:13px;font-weight:500;color:var(--text);margin-bottom:14px;line-height:1.55}
 .q-item{display:flex;gap:10px;margin-bottom:12px;align-items:flex-start}
 .q-num{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .q-text{font-size:13px;color:var(--text2);line-height:1.6;flex:1}
-.q-answer{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:9px 11px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);resize:none;line-height:1.6;outline:none;margin-top:6px;min-height:60px}
+.q-answer{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:9px 11px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);resize:none;line-height:1.6;outline:none;margin-top:6px;min-height:58px}
 .q-answer:focus{border-color:var(--accent)}
-.q-submit{margin-top:12px;display:flex;justify-content:flex-end}
-
 .chips-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.chip{padding:6px 14px;border-radius:20px;font-size:12px;background:var(--accent-light);color:var(--accent);border:0.5px solid var(--accent-mid);cursor:pointer;transition:all .12s;line-height:1.4;font-family:'Inter',sans-serif}
+.chip{padding:6px 14px;border-radius:20px;font-size:12px;background:var(--accent-light);color:var(--accent);border:0.5px solid var(--accent-mid);cursor:pointer;transition:all .12s;font-family:'Inter',sans-serif}
 .chip:hover{background:var(--accent);color:#fff}
 .user-bubble{background:var(--accent-light);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:10px 14px;font-size:13px;color:var(--accent);align-self:flex-end;max-width:72%;line-height:1.65}
 .chat-bar{border-top:0.5px solid var(--border);padding:10px 14px;display:flex;gap:7px;align-items:flex-end;background:var(--bg)}
@@ -176,8 +152,6 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:blink 1.2s infinite}
 .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
-
-/* QUICK PANEL */
 .quick-panel{position:fixed;bottom:0;left:240px;width:380px;background:var(--bg);border:0.5px solid var(--border2);border-bottom:none;border-radius:var(--radius-lg) var(--radius-lg) 0 0;box-shadow:0 -4px 24px rgba(0,0,0,.12);z-index:400;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);max-height:480px}
 .quick-panel.open{transform:translateY(0)}
 .qp-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:0.5px solid var(--border)}
@@ -185,13 +159,11 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .qp-close{background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px}
 .qp-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:200px}
 .qp-agent{background:var(--bg2);border-radius:var(--radius);padding:10px 13px;font-size:12px;line-height:1.7;color:var(--text)}
-.qp-user{background:var(--accent-light);border-radius:var(--radius);padding:8px 12px;font-size:12px;color:var(--accent);align-self:flex-end;max-width:80%;line-height:1.6}
+.qp-user{background:var(--accent-light);border-radius:var(--radius);padding:8px 12px;font-size:12px;color:var(--accent);align-self:flex-end;max-width:80%}
 .qp-bar{display:flex;gap:6px;padding:10px 12px;border-top:0.5px solid var(--border)}
 .qp-bar input{flex:1;border:0.5px solid var(--border2);border-radius:var(--radius);padding:7px 10px;font-size:12px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none}
 .qp-bar input:focus{border-color:var(--accent)}
 .qp-send{padding:7px 11px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-size:12px;cursor:pointer}
-
-/* MODALS */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border2);padding:22px;width:360px;max-height:540px;overflow-y:auto}
@@ -201,13 +173,10 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .modal-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px}
 .modal-input{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:8px 10px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);outline:none;margin-bottom:6px}
 .modal-input:focus{border-color:var(--accent)}
-
-/* ICON PICKER */
 .icon-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:12px}
 .icon-opt{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:pointer;border:0.5px solid transparent;color:var(--text3);font-size:18px;transition:all .1s}
 .icon-opt:hover{background:var(--bg2);color:var(--text)}
 .icon-opt.sel{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
-
 .conn-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;border:0.5px solid var(--border);font-size:12px;color:var(--text2);cursor:pointer;margin-bottom:6px;transition:all .12s;background:var(--bg)}
 .conn-item:hover{border-color:var(--border2)}
 .conn-item.linked{border-color:var(--accent-mid);background:var(--accent-light);color:var(--accent)}
@@ -218,17 +187,18 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .stab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
 .focus-bg-block{background:var(--bg2);border-radius:var(--radius);padding:11px;margin-bottom:8px}
 .focus-bg-name{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px}
-
-/* TOAST */
+.loading-screen{position:fixed;inset:0;background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:999;font-size:14px;color:var(--text2)}
+.loading-screen i{font-size:32px;color:var(--accent)}
 .toast{position:fixed;bottom:20px;right:20px;background:#1a1a1a;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;z-index:600;opacity:0;transition:opacity .25s;pointer-events:none;display:flex;align-items:center;gap:6px}
 .dark .toast{background:#e8e8e8;color:#1a1a1a}
 .toast.show{opacity:1}
 </style>
 </head>
 <body>
+<div id="loading-screen" class="loading-screen"><i class="ti ti-search"></i><span>Cargando Sherlock...</span></div>
 <div id="toast" class="toast"><i class="ti ti-check"></i><span id="toast-msg"></span></div>
 
-<div class="shell">
+<div class="shell" style="display:none" id="shell">
  <div class="sidebar">
   <div class="sb-top">
    <div class="logo"><i class="ti ti-search" style="color:var(--accent);font-size:16px"></i> <span>Sherlock</span></div>
@@ -238,7 +208,7 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
     <i class="ti ti-chevron-down focus-arrow"></i>
    </div>
   </div>
-  <div class="sb-section">Proyectos<button onclick="newProject()" title="Nuevo proyecto"><i class="ti ti-plus"></i></button></div>
+  <div class="sb-section">Proyectos<button onclick="newProject()"><i class="ti ti-plus"></i></button></div>
   <div class="sb-scroll" id="proj-list"></div>
   <div class="sb-bottom">
    <button class="quick-chat-btn" onclick="toggleQuick()"><i class="ti ti-message-circle"></i> Chat rápido</button>
@@ -246,16 +216,13 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
     <span class="dark-label"><i class="ti ti-moon"></i> Modo oscuro</span>
     <label class="toggle-sw"><input type="checkbox" id="dark-chk" onchange="toggleDark()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
    </div>
-   <div class="sb-ver"><span>v1.1.3</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
+   <div class="sync-indicator" id="sync-ind"><span class="sync-dot" id="sync-dot"></span><span id="sync-txt">Sincronizado</span></div>
+   <div class="sb-ver"><span>v1.1.4</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
   </div>
  </div>
-
  <div class="main">
   <div class="topbar">
-   <div style="display:flex;align-items:center;gap:8px">
-    <div class="topbar-title" id="t-title">—</div>
-    <span class="topbar-chat" id="t-chat"></span>
-   </div>
+   <div style="display:flex;align-items:center;gap:8px"><div class="topbar-title" id="t-title">—</div><span class="topbar-chat" id="t-chat"></span></div>
    <div class="topbar-right">
     <button class="btn" onclick="openConnect()"><i class="ti ti-link"></i> Conectar</button>
     <button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Analizar</button>
@@ -266,32 +233,20 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
  </div>
 </div>
 
-<!-- QUICK CHAT -->
 <div class="quick-panel" id="qpanel">
- <div class="qp-header">
-  <div class="qp-title"><i class="ti ti-message-circle"></i> Chat rápido · Sherlock</div>
-  <button class="qp-close" onclick="toggleQuick()"><i class="ti ti-x"></i></button>
- </div>
- <div class="qp-msgs" id="qp-msgs"><div style="font-size:12px;color:var(--text3);text-align:center;padding:24px 10px">Preguntá sobre UX, métricas o benchmarks sin necesidad de cargar un proyecto.</div></div>
+ <div class="qp-header"><div class="qp-title"><i class="ti ti-message-circle"></i> Chat rápido · Sherlock</div><button class="qp-close" onclick="toggleQuick()"><i class="ti ti-x"></i></button></div>
+ <div class="qp-msgs" id="qp-msgs"><div style="font-size:12px;color:var(--text3);text-align:center;padding:24px 10px">Preguntá sobre UX, métricas o benchmarks.</div></div>
  <div class="qp-bar"><input id="qp-in" placeholder="Ej: benchmark conversión e-commerce LATAM" onkeydown="qpKey(event)"/><button class="qp-send" onclick="qpSend()"><i class="ti ti-send"></i></button></div>
 </div>
 
-<!-- MODAL PROYECTO -->
 <div class="overlay" id="proj-modal">
  <div class="modal">
   <div class="modal-hdr"><span class="modal-title" id="pm-title">Editar proyecto</span><button class="modal-close" onclick="closeModal('proj-modal')"><i class="ti ti-x"></i></button></div>
-  <div class="modal-label">Nombre</div>
-  <input class="modal-input" id="pm-name" placeholder="Nombre del proyecto"/>
-  <div class="modal-label">Ícono</div>
-  <div class="icon-grid" id="icon-grid"></div>
-  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
-   <button class="btn" onclick="closeModal('proj-modal')">Cancelar</button>
-   <button class="btn btn-primary" onclick="saveProjModal()">Guardar</button>
-  </div>
+  <div class="modal-label">Nombre</div><input class="modal-input" id="pm-name" placeholder="Nombre del proyecto"/>
+  <div class="modal-label">Ícono</div><div class="icon-grid" id="icon-grid"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><button class="btn" onclick="closeModal('proj-modal')">Cancelar</button><button class="btn btn-primary" onclick="saveProjModal()">Guardar</button></div>
  </div>
 </div>
-
-<!-- MODAL CONFIRM -->
 <div class="overlay" id="confirm-modal">
  <div class="modal" style="width:320px">
   <div class="modal-hdr"><span class="modal-title">¿Confirmar eliminación?</span><button class="modal-close" onclick="closeModal('confirm-modal')"><i class="ti ti-x"></i></button></div>
@@ -299,30 +254,21 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
   <div class="confirm-btns"><button class="btn" onclick="closeModal('confirm-modal')">Cancelar</button><button class="btn btn-danger" onclick="confirmAction()">Eliminar</button></div>
  </div>
 </div>
-
-<!-- MODAL RENAME CHAT -->
 <div class="overlay" id="chat-modal">
  <div class="modal" style="width:300px">
   <div class="modal-hdr"><span class="modal-title">Renombrar análisis</span><button class="modal-close" onclick="closeModal('chat-modal')"><i class="ti ti-x"></i></button></div>
   <input class="modal-input" id="chat-rename-in" placeholder="Nombre del análisis"/>
-  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
-   <button class="btn" onclick="closeModal('chat-modal')">Cancelar</button>
-   <button class="btn btn-primary" onclick="saveChatRename()">Guardar</button>
-  </div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn" onclick="closeModal('chat-modal')">Cancelar</button><button class="btn btn-primary" onclick="saveChatRename()">Guardar</button></div>
  </div>
 </div>
-
-<!-- MODAL CONNECT -->
 <div class="overlay" id="connect-modal">
  <div class="modal">
   <div class="modal-hdr"><span class="modal-title">Conectar proyectos</span><button class="modal-close" onclick="closeModal('connect-modal')"><i class="ti ti-x"></i></button></div>
-  <p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.55">Podés conectar proyectos de cualquier foco. Sherlock los considerará en el análisis.</p>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.55">Podés conectar proyectos de cualquier foco.</p>
   <div id="connect-list"></div>
   <button class="btn btn-primary" onclick="closeModal('connect-modal')" style="margin-top:12px;width:100%;justify-content:center">Listo</button>
  </div>
 </div>
-
-<!-- MODAL SETTINGS -->
 <div class="overlay" id="settings-modal">
  <div class="modal" style="width:500px;max-height:580px">
   <div class="modal-hdr"><span class="modal-title">Configuración global</span><button class="modal-close" onclick="saveSettings();closeModal('settings-modal')"><i class="ti ti-x"></i></button></div>
@@ -333,52 +279,118 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 </div>
 
 <script>
+const SUPA_URL='https://ctqbyuikoesktiqrwovi.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0cWJ5dWlrb2Vza3RpcXJ3b3ZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NjUxNzUsImV4cCI6MjA5NzA0MTE3NX0.uEra2OZ3ZL1Pl504NriH3PZ358GeiwtO6PObaD7NtWo';
+const SB_HDR={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=representation'};
+
+async function sbGet(table,query=''){const r=await fetch(`${SUPA_URL}/rest/v1/${table}?${query}`,{headers:SB_HDR});return r.json();}
+async function sbPost(table,body){const r=await fetch(`${SUPA_URL}/rest/v1/${table}`,{method:'POST',headers:SB_HDR,body:JSON.stringify(body)});return r.json();}
+async function sbPatch(table,query,body){const r=await fetch(`${SUPA_URL}/rest/v1/${table}?${query}`,{method:'PATCH',headers:{...SB_HDR,'Prefer':'return=minimal'},body:JSON.stringify(body)});return r;}
+async function sbDelete(table,query){const r=await fetch(`${SUPA_URL}/rest/v1/${table}?${query}`,{method:'DELETE',headers:SB_HDR});return r;}
+
 const FOCUSES=['Farmacity','Simplicity','Get The Look','The Food Market','Farmacity Uruguay'];
 const KPI_LIST=['Tasa de conversión','Drop en checkout','Tiempo en tarea','Tasa de error','NPS / CSAT','Bounce rate','Click-through rate','Tasa de abandono','Time to first action','Tasa de retención'];
 const COLORS=['#4f46e5','#0d9488','#d97706','#dc2626','#7c3aed','#059669','#0891b2','#db2777'];
 const STEPS=['Objetivo & KPIs','Contexto','Materiales','Limitantes','Referencias','Análisis'];
-const PROJ_ICONS=['ti-shopping-cart','ti-pill','ti-device-mobile','ti-chart-bar','ti-users','ti-bulb','ti-microscope','ti-target','ti-trending-up','ti-folder','ti-map','ti-rocket','ti-star','ti-heart','ti-package','ti-tag','ti-brush','ti-layout','ti-database','ti-settings','ti-eye','ti-flask','ti-gift','ti-home','ti-truck','ti-camera','ti-mail','ti-globe'];
+const PROJ_ICONS=['ti-shopping-cart','ti-pill','ti-device-mobile','ti-chart-bar','ti-users','ti-bulb','ti-microscope','ti-target','ti-trending-up','ti-folder','ti-map','ti-rocket','ti-star','ti-heart','ti-package','ti-tag','ti-brush','ti-layout','ti-database','ti-eye','ti-flask','ti-gift','ti-home','ti-truck','ti-camera','ti-globe','ti-settings','ti-search'];
+const MODEL='llama-3.3-70b-versatile';
 
-let state,dark=false,activeFocus=0,activeId,activeChatId,step=0;
+let projects=[],settings={globalRules:'',focusBg:{}};
+let dark=false,activeFocus=0,activeId=null,activeChatId=null,step=0;
 let pendingConfirm=null,editingProjId=null,editingChatId=null,settingsTab=0;
 let qpOpen=false,qpMsgs=[];
+let saveTimer=null;
 
-function load(){
-  try{state=JSON.parse(localStorage.getItem('sherlock_v7'))||initState();}catch{state=initState();}
-  dark=localStorage.getItem('sh_dark')==='1';applyDark();
-  activeFocus=state.activeFocus||0;
-  const fp=focusProjects();
-  activeId=state.activeId&&fp.find(p=>p.id===state.activeId)?state.activeId:(fp[0]?.id||null);
-  const proj=allProjects().find(p=>p.id===activeId);
-  activeChatId=state.activeChatId&&proj?.chats?.find(c=>c.id===state.activeChatId)?state.activeChatId:(proj?.chats?.[0]?.id||null);
+function setSyncState(state){
+  const dot=document.getElementById('sync-dot');const txt=document.getElementById('sync-txt');
+  if(!dot||!txt)return;
+  dot.className='sync-dot'+(state==='syncing'?' syncing':state==='error'?' error':'');
+  txt.textContent=state==='syncing'?'Sincronizando...':state==='error'?'Error al guardar':'Sincronizado';
 }
-function save(){state.activeFocus=activeFocus;state.activeId=activeId;state.activeChatId=activeChatId;try{localStorage.setItem('sherlock_v7',JSON.stringify(state));}catch{}}
-function initState(){
-  const s={activeFocus:0,activeId:null,activeChatId:null,globalRules:'',focusBg:{},projects:{}};
-  FOCUSES.forEach(f=>{s.projects[f]=[];s.focusBg[f]='';});
-  const p1=mkProj('Checkout Friction Q2','ti-shopping-cart');
-  const p2=mkProj('Home & Categorías','ti-layout');
-  s.projects['Farmacity']=[p1,p2];s.activeId=p1.id;s.activeChatId=p1.chats[0].id;return s;
+
+async function loadAll(){
+  try{
+    const [projs,chats,cfg]=await Promise.all([
+      sbGet('projects','order=created_at.asc'),
+      sbGet('chats','order=created_at.asc'),
+      sbGet('global_settings','id=eq.1')
+    ]);
+    projects=(projs||[]).map(p=>({
+      id:p.id,focus:p.focus,name:p.name,icon:p.icon||'ti-folder',color:p.color||'#4f46e5',
+      context:p.context||'',contextFiles:p.context_files||[],materials:p.materials||[],
+      limitTech:p.limit_tech||'',limitCtx:p.limit_ctx||'',links:p.links||[],
+      objective:p.objective||'',kpis:p.kpis||[],kpiCustom:p.kpi_custom||'',
+      connectedTo:p.connected_to||[],
+      chats:(chats||[]).filter(c=>c.project_id===p.id).map(c=>({id:c.id,name:c.name,messages:c.messages||[]}))
+    }));
+    if(cfg&&cfg[0]){settings={globalRules:cfg[0].global_rules||'',focusBg:cfg[0].focus_bg||{}};}
+    dark=localStorage.getItem('sh_dark')==='1';applyDark();
+    activeFocus=parseInt(localStorage.getItem('sh_focus')||'0');
+    const savedId=localStorage.getItem('sh_proj');
+    const savedChat=localStorage.getItem('sh_chat');
+    const fp=focusProjects();
+    activeId=fp.find(p=>p.id===savedId)?savedId:(fp[0]?.id||null);
+    const proj=projects.find(p=>p.id===activeId);
+    activeChatId=proj?.chats?.find(c=>c.id===savedChat)?savedChat:(proj?.chats?.[0]?.id||null);
+  }catch(e){console.error('Load error',e);}
 }
-function mkProj(name,icon='ti-folder'){const c=mkChat('Análisis inicial');return{id:'p'+Date.now()+Math.random().toString(36).slice(2),name,icon,color:COLORS[Math.floor(Math.random()*COLORS.length)],materials:[],contextFiles:[],context:'',limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],chats:[c]};}
-function mkChat(name){return{id:'c'+Date.now()+Math.random().toString(36).slice(2),name,messages:[],awaitingAnswers:false};}
-function allProjects(){return FOCUSES.flatMap(f=>state.projects[f]||[]);}
-function focusProjects(){return state.projects[FOCUSES[activeFocus]]||[];}
-function activeProj(){return allProjects().find(p=>p.id===activeId)||focusProjects()[0]||null;}
+
+async function saveProject(p){
+  setSyncState('syncing');
+  try{
+    await sbPatch('projects','id=eq.'+p.id,{
+      name:p.name,icon:p.icon,color:p.color,context:p.context,
+      context_files:p.contextFiles||[],materials:p.materials||[],
+      limit_tech:p.limitTech,limit_ctx:p.limitCtx,links:p.links||[],
+      objective:p.objective,kpis:p.kpis||[],kpi_custom:p.kpiCustom,
+      connected_to:p.connectedTo||[],updated_at:new Date().toISOString()
+    });
+    setSyncState('ok');
+  }catch(e){setSyncState('error');}
+}
+async function saveChat(c,projectId){
+  setSyncState('syncing');
+  try{
+    await sbPatch('chats','id=eq.'+c.id,{name:c.name,messages:c.messages||[],updated_at:new Date().toISOString()});
+    setSyncState('ok');
+  }catch(e){setSyncState('error');}
+}
+async function saveSettings(){
+  const gr=document.getElementById('global-rules');if(gr)settings.globalRules=gr.value;
+  FOCUSES.forEach(f=>{const el=document.getElementById('fbg-'+f.replace(/\s/g,'_'));if(el){settings.focusBg[f]=el.value;}});
+  setSyncState('syncing');
+  try{
+    await sbPatch('global_settings','id=eq.1',{global_rules:settings.globalRules,focus_bg:settings.focusBg,updated_at:new Date().toISOString()});
+    setSyncState('ok');showToast('Configuración guardada');
+  }catch(e){setSyncState('error');}
+}
+
+function debounceSave(p,chat){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(async()=>{
+    if(p)await saveProject(p);
+    if(chat)await saveChat(chat,p?.id);
+  },800);
+}
+
+function saveLocal(){localStorage.setItem('sh_focus',activeFocus);localStorage.setItem('sh_proj',activeId||'');localStorage.setItem('sh_chat',activeChatId||'');}
+
+function focusProjects(){return projects.filter(p=>p.focus===FOCUSES[activeFocus]);}
+function activeProj(){return projects.find(p=>p.id===activeId)||focusProjects()[0]||null;}
 function activeChat(){const p=activeProj();return p?.chats?.find(c=>c.id===activeChatId)||p?.chats?.[0]||null;}
+function allProjects(){return projects;}
 
 function applyDark(){document.body.classList.toggle('dark',dark);const c=document.getElementById('dark-chk');if(c)c.checked=dark;}
 function toggleDark(){dark=!dark;localStorage.setItem('sh_dark',dark?'1':'0');applyDark();}
 
-function switchFocus(val){collectCurrent();activeFocus=FOCUSES.indexOf(val);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;step=0;save();render();}
+function switchFocus(val){collectCurrent();activeFocus=FOCUSES.indexOf(val);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;step=0;saveLocal();render();}
 function render(){renderSidebar();renderStep();}
 
 function renderSidebar(){
   const sel=document.getElementById('focus-sel');
   if(sel)sel.innerHTML=FOCUSES.map((f,i)=>`<option value="${f}"${i===activeFocus?' selected':''}>${f}</option>`).join('');
   const proj=activeProj();const chat=activeChat();
-  const tt=document.getElementById('t-title');
-  if(tt)tt.innerHTML=proj?`<i class="ti ${proj.icon||'ti-folder'}" style="color:var(--accent);font-size:16px"></i> ${proj.name}`:'—';
+  const tt=document.getElementById('t-title');if(tt)tt.innerHTML=proj?`<i class="ti ${proj.icon||'ti-folder'}" style="color:var(--accent);font-size:16px"></i> ${proj.name}`:'—';
   const tc=document.getElementById('t-chat');if(tc)tc.textContent=chat?`· ${chat.name}`:'';
   const fp=focusProjects();
   document.getElementById('proj-list').innerHTML=fp.map(p=>`
@@ -405,56 +417,91 @@ function renderSidebar(){
   if(nav)nav.innerHTML=STEPS.map((s,i)=>`<div class="step-tab${i===step?' active':''}" onclick="goStep(${i})"><span class="step-num">${i+1}</span>${s}</div>`).join('');
 }
 
-function switchProj(id){collectCurrent();activeId=id;const p=activeProj();activeChatId=p?.chats?.[0]?.id||null;step=0;save();render();}
-function switchChat(id){activeChatId=id;save();renderSidebar();if(step===5)renderStep();}
-function newProject(){const name=prompt('Nombre del proyecto:');if(!name)return;const p=mkProj(name,'ti-folder');if(!state.projects[FOCUSES[activeFocus]])state.projects[FOCUSES[activeFocus]]=[];state.projects[FOCUSES[activeFocus]].push(p);activeId=p.id;activeChatId=p.chats[0].id;step=0;save();render();}
-function newChat(){const p=activeProj();if(!p)return;const name=prompt('Nombre del análisis:','Análisis '+(p.chats.length+1));if(!name)return;const c=mkChat(name);p.chats.push(c);activeChatId=c.id;save();renderSidebar();goStep(5);}
+function switchProj(id){collectCurrent();activeId=id;const p=activeProj();activeChatId=p?.chats?.[0]?.id||null;step=0;saveLocal();render();}
+function switchChat(id){activeChatId=id;saveLocal();renderSidebar();if(step===5)renderStep();}
+
+async function newProject(){
+  const name=prompt('Nombre del proyecto:');if(!name)return;
+  const id='p'+Date.now()+Math.random().toString(36).slice(2);
+  const chatId='c'+Date.now()+Math.random().toString(36).slice(2);
+  const focus=FOCUSES[activeFocus];
+  const proj={id,focus,name,icon:'ti-folder',color:COLORS[projects.length%COLORS.length],context:'',contextFiles:[],materials:[],limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],chats:[{id:chatId,name:'Análisis inicial',messages:[]}]};
+  setSyncState('syncing');
+  try{
+    await sbPost('projects',{id,focus,name,icon:'ti-folder',color:proj.color,context:'',context_files:[],materials:[],limit_tech:'',limit_ctx:'',links:[],objective:'',kpis:[],kpi_custom:'',connected_to:[]});
+    await sbPost('chats',{id:chatId,project_id:id,name:'Análisis inicial',messages:[]});
+    setSyncState('ok');
+  }catch(e){setSyncState('error');}
+  projects.push(proj);activeId=id;activeChatId=chatId;step=0;saveLocal();render();
+}
+
+async function newChat(){
+  const p=activeProj();if(!p)return;
+  const name=prompt('Nombre del análisis:','Análisis '+(p.chats.length+1));if(!name)return;
+  const id='c'+Date.now()+Math.random().toString(36).slice(2);
+  setSyncState('syncing');
+  try{await sbPost('chats',{id,project_id:p.id,name,messages:[]});setSyncState('ok');}catch(e){setSyncState('error');}
+  p.chats.push({id,name,messages:[]});activeChatId=id;saveLocal();renderSidebar();goStep(5);
+}
 
 function openEditProj(e,id){
   e.stopPropagation();editingProjId=id;
-  const p=allProjects().find(x=>x.id===id);if(!p)return;
+  const p=projects.find(x=>x.id===id);if(!p)return;
   document.getElementById('pm-name').value=p.name;
   document.getElementById('icon-grid').innerHTML=PROJ_ICONS.map(ic=>`<div class="icon-opt${ic===p.icon?' sel':''}" onclick="selectIcon(this,'${ic}')"><i class="ti ${ic}"></i></div>`).join('');
   openModal('proj-modal');
 }
-function selectIcon(el,ic){document.querySelectorAll('.icon-opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
-function saveProjModal(){
-  const p=allProjects().find(x=>x.id===editingProjId);if(!p)return;
+function selectIcon(el){document.querySelectorAll('.icon-opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
+async function saveProjModal(){
+  const p=projects.find(x=>x.id===editingProjId);if(!p)return;
   p.name=document.getElementById('pm-name').value.trim()||p.name;
   const sel=document.querySelector('.icon-opt.sel i');if(sel){const cls=[...sel.classList].find(c=>c.startsWith('ti-'));if(cls)p.icon=cls;}
-  save();closeModal('proj-modal');render();
+  await saveProject(p);closeModal('proj-modal');render();
 }
 
-function askDeleteProj(e,id){e.stopPropagation();const p=allProjects().find(x=>x.id===id);if(!p)return;document.getElementById('confirm-msg').textContent=`¿Querés eliminar el proyecto "${p.name}" y todos sus análisis? Esta acción no se puede deshacer.`;pendingConfirm=()=>deleteProj(id);openModal('confirm-modal');}
-function deleteProj(id){FOCUSES.forEach(f=>{state.projects[f]=(state.projects[f]||[]).filter(p=>p.id!==id);});const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;save();closeModal('confirm-modal');render();showToast('Proyecto eliminado');}
+function askDeleteProj(e,id){e.stopPropagation();const p=projects.find(x=>x.id===id);if(!p)return;document.getElementById('confirm-msg').textContent=`¿Eliminar "${p.name}" y todos sus análisis?`;pendingConfirm=()=>deleteProj(id);openModal('confirm-modal');}
+async function deleteProj(id){
+  setSyncState('syncing');
+  try{await sbDelete('projects','id=eq.'+id);setSyncState('ok');}catch(e){setSyncState('error');}
+  projects=projects.filter(p=>p.id!==id);
+  const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;
+  closeModal('confirm-modal');render();showToast('Proyecto eliminado');
+}
 function askDeleteChat(id){const p=activeProj();const c=p?.chats?.find(x=>x.id===id);if(!c)return;document.getElementById('confirm-msg').textContent=`¿Eliminar el análisis "${c.name}"?`;pendingConfirm=()=>deleteChat(id);openModal('confirm-modal');}
-function deleteChat(id){const p=activeProj();if(!p)return;p.chats=p.chats.filter(c=>c.id!==id);if(!p.chats.length){const c=mkChat('Análisis inicial');p.chats.push(c);}activeChatId=p.chats[0].id;save();closeModal('confirm-modal');renderSidebar();if(step===5)renderStep();showToast('Análisis eliminado');}
+async function deleteChat(id){
+  setSyncState('syncing');
+  try{await sbDelete('chats','id=eq.'+id);setSyncState('ok');}catch(e){setSyncState('error');}
+  const p=activeProj();if(!p)return;
+  p.chats=p.chats.filter(c=>c.id!==id);
+  if(!p.chats.length){const cid='c'+Date.now();await sbPost('chats',{id:cid,project_id:p.id,name:'Análisis inicial',messages:[]});p.chats.push({id:cid,name:'Análisis inicial',messages:[]});}
+  activeChatId=p.chats[0].id;closeModal('confirm-modal');renderSidebar();if(step===5)renderStep();showToast('Análisis eliminado');
+}
 function confirmAction(){if(pendingConfirm){pendingConfirm();pendingConfirm=null;}}
 function openRenameChat(id){editingChatId=id;const p=activeProj();const c=p?.chats?.find(x=>x.id===id);document.getElementById('chat-rename-in').value=c?.name||'';openModal('chat-modal');}
-function saveChatRename(){const p=activeProj();const c=p?.chats?.find(x=>x.id===editingChatId);if(c){c.name=document.getElementById('chat-rename-in').value.trim()||c.name;}save();closeModal('chat-modal');renderSidebar();if(step===5)renderStep();}
-function openConnect(){const p=activeProj();if(!p)return;const others=allProjects().filter(x=>x.id!==activeId);document.getElementById('connect-list').innerHTML=others.length?others.map(x=>`<div class="conn-item${p.connectedTo?.includes(x.id)?' linked':''}" onclick="toggleConn('${x.id}',this)"><i class="ti ${x.icon||'ti-folder'}" style="font-size:14px"></i><span style="flex:1">${x.name}</span><i class="ti ti-link"></i></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No hay otros proyectos.</p>';openModal('connect-modal');}
-function toggleConn(id,el){const p=activeProj();if(!p.connectedTo)p.connectedTo=[];if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}else{p.connectedTo.push(id);el.classList.add('linked');}save();}
+async function saveChatRename(){const p=activeProj();const c=p?.chats?.find(x=>x.id===editingChatId);if(c){c.name=document.getElementById('chat-rename-in').value.trim()||c.name;await saveChat(c,p.id);}closeModal('chat-modal');renderSidebar();if(step===5)renderStep();}
+function openConnect(){const p=activeProj();if(!p)return;const others=projects.filter(x=>x.id!==activeId);document.getElementById('connect-list').innerHTML=others.length?others.map(x=>`<div class="conn-item${p.connectedTo?.includes(x.id)?' linked':''}" onclick="toggleConn('${x.id}',this)"><i class="ti ${x.icon||'ti-folder'}" style="font-size:14px"></i><span style="flex:1">${x.name}</span><i class="ti ti-link"></i></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No hay otros proyectos.</p>';openModal('connect-modal');}
+async function toggleConn(id,el){const p=activeProj();if(!p.connectedTo)p.connectedTo=[];if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}else{p.connectedTo.push(id);el.classList.add('linked');}await saveProject(p);}
 function openSettings(){settingsTab=0;renderSettingsBody();openModal('settings-modal');}
 function stab(n){settingsTab=n;document.querySelectorAll('.stab').forEach((t,i)=>t.classList.toggle('active',i===n));renderSettingsBody();}
 function renderSettingsBody(){
   const body=document.getElementById('stab-body');
-  if(settingsTab===0){body.innerHTML=`<div class="s-desc">Estas reglas se inyectan en TODOS los análisis, sin excepción. Son el primer filtro por el que Sherlock tamiza su razonamiento.</div><textarea id="global-rules" rows="9" placeholder="Ej: Siempre considerá las regulaciones de ANMAT. Las recomendaciones deben ser implementables en menos de 2 sprints...">${state.globalRules||''}</textarea>`;}
-  else{body.innerHTML=`<div class="s-desc">Cada foco tiene su propio background. Sherlock lo usa como base de conocimiento del negocio.</div>${FOCUSES.map(f=>`<div class="focus-bg-block"><div class="focus-bg-name">${f}</div><textarea id="fbg-${f.replace(/\s/g,'_')}" rows="3" placeholder="Usuario, propuesta de valor, métricas clave, aprendizajes del equipo...">${state.focusBg?.[f]||''}</textarea></div>`).join('')}`;}
+  if(settingsTab===0){body.innerHTML=`<div class="s-desc">Reglas que se inyectan en TODOS los análisis, sin excepción.</div><textarea id="global-rules" rows="9" placeholder="Ej: Siempre considerá las regulaciones de ANMAT...">${settings.globalRules||''}</textarea>`;}
+  else{body.innerHTML=`<div class="s-desc">Background de negocio por foco. Sherlock lo usa como base de conocimiento.</div>${FOCUSES.map(f=>`<div class="focus-bg-block"><div class="focus-bg-name">${f}</div><textarea id="fbg-${f.replace(/\s/g,'_')}" rows="3" placeholder="Usuario, propuesta de valor, métricas clave...">${settings.focusBg?.[f]||''}</textarea></div>`).join('')}`;}
 }
-function saveSettings(){const gr=document.getElementById('global-rules');if(gr)state.globalRules=gr.value;FOCUSES.forEach(f=>{const el=document.getElementById('fbg-'+f.replace(/\s/g,'_'));if(el){if(!state.focusBg)state.focusBg={};state.focusBg[f]=el.value;}});save();showToast('Configuración guardada');}
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 
-/* STEPS */
-function goStep(n){collectCurrent();step=n;save();renderSidebar();renderStep();}
+function goStep(n){collectCurrent();step=n;saveLocal();renderSidebar();renderStep();}
 function collectCurrent(){
   const p=activeProj();if(!p)return;
   const v=id=>{const el=document.getElementById(id);return el?el.value:null;};
-  if(step===0){if(v('obj')!==null)p.objective=v('obj');if(v('kc')!==null)p.kpiCustom=v('kc');}
-  if(step===1&&v('ctx')!==null)p.context=v('ctx');
-  if(step===3){if(v('lt')!==null)p.limitTech=v('lt');if(v('lc')!==null)p.limitCtx=v('lc');}
-  save();
+  let changed=false;
+  if(step===0){if(v('obj')!==null&&v('obj')!==p.objective){p.objective=v('obj');changed=true;}if(v('kc')!==null&&v('kc')!==p.kpiCustom){p.kpiCustom=v('kc');changed=true;}}
+  if(step===1&&v('ctx')!==null&&v('ctx')!==p.context){p.context=v('ctx');changed=true;}
+  if(step===3){if(v('lt')!==null&&v('lt')!==p.limitTech){p.limitTech=v('lt');changed=true;}if(v('lc')!==null&&v('lc')!==p.limitCtx){p.limitCtx=v('lc');changed=true;}}
+  if(changed)debounceSave(p,null);
 }
+
 function renderStep(){
   const p=activeProj();const body=document.getElementById('step-body');if(!body)return;
   if(!p){body.innerHTML='<div class="empty-state"><i class="ti ti-folder" style="font-size:28px"></i><span>Creá un proyecto para empezar</span></div>';return;}
@@ -468,9 +515,9 @@ function renderStep(){
 }
 
 function stepObj(p){const sel=p.kpis||[];return`<div class="content"><div class="s-label">Objetivo principal</div><div class="s-desc">Definí qué querés lograr. Esto orienta todo el análisis de Sherlock.</div><textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago un 15% para Q3 2025...">${p.objective||''}</textarea><div class="s-label gap-top">KPIs a impactar</div><div class="kpi-grid">${KPI_LIST.map(k=>`<div class="kpi-tag${sel.includes(k)?' on':''}" onclick="toggleKpi(this,'${k}')">${k}</div>`).join('')}<div class="kpi-tag" onclick="toggleCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div></div><input id="kc" class="txt-in" style="margin-top:9px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}"/><div class="nav-btns"><div></div><button class="btn btn-primary" onclick="goStep(1)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
-function stepCtx(p){const hf=(p.contextFiles||[]).length>0;return`<div class="content"><div class="s-label">Contexto</div><div class="s-desc">Todo lo que Sherlock necesita saber para interpretar los datos correctamente.</div><textarea id="ctx" rows="6" placeholder="Ej: El flujo de checkout fue rediseñado en marzo 2024. Usuario principal: mujer, 35-55 años, urbana...">${p.context||''}</textarea><div class="gap-top"><div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div><div class="upload-zone${hf?' has-files':''}" id="ctx-zone"><input type="file" multiple id="ctx-fi" accept=".csv,.xlsx,.xls,.txt,.md,.pdf"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} cargado${p.contextFiles.length>1?'s':''}</div>` :`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Briefs, personas, research previo</div>`}</div><div class="file-list">${(p.contextFiles||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delCtx(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div></div><div class="nav-btns"><button class="btn" onclick="goStep(0)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(2)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function stepCtx(p){const hf=(p.contextFiles||[]).length>0;return`<div class="content"><div class="s-label">Contexto</div><div class="s-desc">Todo lo que Sherlock necesita saber para interpretar los datos correctamente.</div><textarea id="ctx" rows="6" placeholder="Ej: El flujo de checkout fue rediseñado en marzo 2024...">${p.context||''}</textarea><div class="gap-top"><div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div><div class="upload-zone${hf?' has-files':''}" id="ctx-zone"><input type="file" multiple id="ctx-fi" accept=".csv,.xlsx,.xls,.txt,.md,.pdf"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} cargado${p.contextFiles.length>1?'s':''}</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Briefs, personas, research previo</div>`}</div><div class="file-list">${(p.contextFiles||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delCtx(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div></div><div class="nav-btns"><button class="btn" onclick="goStep(0)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(2)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
 function stepMat(p){const hf=(p.materials||[]).length>0;return`<div class="content"><div class="s-label">Materiales</div><div class="s-desc">Subí los datos clave: exports de Analytics, planillas de métricas, CSVs. Sherlock lee el contenido real.</div><div class="upload-zone${hf?' has-files':''}" id="mat-zone"><input type="file" multiple id="mat-fi" accept=".csv,.xlsx,.xls,.txt,.md"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.materials.length} archivo${p.materials.length>1?'s':''} cargado${p.materials.length>1?'s':''}</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">CSV, XLSX, TXT · múltiples archivos</div>`}</div><div class="file-list">${(p.materials||[]).map((f,i)=>`<div class="file-item ok"><i class="ti ti-file-spreadsheet" style="font-size:14px;color:var(--success)"></i><span class="file-name">${f.name}</span><span class="file-badge">✓</span><input class="file-note" placeholder="nota..." value="${f.note||''}" data-fi="${i}"/><span class="file-size">${fmtSz(f.size)}</span><button class="file-del" onclick="delMat(${i})"><i class="ti ti-x"></i></button></div>`).join('')}</div><div class="nav-btns"><button class="btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(3)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
-function stepLim(p){return`<div class="content"><div class="s-label">Limitantes</div><div class="s-desc">Delimitá el campo de acción para que las recomendaciones sean realistas.</div><div class="split"><div class="sub-block"><div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div><textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4...">${p.limitTech||''}</textarea></div><div class="sub-block"><div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div><textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios...">${p.limitCtx||''}</textarea></div></div><div class="nav-btns"><button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function stepLim(p){return`<div class="content"><div class="s-label">Limitantes</div><div class="s-desc">Delimitá el campo de acción para recomendaciones realistas.</div><div class="split"><div class="sub-block"><div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div><textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4...">${p.limitTech||''}</textarea></div><div class="sub-block"><div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div><textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios...">${p.limitCtx||''}</textarea></div></div><div class="nav-btns"><button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
 function stepRef(p){const links=p.links||[];return`<div class="content"><div class="s-label">Referencias</div><div class="s-desc">Links que Sherlock debe considerar: benchmarks, Figma, competidores.</div><div id="llist">${links.map((l,i)=>`<div class="link-row"><select class="ltype" data-lt="${i}"><option${l.type==='bench'?' selected':''} value="bench">Bench</option><option${l.type==='figma'?' selected':''} value="figma">Figma</option><option${l.type==='ref'?' selected':''} value="ref">Referencia</option><option${l.type==='comp'?' selected':''} value="comp">Competidor</option></select><input placeholder="https://..." value="${l.url||''}" data-lu="${i}"/><button class="link-del" data-ld="${i}"><i class="ti ti-x"></i></button></div>`).join('')}</div><button class="btn" onclick="addLink()" style="margin-top:6px"><i class="ti ti-plus"></i> Agregar link</button><div class="nav-btns"><button class="btn" onclick="goStep(3)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Ir al análisis</button></div></div>`;}
 
 function stepAnal(p){
@@ -479,17 +526,8 @@ function stepAnal(p){
     msgs.length===0
       ?`<div class="empty-state"><i class="ti ti-search" style="font-size:32px;color:var(--accent)"></i><span>Sherlock está listo para analizar.</span><button class="btn btn-primary" onclick="runAnalysis()" style="margin-top:10px"><i class="ti ti-sparkles"></i> Generar análisis</button></div>`
       :msgs.map(m=>{
-        if(m.role==='questions'){
-          return`<div><div class="agent-label"><i class="ti ti-help-circle"></i> Sherlock necesita más info</div>
-          <div class="question-bubble">
-            <div class="q-header">${m.intro}</div>
-            ${m.questions.map((q,i)=>`<div class="q-item"><span class="q-num">${i+1}</span><div style="flex:1"><div class="q-text">${q}</div><textarea class="q-answer" id="qa-${i}" placeholder="Tu respuesta..." rows="2"></textarea></div></div>`).join('')}
-            <div class="q-submit"><button class="btn btn-primary" onclick="submitAnswers()"><i class="ti ti-check"></i> Listo, analizá</button></div>
-          </div></div>`;
-        }
-        if(m.role==='agent'){
-          return`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${renderBubble(m.content)}</div>${m.chips?.length?`<div class="chips-row">${m.chips.map(c=>`<button class="chip" onclick="sendMsg(${JSON.stringify(c)})">${c}</button>`).join('')}</div>`:''}</div>`;
-        }
+        if(m.role==='questions')return`<div><div class="agent-label"><i class="ti ti-help-circle"></i> Sherlock necesita más info</div><div class="question-bubble"><div class="q-header">${m.intro}</div>${m.questions.map((q,i)=>`<div class="q-item"><span class="q-num">${i+1}</span><div style="flex:1"><div class="q-text">${q}</div><textarea class="q-answer" id="qa-${i}" placeholder="Tu respuesta..." rows="2"></textarea></div></div>`).join('')}<div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn btn-primary" onclick="submitAnswers()"><i class="ti ti-check"></i> Listo, analizá</button></div></div></div>`;
+        if(m.role==='agent')return`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${renderBubble(m.content)}</div>${m.chips?.length?`<div class="chips-row">${m.chips.map(c=>`<button class="chip" onclick="sendMsg(${JSON.stringify(c)})">${c}</button>`).join('')}</div>`:''}</div>`;
         return`<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${escHtml(m.content)}</div></div>`;
       }).join('')
   }</div>
@@ -500,249 +538,170 @@ function stepAnal(p){
   </div>`;
 }
 
-/* RENDER BUBBLE — clean structured output */
 function renderBubble(text){
-  // Strip LaTeX and math blocks
-  text=text.replace(/\\\[[\s\S]*?\\\]/g,'').replace(/\\\(.*?\\\)/g,'').replace(/\$\$[\s\S]*?\$\$/g,'').replace(/\$.*?\$/g,'');
-  // Strip all # headings variants
-  text=text.replace(/^#{1,6}\s+/gm,'');
-  // Split into sections by **TITLE** patterns at line start or bold lines alone
-  const lines=text.split('\n');
-  let html='';let currentSection=null;let currentItems=[];
-  const flushSection=()=>{
-    if(currentSection!==null){
-      let inner='';
-      if(currentItems.length){
-        inner=`<ul class="bubble-list">${currentItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;
-        currentItems=[];
-      }
-      html+=`<div class="bubble-section"><div class="bubble-h">${currentSection}</div>${inner}</div>`;
-      currentSection=null;
-    }
-  };
-  const flushItems=()=>{
-    if(currentItems.length&&currentSection===null){
-      html+=`<ul class="bubble-list">${currentItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;
-      currentItems=[];
-    }
-  };
-  let paraLines=[];
+  text=text.replace(/\\\[[\s\S]*?\\\]/g,'').replace(/\\\(.*?\\\)/g,'').replace(/\$\$[\s\S]*?\$\$/g,'').replace(/\$.*?\$/g,'').replace(/^#{1,6}\s+/gm,'');
+  const lines=text.split('\n');let html='';let curSection=null;let curItems=[];let paraLines=[];
   const flushPara=()=>{if(paraLines.length){const t=paraLines.join(' ').trim();if(t)html+=`<p class="bubble-p">${fmtInline(t)}</p>`;paraLines=[];}};
-  for(let i=0;i<lines.length;i++){
-    const l=lines[i];const trim=l.trim();
-    if(!trim){flushPara();continue;}
-    // Bold-only line = section header
-    if(/^\*\*[^*]+\*\*:?\s*$/.test(trim)){
-      flushPara();flushItems();flushSection();
-      currentSection=trim.replace(/\*\*/g,'').replace(/:$/,'');
-      continue;
-    }
-    // List item
-    if(/^[-*•]\s+/.test(trim)||/^\d+\.\s+/.test(trim)){
-      flushPara();
-      const content=trim.replace(/^[-*•]\s+/,'').replace(/^\d+\.\s+/,'');
-      if(currentSection!==null)currentItems.push(content);
-      else{flushItems();currentItems.push(content);}
-      continue;
-    }
-    // Regular paragraph line
-    if(currentSection!==null&&currentItems.length){flushSection();}
-    else if(currentSection!==null){flushSection();}
-    paraLines.push(trim);
+  const flushItems=()=>{if(curItems.length){html+=`<ul class="bubble-list">${curItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;curItems=[];}};
+  const flushSection=()=>{if(curSection!==null){let inner='';if(curItems.length){inner=`<ul class="bubble-list">${curItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;curItems=[];}html+=`<div class="bubble-section"><div class="bubble-h">${curSection}</div>${inner}</div>`;curSection=null;}};
+  for(const l of lines){
+    const trim=l.trim();if(!trim){flushPara();continue;}
+    if(/^\*\*[^*]+\*\*:?\s*$/.test(trim)){flushPara();flushItems();flushSection();curSection=trim.replace(/\*\*/g,'').replace(/:$/,'');continue;}
+    if(/^[-*•]\s+/.test(trim)||/^\d+\.\s+/.test(trim)){flushPara();const c=trim.replace(/^[-*•]\s+/,'').replace(/^\d+\.\s+/,'');if(curSection!==null)curItems.push(c);else{flushItems();curItems.push(c);}continue;}
+    if(curSection!==null){flushSection();}paraLines.push(trim);
   }
   flushPara();flushItems();flushSection();
   return html||`<p class="bubble-p">${fmtInline(text)}</p>`;
 }
-function fmtInline(t){
-  return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
-}
-function escHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtInline(t){return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');}
+function escHtml(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function attachStep(p){
   const mfi=document.getElementById('mat-fi');if(mfi)mfi.addEventListener('change',e=>handleFiles(e.target.files,'mat'));
   const cfi=document.getElementById('ctx-fi');if(cfi)cfi.addEventListener('change',e=>handleFiles(e.target.files,'ctx'));
-  document.querySelectorAll('[data-fi]').forEach(inp=>inp.addEventListener('input',e=>{p.materials[+e.target.dataset.fi].note=e.target.value;save();}));
-  document.querySelectorAll('[data-lu]').forEach(inp=>inp.addEventListener('input',e=>{p.links[+e.target.dataset.lu].url=e.target.value;save();}));
-  document.querySelectorAll('[data-lt]').forEach(sel=>sel.addEventListener('change',e=>{p.links[+e.target.dataset.lt].type=e.target.value;save();}));
-  document.querySelectorAll('[data-ld]').forEach(btn=>btn.addEventListener('click',()=>{p.links.splice(+btn.dataset.ld,1);save();renderStep();}));
+  document.querySelectorAll('[data-fi]').forEach(inp=>inp.addEventListener('input',e=>{p.materials[+e.target.dataset.fi].note=e.target.value;debounceSave(p,null);}));
+  document.querySelectorAll('[data-lu]').forEach(inp=>inp.addEventListener('input',e=>{p.links[+e.target.dataset.lu].url=e.target.value;debounceSave(p,null);}));
+  document.querySelectorAll('[data-lt]').forEach(sel=>sel.addEventListener('change',e=>{p.links[+e.target.dataset.lt].type=e.target.value;debounceSave(p,null);}));
+  document.querySelectorAll('[data-ld]').forEach(btn=>btn.addEventListener('click',()=>{p.links.splice(+btn.dataset.ld,1);debounceSave(p,null);renderStep();}));
   if(step===5&&(activeChat()?.messages||[]).length===0)setTimeout(runAnalysis,400);
   const cw=document.getElementById('chat-wrap');if(cw)cw.scrollTop=cw.scrollHeight;
 }
-function toggleKpi(el,k){const p=activeProj();if(!p.kpis)p.kpis=[];if(p.kpis.includes(k)){p.kpis=p.kpis.filter(x=>x!==k);el.classList.remove('on');}else{p.kpis.push(k);el.classList.add('on');}save();}
+async function toggleKpi(el,k){const p=activeProj();if(!p.kpis)p.kpis=[];if(p.kpis.includes(k)){p.kpis=p.kpis.filter(x=>x!==k);el.classList.remove('on');}else{p.kpis.push(k);el.classList.add('on');}debounceSave(p,null);}
 function toggleCustom(){const i=document.getElementById('kc');if(i){i.style.display=i.style.display==='none'?'block':'none';if(i.style.display==='block')i.focus();}}
-function addLink(){const p=activeProj();if(!p)return;p.links.push({url:'',type:'bench'});save();renderStep();}
-function delMat(i){const p=activeProj();p.materials.splice(i,1);save();renderStep();}
-function delCtx(i){const p=activeProj();p.contextFiles.splice(i,1);save();renderStep();}
+function addLink(){const p=activeProj();if(!p)return;p.links.push({url:'',type:'bench'});renderStep();}
+async function delMat(i){const p=activeProj();p.materials.splice(i,1);await saveProject(p);renderStep();}
+async function delCtx(i){const p=activeProj();p.contextFiles.splice(i,1);await saveProject(p);renderStep();}
 
 async function readFile(file){
   return new Promise(res=>{
     const n=file.name.toLowerCase();
-    if(n.endsWith('.xlsx')||n.endsWith('.xls')){
-      const r=new FileReader();
-      r.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});let out='';wb.SheetNames.forEach(s=>{const csv=XLSX.utils.sheet_to_csv(wb.Sheets[s]);if(csv.trim())out+=`[Hoja: ${s}]\n${csv}\n\n`;});res(out.slice(0,10000));}catch{res('[Error leyendo Excel]');}};
-      r.readAsArrayBuffer(file);
-    }else if(n.endsWith('.csv')||n.endsWith('.txt')||n.endsWith('.md')){
-      const r=new FileReader();r.onload=e=>res((e.target.result||'').slice(0,10000));r.readAsText(file);
-    }else res(`[${file.name} — tipo no soportado]`);
+    if(n.endsWith('.xlsx')||n.endsWith('.xls')){const r=new FileReader();r.onload=e=>{try{const wb=XLSX.read(e.target.result,{type:'array'});let out='';wb.SheetNames.forEach(s=>{const csv=XLSX.utils.sheet_to_csv(wb.Sheets[s]);if(csv.trim())out+=`[Hoja: ${s}]\n${csv}\n\n`;});res(out.slice(0,10000));}catch{res('[Error leyendo Excel]');}};r.readAsArrayBuffer(file);}
+    else if(n.endsWith('.csv')||n.endsWith('.txt')||n.endsWith('.md')){const r=new FileReader();r.onload=e=>res((e.target.result||'').slice(0,10000));r.readAsText(file);}
+    else res(`[${file.name}]`);
   });
 }
-function handleFiles(files,type){
+async function handleFiles(files,type){
   const p=activeProj();let pending=files.length;
   Array.from(files).forEach(async f=>{
     const content=await readFile(f);
     if(type==='mat')p.materials.push({name:f.name,note:'',size:f.size,content});
     else{if(!p.contextFiles)p.contextFiles=[];p.contextFiles.push({name:f.name,size:f.size,content});}
-    pending--;if(pending===0){save();renderStep();showToast(`${files.length} archivo${files.length>1?'s':''} cargado${files.length>1?'s':''}`);}
+    pending--;if(pending===0){await saveProject(p);renderStep();showToast(`${files.length} archivo${files.length>1?'s':''} cargado${files.length>1?'s':''}`);}
   });
 }
 
-/* AI */
-const MODEL='llama-3.3-70b-versatile';
 const SYS=`Sos Sherlock, agente experto en UX/UI y métricas para e-commerce y retail latinoamericano.
-
-Tu perfil:
-- Especialista en usabilidad, diseño de interacción y research de usuarios
-- Analista obsesivo de métricas: conversión, funnel, comportamiento, retención
-- Siempre conectás hallazgos con números concretos y accionables
-- Tono directo, colega-a-colega, sin relleno ni frases de apertura
-
-REGLAS DE FORMATO (crítico):
+Perfil: especialista en usabilidad, diseño de interacción, research y análisis de métricas. Obsesivo con los números. Tono directo, colega-a-colega.
+REGLAS DE FORMATO (crítico — nunca las rompas):
 - Jamás uses #, ##, ### ni ####
-- Jamás uses LaTeX, fórmulas matemáticas ni notación \[ \] ni \( \)
-- Para títulos de sección usá solo **Título en negrita** en una línea sola
+- Jamás uses LaTeX, fórmulas matemáticas ni notación con \[ \] ni \( \)
+- Para títulos de sección usá solo **Título** en una línea sola (sin nada más en esa línea)
 - Para listas usá - item
-- Escribí los números y porcentajes directamente: "1.31%" no "\frac{7256}{553293}"
+- Calculá los números vos y escribilos directamente: "1.31%" no "\frac{7256}{553293}"
 - Dejá líneas en blanco entre secciones
-- Respuestas con estructura clara: secciones bien separadas
-
 FLUJO DE ANÁLISIS INICIAL:
-Antes de dar el análisis completo, SIEMPRE hacé 2-3 preguntas clave que te ayuden a afinar el análisis. Respondé en este formato JSON exacto al inicio:
-PREGUNTAS:{"intro":"frase breve que explique por qué necesitás más info","questions":["pregunta 1","pregunta 2","pregunta 3"]}
+Antes del análisis completo, hacé 2-3 preguntas clave. Respondé exactamente así:
+PREGUNTAS:{"intro":"frase breve","questions":["pregunta 1","pregunta 2","pregunta 3"]}
+Cuando el usuario responda, entregá el análisis completo.
+En análisis y refinamientos, al final siempre incluí:
+CHIPS:["sugerencia 1","sugerencia 2","pregunta de profundización"]`;
 
-Cuando el usuario responda las preguntas, ahí sí entregás el análisis completo.
-
-En el análisis y en respuestas de refinamiento, al final incluí:
-CHIPS:["sugerencia accionable 1","sugerencia accionable 2","pregunta que abre nuevo ángulo"]`;
-
-function truncateContent(content,maxChars=6000){if(!content)return'';return content.length>maxChars?content.slice(0,maxChars)+'\n[... truncado por longitud]':content;}
+function truncate(s,n=6000){if(!s)return'';return s.length>n?s.slice(0,n)+'\n[truncado]':s;}
 
 function buildPrompt(p,chat,userMsg){
   const focus=FOCUSES[activeFocus];
-  const focusBg=state.focusBg?.[focus]||'';
-  const globalRules=state.globalRules||'';
-  const matContent=(p.materials||[]).map(f=>`--- ${f.name}${f.note?' ('+f.note+')':''} ---\n${truncateContent(f.content)}`).join('\n\n');
-  const ctxContent=(p.contextFiles||[]).map(f=>`--- ${f.name} ---\n${truncateContent(f.content,3000)}`).join('\n\n');
-  const connCtx=allProjects().filter(x=>p.connectedTo?.includes(x.id)).map(x=>`[Proyecto: ${x.name}] Objetivo: ${x.objective||'—'}`).join('\n');
-  const history=(chat?.messages||[]).filter(m=>m.role==='agent'||m.role==='user').slice(-6).map(m=>`${m.role==='agent'?'Sherlock':'Usuario'}: ${typeof m.content==='string'?m.content.slice(0,800):JSON.stringify(m.content).slice(0,400)}`).join('\n');
-  return`${globalRules?`REGLAS MÁXIMAS:\n${globalRules}\n\n`:''}${focusBg?`BACKGROUND ${focus}:\n${focusBg}\n\n`:''}PROYECTO: ${p.name} · Foco: ${focus}
+  const focusBg=settings.focusBg?.[focus]||'';
+  const globalRules=settings.globalRules||'';
+  const matContent=(p.materials||[]).map(f=>`--- ${f.name}${f.note?' ('+f.note+')':''} ---\n${truncate(f.content)}`).join('\n\n');
+  const ctxContent=(p.contextFiles||[]).map(f=>`--- ${f.name} ---\n${truncate(f.content,3000)}`).join('\n\n');
+  const connCtx=projects.filter(x=>p.connectedTo?.includes(x.id)).map(x=>`[${x.name}] Objetivo: ${x.objective||'—'}`).join('\n');
+  const history=(chat?.messages||[]).filter(m=>m.role==='agent'||m.role==='user').slice(-6).map(m=>`${m.role==='agent'?'Sherlock':'Usuario'}: ${(typeof m.content==='string'?m.content:'[preguntas]').slice(0,600)}`).join('\n');
+  return`${globalRules?`REGLAS MÁXIMAS:\n${globalRules}\n\n`:''}${focusBg?`BACKGROUND ${focus}:\n${focusBg}\n\n`:''}PROYECTO: ${p.name} · ${focus}
 OBJETIVO: ${p.objective||'(no especificado)'}
 KPIs: ${[...(p.kpis||[]),p.kpiCustom].filter(Boolean).join(', ')||'(no especificados)'}
-CONTEXTO: ${(p.context||'(no especificado)').slice(0,1500)}${ctxContent?'\n\n'+ctxContent:''}
+CONTEXTO: ${truncate(p.context||'(no especificado)',1200)}${ctxContent?'\n'+ctxContent:''}
 DATOS:\n${matContent||'(sin archivos)'}
 LIMITANTES TÉC: ${p.limitTech||'(ninguna)'}
 LIMITANTES CTX: ${p.limitCtx||'(ninguna)'}
 REFS: ${(p.links||[]).map(l=>`[${l.type}] ${l.url}`).join(', ')||'(ninguna)'}${connCtx?'\n\nCONECTADOS:\n'+connCtx:''}${history?'\n\nCONVERSACIÓN:\n'+history:''}
-${userMsg?'USUARIO: '+userMsg:'INSTRUCCIÓN: Iniciá el proceso de análisis con las preguntas previas.'}`;
+${userMsg?'USUARIO: '+userMsg:'INSTRUCCIÓN: Iniciá con las preguntas previas al análisis.'}`;
 }
 
 function parsePreguntas(raw){const m=raw.match(/PREGUNTAS:(\{[\s\S]*?\})/);if(!m)return null;try{return JSON.parse(m[1]);}catch{return null;}}
 function parseChips(raw){const m=raw.match(/CHIPS:\[(.+?)\]/s);if(!m)return[];try{return JSON.parse('['+m[1]+']');}catch{return[];}}
-function cleanRaw(raw){return raw.replace(/PREGUNTAS:\{[\s\S]*?\}/,'').replace(/CHIPS:\[.+?\]/s,'').trim();}
+function cleanRaw(raw){return raw.replace(/PREGUNTAS:\{[\s\S]*?\}/s,'').replace(/CHIPS:\[.+?\]/s,'').trim();}
 
 async function callGroq(content){
   const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:SYS,messages:[{role:'user',content}]})});
   const d=await r.json();if(d.error)throw new Error(d.error);return d.text;
 }
-
 function addThinking(){
   const wrap=document.getElementById('chat-wrap');if(!wrap)return null;
-  const d=document.createElement('div');
-  d.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Analizando...</div>`;
+  const d=document.createElement('div');d.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Analizando...</div>`;
   wrap.appendChild(d);wrap.scrollTop=wrap.scrollHeight;return d;
 }
-
 async function runAnalysis(){
-  collectCurrent();
-  const p=activeProj();const chat=activeChat();if(!p||!chat)return;
-  chat.messages=[];chat.awaitingAnswers=false;save();
-  const wrap=document.getElementById('chat-wrap');if(wrap)wrap.innerHTML='';
+  collectCurrent();const p=activeProj();const chat=activeChat();if(!p||!chat)return;
+  chat.messages=[];const wrap=document.getElementById('chat-wrap');if(wrap)wrap.innerHTML='';
   const t=addThinking();
   try{
     const raw=await callGroq(buildPrompt(p,chat,null));
     const preguntas=parsePreguntas(raw);
-    if(preguntas){
-      chat.messages.push({role:'questions',intro:preguntas.intro,questions:preguntas.questions});
-      chat.awaitingAnswers=true;
-    }else{
-      const chips=parseChips(raw);const text=cleanRaw(raw);
-      chat.messages.push({role:'agent',content:text,chips});
-    }
-    save();renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
+    if(preguntas){chat.messages.push({role:'questions',intro:preguntas.intro,questions:preguntas.questions});}
+    else{const chips=parseChips(raw);chat.messages.push({role:'agent',content:cleanRaw(raw),chips});}
+    await saveChat(chat,p.id);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
   }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
-
 async function submitAnswers(){
   const chat=activeChat();if(!chat)return;
   const lastQ=chat.messages.findLast(m=>m.role==='questions');if(!lastQ)return;
   const answers=lastQ.questions.map((_,i)=>{const el=document.getElementById('qa-'+i);return el?el.value.trim():'';});
   const answersText=lastQ.questions.map((q,i)=>`${q}\nRespuesta: ${answers[i]||'(sin respuesta)'}`).join('\n\n');
-  chat.messages.push({role:'user',content:`Respuestas:\n${answersText}`});
-  chat.awaitingAnswers=false;save();renderStep();
-  const t=addThinking();
+  chat.messages.push({role:'user',content:`Respuestas a tus preguntas:\n${answersText}`});
+  renderStep();const t=addThinking();
   try{
-    const raw=await callGroq(buildPrompt(activeProj(),chat,`El usuario respondió las preguntas previas. Ahora entregá el análisis completo.\n\n${answersText}`));
-    const chips=parseChips(raw);const text=cleanRaw(raw);
-    chat.messages.push({role:'agent',content:text,chips});
-    save();renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
+    const raw=await callGroq(buildPrompt(activeProj(),chat,`El usuario respondió. Ahora entregá el análisis completo.\n\n${answersText}`));
+    const chips=parseChips(raw);chat.messages.push({role:'agent',content:cleanRaw(raw),chips});
+    await saveChat(chat,activeProj().id);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
   }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
-
 async function sendMsg(msg){
   const p=activeProj();const chat=activeChat();if(!p||!chat)return;
-  const inp=document.getElementById('chat-in');
-  const text=msg||(inp?.value?.trim());if(!text)return;
-  chat.messages.push({role:'user',content:text});
-  if(inp)inp.value='';save();renderStep();
-  const t=addThinking();
-  const wrap=document.getElementById('chat-wrap');if(wrap)wrap.scrollTop=wrap.scrollHeight;
+  const inp=document.getElementById('chat-in');const text=msg||(inp?.value?.trim());if(!text)return;
+  chat.messages.push({role:'user',content:text});if(inp)inp.value='';renderStep();
+  const t=addThinking();const wrap=document.getElementById('chat-wrap');if(wrap)wrap.scrollTop=wrap.scrollHeight;
   try{
     const raw=await callGroq(buildPrompt(p,chat,text));
-    const chips=parseChips(raw);const clean=cleanRaw(raw);
-    chat.messages.push({role:'agent',content:clean,chips});
-    save();renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
+    const chips=parseChips(raw);chat.messages.push({role:'agent',content:cleanRaw(raw),chips});
+    await saveChat(chat,p.id);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
   }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
 function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
 
-/* QUICK CHAT */
 function toggleQuick(){qpOpen=!qpOpen;document.getElementById('qpanel').classList.toggle('open',qpOpen);}
 function qpKey(e){if(e.key==='Enter')qpSend();}
 async function qpSend(){
   const inp=document.getElementById('qp-in');const msg=inp?.value?.trim();if(!msg)return;
   inp.value='';qpMsgs.push({r:'user',t:msg});renderQP();
-  const wrap=document.getElementById('qp-msgs');
-  const d=document.createElement('div');d.className='qp-agent';
-  d.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-  wrap?.appendChild(d);if(wrap)wrap.scrollTop=wrap.scrollHeight;
-  const focus=FOCUSES[activeFocus];
-  const sys=`${SYS}\nFoco activo: ${focus}${state.globalRules?'\nReglas: '+state.globalRules:''}${state.focusBg?.[focus]?'\nBackground: '+state.focusBg[focus]:''}`;
+  const wrap=document.getElementById('qp-msgs');const d=document.createElement('div');d.className='qp-agent';d.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';wrap?.appendChild(d);if(wrap)wrap.scrollTop=wrap.scrollHeight;
+  const focus=FOCUSES[activeFocus];const sys=`${SYS}\nFoco: ${focus}${settings.globalRules?'\nReglas: '+settings.globalRules:''}${settings.focusBg?.[focus]?'\nBackground: '+settings.focusBg[focus]:''}`;
   try{
     const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:sys,messages:[...qpMsgs.slice(-6).map(m=>({role:m.r==='agent'?'assistant':'user',content:m.t})),{role:'user',content:msg}]})});
-    const data=await r.json();const text=cleanRaw(data.text||'Sin respuesta');
+    const data=await r.json();const text=cleanRaw(data.text||'');
     qpMsgs.push({r:'agent',t:text});renderQP();
   }catch(e){d.textContent='Error: '+e.message;}
 }
-function renderQP(){
-  const wrap=document.getElementById('qp-msgs');if(!wrap)return;
-  wrap.innerHTML=qpMsgs.map(m=>m.r==='agent'?`<div class="qp-agent">${renderBubble(m.t)}</div>`:`<div class="qp-user">${escHtml(m.t)}</div>`).join('');
-  wrap.scrollTop=wrap.scrollHeight;
-}
+function renderQP(){const wrap=document.getElementById('qp-msgs');if(!wrap)return;wrap.innerHTML=qpMsgs.map(m=>m.r==='agent'?`<div class="qp-agent">${renderBubble(m.t)}</div>`:`<div class="qp-user">${escHtml(m.t)}</div>`).join('');wrap.scrollTop=wrap.scrollHeight;}
 
-/* UTILS */
 function fmtSz(b){if(!b)return'';if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
 function showToast(msg){const t=document.getElementById('toast');const m=document.getElementById('toast-msg');if(!t||!m)return;m.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-load();render();
+(async()=>{
+  await loadAll();
+  document.getElementById('loading-screen').style.display='none';
+  document.getElementById('shell').style.display='flex';
+  render();
+})();
 </script>
 </body>
 </html>
