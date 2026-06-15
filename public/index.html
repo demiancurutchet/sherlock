@@ -120,14 +120,10 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .kpi-tag.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 .nav-btns{display:flex;justify-content:space-between;margin-top:18px}
 .gap-top{margin-top:16px}
-
-/* EMPTY STATE GLOBAL */
 .global-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;color:var(--text3);text-align:center;padding:40px}
 .global-empty-icon{width:64px;height:64px;border-radius:16px;background:var(--accent-light);border:0.5px solid var(--accent-mid);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--accent)}
 .global-empty h2{font-size:16px;font-weight:600;color:var(--text);margin-top:4px}
 .global-empty p{font-size:13px;color:var(--text2);line-height:1.6;max-width:300px}
-
-/* CHAT */
 .chat-wrap{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:20px}
 .agent-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:flex;align-items:center;gap:5px}
 .agent-bubble{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;color:var(--text)}
@@ -141,21 +137,17 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 .bubble-list li{display:flex;gap:9px;font-size:13px;line-height:1.65;color:var(--text2)}
 .bubble-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0}
 .bubble-list li strong{color:var(--text);font-weight:600}
-
-/* QUESTION BUBBLE */
 .question-bubble{background:var(--bg);border:0.5px solid var(--accent-mid);border-radius:var(--radius-lg);padding:18px 20px}
 .q-header{font-size:13px;font-weight:500;color:var(--text);margin-bottom:16px;line-height:1.55}
 .q-item{margin-bottom:18px}
-.q-item:last-child{margin-bottom:0}
 .q-num-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
 .q-num{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .q-text{font-size:13px;color:var(--text2);line-height:1.6;flex:1}
 .q-answer{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius);padding:9px 11px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);resize:none;line-height:1.6;outline:none;min-height:58px;margin-bottom:8px}
 .q-answer:focus{border-color:var(--accent)}
 .q-presets{display:flex;flex-wrap:wrap;gap:6px}
-.q-preset{padding:5px 11px;border-radius:20px;font-size:11px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border);cursor:pointer;transition:all .12s;font-family:'Inter',sans-serif;line-height:1.4}
+.q-preset{padding:5px 11px;border-radius:20px;font-size:11px;background:var(--bg2);color:var(--text2);border:0.5px solid var(--border);cursor:pointer;transition:all .12s;font-family:'Inter',sans-serif}
 .q-preset:hover{background:var(--accent-light);border-color:var(--accent-mid);color:var(--accent)}
-
 .chips-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
 .chip{padding:6px 14px;border-radius:20px;font-size:12px;background:var(--accent-light);color:var(--accent);border:0.5px solid var(--accent-mid);cursor:pointer;transition:all .12s;font-family:'Inter',sans-serif}
 .chip:hover{background:var(--accent);color:#fff}
@@ -216,151 +208,112 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
 <body>
 <div id="loading-screen" class="loading-screen"><i class="ti ti-search"></i><span>Cargando Sherlock...</span></div>
 <div id="toast" class="toast"><i class="ti ti-check"></i><span id="toast-msg"></span></div>
-
 <div class="shell" style="display:none" id="shell">
  <div class="sidebar">
   <div class="sb-top">
    <div class="logo"><i class="ti ti-search" style="color:var(--accent);font-size:16px"></i> <span>Sherlock</span></div>
    <div class="logo-sub">UX Agent</div>
-   <div class="focus-wrap">
-    <select class="focus-select" id="focus-sel" onchange="switchFocus(this.value)"></select>
-    <i class="ti ti-chevron-down focus-arrow"></i>
-   </div>
+   <div class="focus-wrap"><select class="focus-select" id="focus-sel" onchange="switchFocus(this.value)"></select><i class="ti ti-chevron-down focus-arrow"></i></div>
   </div>
   <div class="sb-section">Proyectos<button onclick="newProject()"><i class="ti ti-plus"></i></button></div>
   <div class="sb-scroll" id="proj-list"></div>
   <div class="sb-bottom">
    <button class="quick-chat-btn" onclick="toggleQuick()"><i class="ti ti-message-circle"></i> Chat rápido</button>
-   <div class="dark-row">
-    <span class="dark-label"><i class="ti ti-moon"></i> Modo oscuro</span>
-    <label class="toggle-sw"><input type="checkbox" id="dark-chk" onchange="toggleDark()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
-   </div>
-   <div class="sync-indicator" id="sync-ind"><span class="sync-dot" id="sync-dot"></span><span id="sync-txt">Sincronizado</span></div>
-   <div class="sb-ver"><span>v1.1.5</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
+   <div class="dark-row"><span class="dark-label"><i class="ti ti-moon"></i> Modo oscuro</span><label class="toggle-sw"><input type="checkbox" id="dark-chk" onchange="toggleDark()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label></div>
+   <div class="sync-indicator"><span class="sync-dot" id="sync-dot"></span><span id="sync-txt">Sincronizado</span></div>
+   <div class="sb-ver"><span>v1.1.6</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
   </div>
  </div>
- <div class="main" id="main-area">
-  <div class="topbar">
+ <div class="main">
+  <div class="topbar" id="topbar">
    <div style="display:flex;align-items:center;gap:8px"><div class="topbar-title" id="t-title">—</div><span class="topbar-chat" id="t-chat"></span></div>
-   <div class="topbar-right">
-    <button class="btn" onclick="openConnect()"><i class="ti ti-link"></i> Conectar</button>
-    <button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Analizar</button>
-   </div>
+   <div class="topbar-right"><button class="btn" onclick="openConnect()"><i class="ti ti-link"></i> Conectar</button><button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Analizar</button></div>
   </div>
   <div class="steps-nav" id="steps-nav"></div>
   <div id="step-body" style="flex:1;overflow:hidden;display:flex;flex-direction:column"></div>
  </div>
 </div>
-
 <div class="quick-panel" id="qpanel">
  <div class="qp-header"><div class="qp-title"><i class="ti ti-message-circle"></i> Chat rápido · Sherlock</div><button class="qp-close" onclick="toggleQuick()"><i class="ti ti-x"></i></button></div>
  <div class="qp-msgs" id="qp-msgs"><div style="font-size:12px;color:var(--text3);text-align:center;padding:24px 10px">Preguntá sobre UX, métricas o benchmarks.</div></div>
  <div class="qp-bar"><input id="qp-in" placeholder="Ej: benchmark conversión e-commerce LATAM" onkeydown="qpKey(event)"/><button class="qp-send" onclick="qpSend()"><i class="ti ti-send"></i></button></div>
 </div>
-
-<div class="overlay" id="proj-modal"><div class="modal"><div class="modal-hdr"><span class="modal-title" id="pm-title">Editar proyecto</span><button class="modal-close" onclick="closeModal('proj-modal')"><i class="ti ti-x"></i></button></div><div class="modal-label">Nombre</div><input class="modal-input" id="pm-name" placeholder="Nombre del proyecto"/><div class="modal-label">Ícono</div><div class="icon-grid" id="icon-grid"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><button class="btn" onclick="closeModal('proj-modal')">Cancelar</button><button class="btn btn-primary" onclick="saveProjModal()">Guardar</button></div></div></div>
+<div class="overlay" id="proj-modal"><div class="modal"><div class="modal-hdr"><span class="modal-title">Editar proyecto</span><button class="modal-close" onclick="closeModal('proj-modal')"><i class="ti ti-x"></i></button></div><div class="modal-label">Nombre</div><input class="modal-input" id="pm-name"/><div class="modal-label">Ícono</div><div class="icon-grid" id="icon-grid"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><button class="btn" onclick="closeModal('proj-modal')">Cancelar</button><button class="btn btn-primary" onclick="saveProjModal()">Guardar</button></div></div></div>
 <div class="overlay" id="confirm-modal"><div class="modal" style="width:320px"><div class="modal-hdr"><span class="modal-title">¿Confirmar eliminación?</span><button class="modal-close" onclick="closeModal('confirm-modal')"><i class="ti ti-x"></i></button></div><p class="confirm-msg" id="confirm-msg"></p><div class="confirm-btns"><button class="btn" onclick="closeModal('confirm-modal')">Cancelar</button><button class="btn btn-danger" onclick="confirmAction()">Eliminar</button></div></div></div>
-<div class="overlay" id="chat-modal"><div class="modal" style="width:300px"><div class="modal-hdr"><span class="modal-title">Renombrar análisis</span><button class="modal-close" onclick="closeModal('chat-modal')"><i class="ti ti-x"></i></button></div><input class="modal-input" id="chat-rename-in" placeholder="Nombre del análisis"/><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn" onclick="closeModal('chat-modal')">Cancelar</button><button class="btn btn-primary" onclick="saveChatRename()">Guardar</button></div></div></div>
+<div class="overlay" id="chat-modal"><div class="modal" style="width:300px"><div class="modal-hdr"><span class="modal-title">Renombrar análisis</span><button class="modal-close" onclick="closeModal('chat-modal')"><i class="ti ti-x"></i></button></div><input class="modal-input" id="chat-rename-in"/><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px"><button class="btn" onclick="closeModal('chat-modal')">Cancelar</button><button class="btn btn-primary" onclick="saveChatRename()">Guardar</button></div></div></div>
 <div class="overlay" id="connect-modal"><div class="modal"><div class="modal-hdr"><span class="modal-title">Conectar proyectos</span><button class="modal-close" onclick="closeModal('connect-modal')"><i class="ti ti-x"></i></button></div><p style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.55">Podés conectar proyectos de cualquier foco.</p><div id="connect-list"></div><button class="btn btn-primary" onclick="closeModal('connect-modal')" style="margin-top:12px;width:100%;justify-content:center">Listo</button></div></div>
 <div class="overlay" id="settings-modal"><div class="modal" style="width:500px;max-height:580px"><div class="modal-hdr"><span class="modal-title">Configuración global</span><button class="modal-close" onclick="saveSettings();closeModal('settings-modal')"><i class="ti ti-x"></i></button></div><div class="settings-tabs"><div class="stab active" onclick="stab(0)" id="stab0">Reglas máximas</div><div class="stab" onclick="stab(1)" id="stab1">Background por foco</div></div><div id="stab-body"></div><div style="display:flex;justify-content:flex-end;margin-top:16px"><button class="btn btn-primary" onclick="saveSettings();closeModal('settings-modal')">Guardar y cerrar</button></div></div></div>
 
 <script>
-const SUPA_URL='https://ctqbyuikoesktiqrwovi.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0cWJ5dWlrb2Vza3RpcXJ3b3ZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NjUxNzUsImV4cCI6MjA5NzA0MTE3NX0.uEra2OZ3ZL1Pl504NriH3PZ358GeiwtO6PObaD7NtWo';
-const SB={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=representation'};
-const SB_MIN={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'};
-
-async function sbGet(t,q=''){const r=await fetch(`${SUPA_URL}/rest/v1/${t}?${q}`,{headers:SB});return r.json();}
-async function sbPost(t,b){const r=await fetch(`${SUPA_URL}/rest/v1/${t}`,{method:'POST',headers:SB,body:JSON.stringify(b)});return r.json();}
-async function sbPatch(t,q,b){return fetch(`${SUPA_URL}/rest/v1/${t}?${q}`,{method:'PATCH',headers:SB_MIN,body:JSON.stringify(b)});}
-async function sbDelete(t,q){return fetch(`${SUPA_URL}/rest/v1/${t}?${q}`,{method:'DELETE',headers:SB_MIN});}
+const SUPA='https://ctqbyuikoesktiqrwovi.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0cWJ5dWlrb2Vza3RpcXJ3b3ZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NjUxNzUsImV4cCI6MjA5NzA0MTE3NX0.uEra2OZ3ZL1Pl504NriH3PZ358GeiwtO6PObaD7NtWo';
+const H={'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY,'Prefer':'return=representation'};
+const HM={'Content-Type':'application/json','apikey':KEY,'Authorization':'Bearer '+KEY,'Prefer':'return=minimal'};
+const sb=async(m,t,q='',b)=>{const r=await fetch(`${SUPA}/rest/v1/${t}?${q}`,{method:m,headers:m==='GET'?H:m==='POST'?H:HM,body:b?JSON.stringify(b):undefined});return m==='GET'||m==='POST'?r.json():r;};
+const sbGet=(t,q)=>sb('GET',t,q);
+const sbPost=(t,b)=>sb('POST',t,'',b);
+const sbPatch=(t,q,b)=>sb('PATCH',t,q,b);
+const sbDelete=(t,q)=>sb('DELETE',t,q);
 
 const FOCUSES=['Farmacity','Simplicity','Get The Look','The Food Market','Farmacity Uruguay'];
 const KPI_LIST=['Tasa de conversión','Drop en checkout','Tiempo en tarea','Tasa de error','NPS / CSAT','Bounce rate','Click-through rate','Tasa de abandono','Time to first action','Tasa de retención'];
 const COLORS=['#4f46e5','#0d9488','#d97706','#dc2626','#7c3aed','#059669','#0891b2','#db2777'];
 const STEPS=['Objetivo & KPIs','Contexto','Materiales','Limitantes','Referencias','Análisis'];
-const PROJ_ICONS=['ti-shopping-cart','ti-pill','ti-device-mobile','ti-chart-bar','ti-users','ti-bulb','ti-microscope','ti-target','ti-trending-up','ti-folder','ti-map','ti-rocket','ti-star','ti-heart','ti-package','ti-tag','ti-brush','ti-layout','ti-database','ti-eye','ti-flask','ti-gift','ti-home','ti-truck','ti-camera','ti-globe','ti-settings','ti-search'];
+const ICONS=['ti-shopping-cart','ti-pill','ti-device-mobile','ti-chart-bar','ti-users','ti-bulb','ti-microscope','ti-target','ti-trending-up','ti-folder','ti-map','ti-rocket','ti-star','ti-heart','ti-package','ti-tag','ti-brush','ti-layout','ti-database','ti-eye','ti-flask','ti-gift','ti-home','ti-truck','ti-camera','ti-globe','ti-settings','ti-search'];
 const MODEL='llama-3.3-70b-versatile';
-const MAX_ROWS=400;
-const MAX_CHARS=8000;
-
-// Preset answers per question index (rotated suggestions)
-const PRESET_POOLS=[
-  ['Es el análisis inicial','Quiero identificar fricciones','Busco oportunidades de mejora'],
-  ['Sí, tengo datos de los últimos 3 meses','Solo tengo datos del último mes','Tengo datos de más de 6 meses'],
-  ['El equipo técnico tiene disponibilidad','Hay restricciones de sprint','Podemos iterar en 2 semanas'],
-];
+const MAX_ROWS=400;const MAX_CHARS=8000;
+const PRESETS=[['Es el análisis inicial','Quiero identificar fricciones','Busco oportunidades de mejora'],['Sí, tengo datos de los últimos 3 meses','Solo tengo datos del último mes','Tengo datos históricos de +6 meses'],['El equipo puede iterar en 2 semanas','Hay restricciones de sprint','Tenemos disponibilidad inmediata']];
 
 let projects=[],settings={globalRules:'',focusBg:{}};
 let dark=false,activeFocus=0,activeId=null,activeChatId=null,step=0;
-let pendingConfirm=null,editingProjId=null,editingChatId=null,settingsTab=0;
-let qpOpen=false,qpMsgs=[];
-let saveTimer=null;
-let showAllFiles={mat:false,ctx:false};
+let pendingConfirm=null,editProjId=null,editChatId=null,stTab=0;
+let qpOpen=false,qpMsgs=[],showAll={mat:false,ctx:false},saveTimer=null;
 
-function setSyncState(s){
-  const dot=document.getElementById('sync-dot');const txt=document.getElementById('sync-txt');
-  if(!dot||!txt)return;
-  dot.className='sync-dot'+(s==='syncing'?' syncing':s==='error'?' error':'');
-  txt.textContent=s==='syncing'?'Sincronizando...':s==='error'?'Error al guardar':'Sincronizado';
-}
+function setSS(s){const d=document.getElementById('sync-dot'),t=document.getElementById('sync-txt');if(!d||!t)return;d.className='sync-dot'+(s==='syncing'?' syncing':s==='error'?' error':'');t.textContent=s==='syncing'?'Sincronizando...':s==='error'?'Error':'Sincronizado';}
 
 async function loadAll(){
   try{
-    const [projs,chats,cfg]=await Promise.all([
+    const [projs,chats,files,cfg]=await Promise.all([
       sbGet('projects','order=created_at.asc'),
       sbGet('chats','order=created_at.asc'),
+      sbGet('file_contents','order=created_at.asc'),
       sbGet('global_settings','id=eq.1')
     ]);
     projects=(projs||[]).map(p=>({
       id:p.id,focus:p.focus,name:p.name,icon:p.icon||'ti-folder',color:p.color||'#4f46e5',
-      context:p.context||'',contextFiles:p.context_files||[],materials:p.materials||[],
-      limitTech:p.limit_tech||'',limitCtx:p.limit_ctx||'',links:p.links||[],
-      objective:p.objective||'',kpis:p.kpis||[],kpiCustom:p.kpi_custom||'',
+      context:p.context||'',limitTech:p.limit_tech||'',limitCtx:p.limit_ctx||'',
+      links:p.links||[],objective:p.objective||'',kpis:p.kpis||[],kpiCustom:p.kpi_custom||'',
       connectedTo:p.connected_to||[],
+      materials:(files||[]).filter(f=>f.project_id===p.id&&f.file_type==='mat').map(f=>({id:f.id,name:f.name,note:f.note||'',size:f.size||0,truncated:f.truncated||false,content:f.content||''})),
+      contextFiles:(files||[]).filter(f=>f.project_id===p.id&&f.file_type==='ctx').map(f=>({id:f.id,name:f.name,size:f.size||0,truncated:f.truncated||false,content:f.content||''})),
       chats:(chats||[]).filter(c=>c.project_id===p.id).map(c=>({id:c.id,name:c.name,messages:c.messages||[]}))
     }));
     if(cfg&&cfg[0])settings={globalRules:cfg[0].global_rules||'',focusBg:cfg[0].focus_bg||{}};
     dark=localStorage.getItem('sh_dark')==='1';applyDark();
     activeFocus=parseInt(localStorage.getItem('sh_focus')||'0');
-    const savedId=localStorage.getItem('sh_proj');const savedChat=localStorage.getItem('sh_chat');
+    const sId=localStorage.getItem('sh_proj'),sCh=localStorage.getItem('sh_chat');
     const fp=focusProjects();
-    activeId=fp.find(p=>p.id===savedId)?savedId:(fp[0]?.id||null);
+    activeId=fp.find(p=>p.id===sId)?sId:(fp[0]?.id||null);
     const proj=projects.find(p=>p.id===activeId);
-    activeChatId=proj?.chats?.find(c=>c.id===savedChat)?savedChat:(proj?.chats?.[0]?.id||null);
-  }catch(e){console.error('Load error',e);}
+    activeChatId=proj?.chats?.find(c=>c.id===sCh)?sCh:(proj?.chats?.[0]?.id||null);
+  }catch(e){console.error(e);}
 }
 
-async function saveProject(p){
-  setSyncState('syncing');
+async function spProj(p){
+  setSS('syncing');
   try{
-    // Strip content from materials/contextFiles before saving to DB (too large)
-    const matMeta=(p.materials||[]).map(f=>({name:f.name,note:f.note||'',size:f.size||0,truncated:f.truncated||false}));
-    const ctxMeta=(p.contextFiles||[]).map(f=>({name:f.name,size:f.size||0,truncated:f.truncated||false}));
-    await sbPatch('projects','id=eq.'+p.id,{
-      name:p.name,icon:p.icon,color:p.color,context:p.context,
-      context_files:ctxMeta,materials:matMeta,
-      limit_tech:p.limitTech,limit_ctx:p.limitCtx,links:p.links||[],
-      objective:p.objective,kpis:p.kpis||[],kpi_custom:p.kpiCustom,
-      connected_to:p.connectedTo||[],updated_at:new Date().toISOString()
-    });
-    setSyncState('ok');
-  }catch(e){setSyncState('error');}
+    await sbPatch('projects','id=eq.'+p.id,{name:p.name,icon:p.icon,color:p.color,context:p.context,limit_tech:p.limitTech,limit_ctx:p.limitCtx,links:p.links||[],objective:p.objective,kpis:p.kpis||[],kpi_custom:p.kpiCustom,connected_to:p.connectedTo||[],updated_at:new Date().toISOString()});
+    setSS('ok');
+  }catch{setSS('error');}
 }
-async function saveChat(c){
-  setSyncState('syncing');
-  try{await sbPatch('chats','id=eq.'+c.id,{name:c.name,messages:c.messages||[],updated_at:new Date().toISOString()});setSyncState('ok');}
-  catch(e){setSyncState('error');}
-}
+async function spChat(c){setSS('syncing');try{await sbPatch('chats','id=eq.'+c.id,{name:c.name,messages:c.messages||[],updated_at:new Date().toISOString()});setSS('ok');}catch{setSS('error');}}
 async function saveSettings(){
   const gr=document.getElementById('global-rules');if(gr)settings.globalRules=gr.value;
   FOCUSES.forEach(f=>{const el=document.getElementById('fbg-'+f.replace(/\s/g,'_'));if(el)settings.focusBg[f]=el.value;});
-  setSyncState('syncing');
-  try{await sbPatch('global_settings','id=eq.1',{global_rules:settings.globalRules,focus_bg:settings.focusBg,updated_at:new Date().toISOString()});setSyncState('ok');showToast('Configuración guardada');}
-  catch(e){setSyncState('error');}
+  setSS('syncing');try{await sbPatch('global_settings','id=eq.1',{global_rules:settings.globalRules,focus_bg:settings.focusBg,updated_at:new Date().toISOString()});setSS('ok');showToast('Configuración guardada');}catch{setSS('error');}
 }
-function debounceSaveProj(p){clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveProject(p),900);}
-function saveLocal(){localStorage.setItem('sh_focus',activeFocus);localStorage.setItem('sh_proj',activeId||'');localStorage.setItem('sh_chat',activeChatId||'');}
+function dbp(p){clearTimeout(saveTimer);saveTimer=setTimeout(()=>spProj(p),900);}
+function sl(){localStorage.setItem('sh_focus',activeFocus);localStorage.setItem('sh_proj',activeId||'');localStorage.setItem('sh_chat',activeChatId||'');}
 
 function focusProjects(){return projects.filter(p=>p.focus===FOCUSES[activeFocus]);}
 function activeProj(){return projects.find(p=>p.id===activeId)||null;}
@@ -368,15 +321,15 @@ function activeChat(){const p=activeProj();return p?.chats?.find(c=>c.id===activ
 
 function applyDark(){document.body.classList.toggle('dark',dark);const c=document.getElementById('dark-chk');if(c)c.checked=dark;}
 function toggleDark(){dark=!dark;localStorage.setItem('sh_dark',dark?'1':'0');applyDark();}
-function switchFocus(val){collectCurrent();activeFocus=FOCUSES.indexOf(val);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;step=0;showAllFiles={mat:false,ctx:false};saveLocal();render();}
-function render(){renderSidebar();renderMainArea();}
+function switchFocus(val){cc();activeFocus=FOCUSES.indexOf(val);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;step=0;showAll={mat:false,ctx:false};sl();render();}
+function render(){renderSidebar();renderMain();}
 
 function renderSidebar(){
   const sel=document.getElementById('focus-sel');
   if(sel)sel.innerHTML=FOCUSES.map((f,i)=>`<option value="${f}"${i===activeFocus?' selected':''}>${f}</option>`).join('');
-  const proj=activeProj();const chat=activeChat();
-  const tt=document.getElementById('t-title');if(tt)tt.innerHTML=proj?`<i class="ti ${proj.icon||'ti-folder'}" style="color:var(--accent);font-size:16px"></i> ${proj.name}`:'—';
-  const tc=document.getElementById('t-chat');if(tc)tc.textContent=chat?`· ${chat.name}`:'';
+  const p=activeProj(),ch=activeChat();
+  const tt=document.getElementById('t-title');if(tt)tt.innerHTML=p?`<i class="ti ${p.icon||'ti-folder'}" style="color:var(--accent);font-size:16px"></i> ${p.name}`:'—';
+  const tc=document.getElementById('t-chat');if(tc)tc.textContent=ch?`· ${ch.name}`:'';
   const fp=focusProjects();
   document.getElementById('proj-list').innerHTML=fp.map(p=>`
     <div class="proj-item${p.id===activeId?' active':''}" onclick="switchProj('${p.id}')">
@@ -384,7 +337,7 @@ function renderSidebar(){
       <span class="proj-label">${p.name}</span>
       <span class="proj-actions">
         <button class="proj-act-btn" onclick="openEditProj(event,'${p.id}')"><i class="ti ti-pencil"></i></button>
-        <button class="proj-act-btn del" onclick="askDeleteProj(event,'${p.id}')"><i class="ti ti-trash"></i></button>
+        <button class="proj-act-btn del" onclick="askDelProj(event,'${p.id}')"><i class="ti ti-trash"></i></button>
       </span>
     </div>
     ${p.id===activeId?`<div class="chat-sub">${(p.chats||[]).map(c=>`
@@ -393,7 +346,7 @@ function renderSidebar(){
         <span class="chat-item-name" onclick="switchChat('${c.id}')">${c.name}</span>
         <span class="chat-item-acts">
           <button class="chat-act-btn" onclick="openRenameChat('${c.id}')"><i class="ti ti-pencil"></i></button>
-          <button class="chat-act-btn" onclick="askDeleteChat('${c.id}')"><i class="ti ti-trash"></i></button>
+          <button class="chat-act-btn" onclick="askDelChat('${c.id}')"><i class="ti ti-trash"></i></button>
         </span>
       </div>`).join('')}
       <button class="new-chat-btn" onclick="newChat()"><i class="ti ti-plus" style="font-size:10px"></i> Nuevo análisis</button>
@@ -402,181 +355,123 @@ function renderSidebar(){
   if(nav)nav.innerHTML=STEPS.map((s,i)=>`<div class="step-tab${i===step?' active':''}" onclick="goStep(${i})"><span class="step-num">${i+1}</span>${s}</div>`).join('');
 }
 
-function renderMainArea(){
+function renderMain(){
   const fp=focusProjects();
-  const topbar=document.querySelector('.topbar');
-  const stepsNav=document.getElementById('steps-nav');
-  const stepBody=document.getElementById('step-body');
-  const topbarRight=document.querySelector('.topbar-right');
+  const tb=document.getElementById('topbar'),sn=document.getElementById('steps-nav'),sb2=document.getElementById('step-body');
   if(!fp.length){
-    if(topbar)topbar.style.display='none';
-    if(stepsNav)stepsNav.style.display='none';
-    if(topbarRight)topbarRight.style.display='none';
-    if(stepBody)stepBody.innerHTML=`
-      <div class="global-empty">
-        <div class="global-empty-icon"><i class="ti ti-search"></i></div>
-        <h2>No hay proyectos en ${FOCUSES[activeFocus]}</h2>
-        <p>Creá tu primer proyecto para empezar a analizar con Sherlock.</p>
-        <button class="btn btn-primary" onclick="newProject()" style="margin-top:4px;font-size:13px;padding:8px 18px">
-          <i class="ti ti-plus"></i> Crear proyecto
-        </button>
-      </div>`;
+    if(tb)tb.style.display='none';if(sn)sn.style.display='none';
+    if(sb2)sb2.innerHTML=`<div class="global-empty"><div class="global-empty-icon"><i class="ti ti-search"></i></div><h2>Sin proyectos en ${FOCUSES[activeFocus]}</h2><p>Creá tu primer proyecto para empezar a analizar con Sherlock.</p><button class="btn btn-primary" onclick="newProject()" style="margin-top:4px;font-size:13px;padding:8px 18px"><i class="ti ti-plus"></i> Crear proyecto</button></div>`;
   }else{
-    if(topbar)topbar.style.display='flex';
-    if(stepsNav)stepsNav.style.display='flex';
-    if(topbarRight)topbarRight.style.display='flex';
+    if(tb)tb.style.display='flex';if(sn)sn.style.display='flex';
     renderStep();
   }
 }
 
-function switchProj(id){collectCurrent();activeId=id;const p=activeProj();activeChatId=p?.chats?.[0]?.id||null;step=0;showAllFiles={mat:false,ctx:false};saveLocal();render();}
-function switchChat(id){activeChatId=id;saveLocal();renderSidebar();if(step===5)renderStep();}
+function switchProj(id){cc();activeId=id;const p=activeProj();activeChatId=p?.chats?.[0]?.id||null;step=0;showAll={mat:false,ctx:false};sl();render();}
+function switchChat(id){activeChatId=id;sl();renderSidebar();if(step===5)renderStep();}
 
 async function newProject(){
   const name=prompt('Nombre del proyecto:');if(!name)return;
   const id='p'+Date.now()+Math.random().toString(36).slice(2);
-  const chatId='c'+Date.now()+Math.random().toString(36).slice(2);
+  const cid='c'+Date.now()+Math.random().toString(36).slice(2);
   const focus=FOCUSES[activeFocus];
-  const proj={id,focus,name,icon:'ti-folder',color:COLORS[projects.length%COLORS.length],context:'',contextFiles:[],materials:[],limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],chats:[{id:chatId,name:'Análisis inicial',messages:[]}]};
-  setSyncState('syncing');
-  try{await sbPost('projects',{id,focus,name,icon:'ti-folder',color:proj.color,context:'',context_files:[],materials:[],limit_tech:'',limit_ctx:'',links:[],objective:'',kpis:[],kpi_custom:'',connected_to:[]});await sbPost('chats',{id:chatId,project_id:id,name:'Análisis inicial',messages:[]});setSyncState('ok');}
-  catch(e){setSyncState('error');}
-  projects.push(proj);activeId=id;activeChatId=chatId;step=0;showAllFiles={mat:false,ctx:false};saveLocal();render();
+  const proj={id,focus,name,icon:'ti-folder',color:COLORS[projects.length%COLORS.length],context:'',limitTech:'',limitCtx:'',links:[],objective:'',kpis:[],kpiCustom:'',connectedTo:[],materials:[],contextFiles:[],chats:[{id:cid,name:'Análisis inicial',messages:[]}]};
+  setSS('syncing');
+  try{await sbPost('projects',{id,focus,name,icon:'ti-folder',color:proj.color,context:'',limit_tech:'',limit_ctx:'',links:[],objective:'',kpis:[],kpi_custom:'',connected_to:[]});await sbPost('chats',{id:cid,project_id:id,name:'Análisis inicial',messages:[]});setSS('ok');}catch{setSS('error');}
+  projects.push(proj);activeId=id;activeChatId=cid;step=0;showAll={mat:false,ctx:false};sl();render();
 }
 async function newChat(){
   const p=activeProj();if(!p)return;
   const name=prompt('Nombre del análisis:','Análisis '+(p.chats.length+1));if(!name)return;
   const id='c'+Date.now()+Math.random().toString(36).slice(2);
-  setSyncState('syncing');
-  try{await sbPost('chats',{id,project_id:p.id,name,messages:[]});setSyncState('ok');}catch(e){setSyncState('error');}
-  p.chats.push({id,name,messages:[]});activeChatId=id;saveLocal();renderSidebar();goStep(5);
+  setSS('syncing');try{await sbPost('chats',{id,project_id:p.id,name,messages:[]});setSS('ok');}catch{setSS('error');}
+  p.chats.push({id,name,messages:[]});activeChatId=id;sl();renderSidebar();goStep(5);
 }
 
-function openEditProj(e,id){e.stopPropagation();editingProjId=id;const p=projects.find(x=>x.id===id);if(!p)return;document.getElementById('pm-name').value=p.name;document.getElementById('icon-grid').innerHTML=PROJ_ICONS.map(ic=>`<div class="icon-opt${ic===p.icon?' sel':''}" onclick="selectIcon(this)"><i class="ti ${ic}"></i></div>`).join('');openModal('proj-modal');}
-function selectIcon(el){document.querySelectorAll('.icon-opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
-async function saveProjModal(){const p=projects.find(x=>x.id===editingProjId);if(!p)return;p.name=document.getElementById('pm-name').value.trim()||p.name;const sel=document.querySelector('.icon-opt.sel i');if(sel){const cls=[...sel.classList].find(c=>c.startsWith('ti-'));if(cls)p.icon=cls;}await saveProject(p);closeModal('proj-modal');render();}
+function openEditProj(e,id){e.stopPropagation();editProjId=id;const p=projects.find(x=>x.id===id);if(!p)return;document.getElementById('pm-name').value=p.name;document.getElementById('icon-grid').innerHTML=ICONS.map(ic=>`<div class="icon-opt${ic===p.icon?' sel':''}" onclick="selIcon(this)"><i class="ti ${ic}"></i></div>`).join('');openModal('proj-modal');}
+function selIcon(el){document.querySelectorAll('.icon-opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
+async function saveProjModal(){const p=projects.find(x=>x.id===editProjId);if(!p)return;p.name=document.getElementById('pm-name').value.trim()||p.name;const sel=document.querySelector('.icon-opt.sel i');if(sel){const c=[...sel.classList].find(c=>c.startsWith('ti-'));if(c)p.icon=c;}await spProj(p);closeModal('proj-modal');render();}
 
-function askDeleteProj(e,id){e.stopPropagation();const p=projects.find(x=>x.id===id);if(!p)return;document.getElementById('confirm-msg').textContent=`¿Eliminar "${p.name}" y todos sus análisis?`;pendingConfirm=()=>deleteProj(id);openModal('confirm-modal');}
-async function deleteProj(id){setSyncState('syncing');try{await sbDelete('projects','id=eq.'+id);setSyncState('ok');}catch(e){setSyncState('error');}projects=projects.filter(p=>p.id!==id);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;closeModal('confirm-modal');render();showToast('Proyecto eliminado');}
-function askDeleteChat(id){const p=activeProj();const c=p?.chats?.find(x=>x.id===id);if(!c)return;document.getElementById('confirm-msg').textContent=`¿Eliminar el análisis "${c.name}"?`;pendingConfirm=()=>deleteChat(id);openModal('confirm-modal');}
-async function deleteChat(id){setSyncState('syncing');try{await sbDelete('chats','id=eq.'+id);setSyncState('ok');}catch(e){setSyncState('error');}const p=activeProj();if(!p)return;p.chats=p.chats.filter(c=>c.id!==id);if(!p.chats.length){const cid='c'+Date.now();await sbPost('chats',{id:cid,project_id:p.id,name:'Análisis inicial',messages:[]});p.chats.push({id:cid,name:'Análisis inicial',messages:[]});}activeChatId=p.chats[0].id;closeModal('confirm-modal');renderSidebar();if(step===5)renderStep();showToast('Análisis eliminado');}
+function askDelProj(e,id){e.stopPropagation();const p=projects.find(x=>x.id===id);if(!p)return;document.getElementById('confirm-msg').textContent=`¿Eliminar "${p.name}" y todos sus análisis?`;pendingConfirm=()=>delProj(id);openModal('confirm-modal');}
+async function delProj(id){setSS('syncing');try{await sbDelete('projects','id=eq.'+id);setSS('ok');}catch{setSS('error');}projects=projects.filter(p=>p.id!==id);const fp=focusProjects();activeId=fp[0]?.id||null;activeChatId=activeId?fp[0]?.chats?.[0]?.id||null:null;closeModal('confirm-modal');render();showToast('Proyecto eliminado');}
+function askDelChat(id){const p=activeProj();const c=p?.chats?.find(x=>x.id===id);if(!c)return;document.getElementById('confirm-msg').textContent=`¿Eliminar "${c.name}"?`;pendingConfirm=()=>delChat(id);openModal('confirm-modal');}
+async function delChat(id){setSS('syncing');try{await sbDelete('chats','id=eq.'+id);setSS('ok');}catch{setSS('error');}const p=activeProj();if(!p)return;p.chats=p.chats.filter(c=>c.id!==id);if(!p.chats.length){const cid='c'+Date.now();await sbPost('chats',{id:cid,project_id:p.id,name:'Análisis inicial',messages:[]});p.chats.push({id:cid,name:'Análisis inicial',messages:[]});}activeChatId=p.chats[0].id;closeModal('confirm-modal');renderSidebar();if(step===5)renderStep();showToast('Análisis eliminado');}
 function confirmAction(){if(pendingConfirm){pendingConfirm();pendingConfirm=null;}}
-function openRenameChat(id){editingChatId=id;const p=activeProj();const c=p?.chats?.find(x=>x.id===id);document.getElementById('chat-rename-in').value=c?.name||'';openModal('chat-modal');}
-async function saveChatRename(){const p=activeProj();const c=p?.chats?.find(x=>x.id===editingChatId);if(c){c.name=document.getElementById('chat-rename-in').value.trim()||c.name;await saveChat(c);}closeModal('chat-modal');renderSidebar();if(step===5)renderStep();}
+function openRenameChat(id){editChatId=id;const p=activeProj();const c=p?.chats?.find(x=>x.id===id);document.getElementById('chat-rename-in').value=c?.name||'';openModal('chat-modal');}
+async function saveChatRename(){const p=activeProj();const c=p?.chats?.find(x=>x.id===editChatId);if(c){c.name=document.getElementById('chat-rename-in').value.trim()||c.name;await spChat(c);}closeModal('chat-modal');renderSidebar();if(step===5)renderStep();}
 function openConnect(){const p=activeProj();if(!p)return;const others=projects.filter(x=>x.id!==activeId);document.getElementById('connect-list').innerHTML=others.length?others.map(x=>`<div class="conn-item${p.connectedTo?.includes(x.id)?' linked':''}" onclick="toggleConn('${x.id}',this)"><i class="ti ${x.icon||'ti-folder'}" style="font-size:14px"></i><span style="flex:1">${x.name}</span><i class="ti ti-link"></i></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No hay otros proyectos.</p>';openModal('connect-modal');}
-async function toggleConn(id,el){const p=activeProj();if(!p.connectedTo)p.connectedTo=[];if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}else{p.connectedTo.push(id);el.classList.add('linked');}await saveProject(p);}
-function openSettings(){settingsTab=0;renderSettingsBody();openModal('settings-modal');}
-function stab(n){settingsTab=n;document.querySelectorAll('.stab').forEach((t,i)=>t.classList.toggle('active',i===n));renderSettingsBody();}
-function renderSettingsBody(){const body=document.getElementById('stab-body');if(settingsTab===0){body.innerHTML=`<div class="s-desc">Reglas que se inyectan en TODOS los análisis, sin excepción.</div><textarea id="global-rules" rows="9" placeholder="Ej: Siempre considerá las regulaciones de ANMAT...">${settings.globalRules||''}</textarea>`;}else{body.innerHTML=`<div class="s-desc">Background de negocio por foco. Sherlock lo usa como base de conocimiento.</div>${FOCUSES.map(f=>`<div class="focus-bg-block"><div class="focus-bg-name">${f}</div><textarea id="fbg-${f.replace(/\s/g,'_')}" rows="3" placeholder="Usuario, propuesta de valor, métricas clave...">${settings.focusBg?.[f]||''}</textarea></div>`).join('')}`;}}
+async function toggleConn(id,el){const p=activeProj();if(!p.connectedTo)p.connectedTo=[];if(p.connectedTo.includes(id)){p.connectedTo=p.connectedTo.filter(x=>x!==id);el.classList.remove('linked');}else{p.connectedTo.push(id);el.classList.add('linked');}await spProj(p);}
+function openSettings(){stTab=0;renderStBody();openModal('settings-modal');}
+function stab(n){stTab=n;document.querySelectorAll('.stab').forEach((t,i)=>t.classList.toggle('active',i===n));renderStBody();}
+function renderStBody(){const b=document.getElementById('stab-body');if(stTab===0)b.innerHTML=`<div class="s-desc">Reglas que se inyectan en TODOS los análisis.</div><textarea id="global-rules" rows="9" placeholder="Ej: Siempre considerá las regulaciones de ANMAT...">${settings.globalRules||''}</textarea>`;else b.innerHTML=`<div class="s-desc">Background de negocio por foco.</div>${FOCUSES.map(f=>`<div class="focus-bg-block"><div class="focus-bg-name">${f}</div><textarea id="fbg-${f.replace(/\s/g,'_')}" rows="3" placeholder="Usuario, métricas clave, aprendizajes...">${settings.focusBg?.[f]||''}</textarea></div>`).join('')}`;}
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 
-function goStep(n){collectCurrent();step=n;saveLocal();renderSidebar();renderMainArea();}
+function goStep(n){cc();step=n;sl();renderSidebar();renderMain();}
 
-function collectCurrent(){
+// Collect current text fields without re-render
+function cc(){
   const p=activeProj();if(!p)return;
   const v=id=>{const el=document.getElementById(id);return el?el.value:null;};
   let changed=false;
   if(step===0){if(v('obj')!==null&&v('obj')!==p.objective){p.objective=v('obj');changed=true;}if(v('kc')!==null&&v('kc')!==p.kpiCustom){p.kpiCustom=v('kc');changed=true;}}
   if(step===1&&v('ctx')!==null&&v('ctx')!==p.context){p.context=v('ctx');changed=true;}
   if(step===3){if(v('lt')!==null&&v('lt')!==p.limitTech){p.limitTech=v('lt');changed=true;}if(v('lc')!==null&&v('lc')!==p.limitCtx){p.limitCtx=v('lc');changed=true;}}
-  if(changed)debounceSaveProj(p);
+  if(changed)dbp(p);
 }
 
 function renderStep(){
-  const p=activeProj();const body=document.getElementById('step-body');if(!body)return;
-  if(!p){body.innerHTML='';return;}
-  if(step===0)body.innerHTML=stepObj(p);
-  else if(step===1)body.innerHTML=stepCtx(p);
-  else if(step===2)body.innerHTML=stepMat(p);
-  else if(step===3)body.innerHTML=stepLim(p);
-  else if(step===4)body.innerHTML=stepRef(p);
-  else body.innerHTML=stepAnal(p);
+  const p=activeProj();const b=document.getElementById('step-body');if(!b||!p)return;
+  if(step===0)b.innerHTML=sObj(p);
+  else if(step===1)b.innerHTML=sCtx(p);
+  else if(step===2)b.innerHTML=sMat(p);
+  else if(step===3)b.innerHTML=sLim(p);
+  else if(step===4)b.innerHTML=sRef(p);
+  else b.innerHTML=sAnal(p);
   attachStep(p);
 }
 
-function renderFileList(files,type,showAll){
-  const visible=showAll?files:files.slice(-3);
-  const hidden=files.length-visible.length;
+function renderFiles(files,type,sa){
+  if(!files.length)return'';
+  const vis=sa?files:files.slice(-3);
+  const hidden=files.length-vis.length;
   const icon=type==='mat'?'ti-file-spreadsheet':'ti-file';
   return`<div class="file-list">
-    ${visible.map((f,i)=>{const realIdx=showAll?i:files.length-visible.length+i;return`<div class="file-item ok">
+    ${vis.map((f,i)=>{const ri=sa?i:files.length-vis.length+i;return`<div class="file-item ok">
       <i class="ti ${icon}" style="font-size:14px;color:var(--success)"></i>
       <span class="file-name" title="${f.name}">${f.name}</span>
       <span class="file-badge">✓</span>
       ${f.truncated?'<span class="file-trunc">truncado</span>':''}
-      ${type==='mat'?`<input class="file-note" placeholder="nota..." value="${f.note||''}" data-fi="${realIdx}"/>`:''}
+      ${type==='mat'?`<input class="file-note" placeholder="nota..." value="${f.note||''}" data-fi="${ri}"/>`:''}
       <span class="file-size">${fmtSz(f.size)}</span>
-      <button class="file-del" onclick="${type==='mat'?'delMat':'delCtx'}(${realIdx})"><i class="ti ti-x"></i></button>
+      <button class="file-del" onclick="${type==='mat'?'delMat':'delCtx'}('${f.id||ri}')"><i class="ti ti-x"></i></button>
     </div>`;}).join('')}
-    ${hidden>0?`<button class="see-all-btn" onclick="toggleShowAll('${type}')"><i class="ti ti-eye"></i> Ver todos (${hidden} más)</button>`:''}
-    ${showAll&&files.length>3?`<button class="see-all-btn" onclick="toggleShowAll('${type}')"><i class="ti ti-eye-off"></i> Ver menos</button>`:''}
+    ${hidden>0?`<button class="see-all-btn" onclick="toggleSA('${type}')"><i class="ti ti-eye"></i> Ver todos (${hidden} más)</button>`:''}
+    ${sa&&files.length>3?`<button class="see-all-btn" onclick="toggleSA('${type}')"><i class="ti ti-eye-off"></i> Ver menos</button>`:''}
   </div>`;
 }
-function toggleShowAll(type){showAllFiles[type]=!showAllFiles[type];renderStep();}
+function toggleSA(t){showAll[t]=!showAll[t];renderStep();}
 
-function stepObj(p){const sel=p.kpis||[];return`<div class="content"><div class="s-label">Objetivo principal</div><div class="s-desc">Definí qué querés lograr. Esto orienta todo el análisis de Sherlock.</div><textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago un 15% para Q3 2025...">${p.objective||''}</textarea><div class="s-label gap-top">KPIs a impactar</div><div class="kpi-grid">${KPI_LIST.map(k=>`<div class="kpi-tag${sel.includes(k)?' on':''}" onclick="toggleKpi(this,'${k}')">${k}</div>`).join('')}<div class="kpi-tag" onclick="toggleCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div></div><input id="kc" class="txt-in" style="margin-top:9px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}"/><div class="nav-btns"><div></div><button class="btn btn-primary" onclick="goStep(1)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
+function sObj(p){const sel=p.kpis||[];return`<div class="content"><div class="s-label">Objetivo principal</div><div class="s-desc">Definí qué querés lograr. Esto orienta todo el análisis de Sherlock.</div><textarea id="obj" rows="3" placeholder="Ej: Reducir el abandono en el paso de pago un 15%...">${p.objective||''}</textarea><div class="s-label gap-top">KPIs a impactar</div><div class="kpi-grid">${KPI_LIST.map(k=>`<div class="kpi-tag${sel.includes(k)?' on':''}" onclick="tKpi(this,'${k}')">${k}</div>`).join('')}<div class="kpi-tag" onclick="tCustom()" style="border-style:dashed"><i class="ti ti-plus"></i> Personalizado</div></div><input id="kc" class="txt-in" style="margin-top:9px;display:${p.kpiCustom?'block':'none'}" placeholder="KPI personalizado..." value="${p.kpiCustom||''}"/><div class="nav-btns"><div></div><button class="btn btn-primary" onclick="goStep(1)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
 
-function stepCtx(p){
-  const hf=(p.contextFiles||[]).length>0;
-  return`<div class="content">
-    <div class="s-label">Contexto</div>
-    <div class="s-desc">Todo lo que Sherlock necesita saber para interpretar los datos correctamente.</div>
-    <textarea id="ctx" rows="6" placeholder="Ej: El flujo de checkout fue rediseñado en marzo 2024...">${p.context||''}</textarea>
-    <div class="gap-top">
-      <div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div>
-      <div class="upload-zone${hf?' has-files':''}" id="ctx-zone">
-        <input type="file" multiple id="ctx-fi" accept=".csv,.xlsx,.xls,.txt,.md,.pdf"/>
-        ${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} · arrastrá más para agregar</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Briefs, personas, research previo</div>`}
-      </div>
-      ${hf?renderFileList(p.contextFiles,'ctx',showAllFiles.ctx):''}
-    </div>
-    <div class="nav-btns"><button class="btn" onclick="goStep(0)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(2)">Siguiente <i class="ti ti-arrow-right"></i></button></div>
-  </div>`;
-}
+function sCtx(p){const hf=p.contextFiles?.length>0;return`<div class="content"><div class="s-label">Contexto</div><div class="s-desc">Todo lo que Sherlock necesita saber para interpretar los datos correctamente.</div><textarea id="ctx" rows="6" placeholder="Ej: El flujo de checkout fue rediseñado en marzo 2024...">${p.context||''}</textarea><div class="gap-top"><div class="s-label">Archivos de contexto <span style="font-weight:400;text-transform:none;font-size:11px">(opcional)</span></div><div class="upload-zone${hf?' has-files':''}" id="ctx-zone"><input type="file" multiple id="ctx-fi" accept=".csv,.xlsx,.xls,.txt,.md,.pdf"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.contextFiles.length} archivo${p.contextFiles.length>1?'s':''} · arrastrá más</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">Briefs, personas, research previo</div>`}</div>${renderFiles(p.contextFiles||[],'ctx',showAll.ctx)}</div><div class="nav-btns"><button class="btn" onclick="goStep(0)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(2)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
 
-function stepMat(p){
-  const hf=(p.materials||[]).length>0;
-  return`<div class="content">
-    <div class="s-label">Materiales</div>
-    <div class="s-desc">Subí los datos clave: exports de Analytics, planillas de métricas, CSVs. Sherlock lee el contenido real — los excels grandes se toman las primeras ${MAX_ROWS} filas por hoja.</div>
-    <div class="upload-zone${hf?' has-files':''}" id="mat-zone">
-      <input type="file" multiple id="mat-fi" accept=".csv,.xlsx,.xls,.txt,.md"/>
-      ${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.materials.length} archivo${p.materials.length>1?'s':''} · arrastrá más para agregar</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">CSV, XLSX, TXT · múltiples archivos</div>`}
-    </div>
-    ${hf?renderFileList(p.materials,'mat',showAllFiles.mat):''}
-    <div class="nav-btns"><button class="btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(3)">Siguiente <i class="ti ti-arrow-right"></i></button></div>
-  </div>`;
-}
+function sMat(p){const hf=p.materials?.length>0;return`<div class="content"><div class="s-label">Materiales</div><div class="s-desc">Subí exports de Analytics, planillas de métricas, CSVs. Sherlock lee el contenido real — primeras ${MAX_ROWS} filas por hoja.</div><div class="upload-zone${hf?' has-files':''}" id="mat-zone"><input type="file" multiple id="mat-fi" accept=".csv,.xlsx,.xls,.txt,.md"/>${hf?`<div style="font-size:13px;color:var(--success);font-weight:500"><i class="ti ti-check"></i> ${p.materials.length} archivo${p.materials.length>1?'s':''} · arrastrá más</div>`:`<div style="font-size:20px;color:var(--text3);margin-bottom:4px"><i class="ti ti-upload"></i></div><div style="font-size:12px;color:var(--text2)">CSV, XLSX, TXT · múltiples archivos</div>`}</div>${renderFiles(p.materials||[],'mat',showAll.mat)}<div class="nav-btns"><button class="btn" onclick="goStep(1)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(3)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
 
-function stepLim(p){return`<div class="content"><div class="s-label">Limitantes</div><div class="s-desc">Delimitá el campo de acción para recomendaciones realistas.</div><div class="split"><div class="sub-block"><div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div><textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4...">${p.limitTech||''}</textarea></div><div class="sub-block"><div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div><textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios...">${p.limitCtx||''}</textarea></div></div><div class="nav-btns"><button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
-function stepRef(p){const links=p.links||[];return`<div class="content"><div class="s-label">Referencias</div><div class="s-desc">Links que Sherlock debe considerar: benchmarks, Figma, competidores.</div><div id="llist">${links.map((l,i)=>`<div class="link-row"><select class="ltype" data-lt="${i}"><option${l.type==='bench'?' selected':''} value="bench">Bench</option><option${l.type==='figma'?' selected':''} value="figma">Figma</option><option${l.type==='ref'?' selected':''} value="ref">Referencia</option><option${l.type==='comp'?' selected':''} value="comp">Competidor</option></select><input placeholder="https://..." value="${l.url||''}" data-lu="${i}"/><button class="link-del" data-ld="${i}"><i class="ti ti-x"></i></button></div>`).join('')}</div><button class="btn" onclick="addLink()" style="margin-top:6px"><i class="ti ti-plus"></i> Agregar link</button><div class="nav-btns"><button class="btn" onclick="goStep(3)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Ir al análisis</button></div></div>`;}
+function sLim(p){return`<div class="content"><div class="s-label">Limitantes</div><div class="s-desc">Delimitá el campo de acción para recomendaciones realistas.</div><div class="split"><div class="sub-block"><div class="sub-title"><i class="ti ti-cpu" style="color:var(--accent)"></i> Técnicas</div><textarea id="lt" rows="6" placeholder="Ej: No podemos tocar el backend de pagos hasta Q4...">${p.limitTech||''}</textarea></div><div class="sub-block"><div class="sub-title"><i class="ti ti-building" style="color:#0d9488"></i> Contextuales / políticas</div><textarea id="lc" rows="6" placeholder="Ej: Legal requiere 3 semanas para aprobar cambios...">${p.limitCtx||''}</textarea></div></div><div class="nav-btns"><button class="btn" onclick="goStep(2)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(4)">Siguiente <i class="ti ti-arrow-right"></i></button></div></div>`;}
 
-function stepAnal(p){
-  const chat=activeChat();const msgs=chat?.messages||[];
-  return`<div class="chat-wrap" id="chat-wrap">${
-    msgs.length===0
-      ?`<div class="empty-state"><i class="ti ti-search" style="font-size:32px;color:var(--accent)"></i><span>Sherlock está listo para analizar.</span><button class="btn btn-primary" onclick="runAnalysis()" style="margin-top:10px"><i class="ti ti-sparkles"></i> Generar análisis</button></div>`
-      :msgs.map(m=>{
-        if(m.role==='questions'){
-          return`<div><div class="agent-label"><i class="ti ti-help-circle"></i> Sherlock necesita más info</div>
-          <div class="question-bubble">
-            <div class="q-header">${m.intro}</div>
-            ${m.questions.map((q,i)=>`
-              <div class="q-item">
-                <div class="q-num-row"><span class="q-num">${i+1}</span><div class="q-text">${q}</div></div>
-                <textarea class="q-answer" id="qa-${i}" placeholder="Tu respuesta..." rows="2"></textarea>
-                <div class="q-presets">
-                  ${(PRESET_POOLS[i]||PRESET_POOLS[0]).map(ps=>`<button class="q-preset" onclick="setPreset(${i},'${ps.replace(/'/g,"\\'")}')">↗ ${ps}</button>`).join('')}
-                </div>
-              </div>`).join('')}
-            <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn btn-primary" onclick="submitAnswers()"><i class="ti ti-check"></i> Listo, analizá</button></div>
-          </div></div>`;
-        }
-        if(m.role==='agent')return`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${renderBubble(m.content)}</div>${m.chips?.length?`<div class="chips-row">${m.chips.map(c=>`<button class="chip" onclick="sendMsg(${JSON.stringify(c)})">${c}</button>`).join('')}</div>`:''}</div>`;
-        return`<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${escHtml(m.content)}</div></div>`;
-      }).join('')
-  }</div>
+function sRef(p){const links=p.links||[];return`<div class="content"><div class="s-label">Referencias</div><div class="s-desc">Links que Sherlock debe considerar: benchmarks, Figma, competidores.</div><div id="llist">${links.map((l,i)=>`<div class="link-row"><select class="ltype" data-lt="${i}"><option${l.type==='bench'?' selected':''} value="bench">Bench</option><option${l.type==='figma'?' selected':''} value="figma">Figma</option><option${l.type==='ref'?' selected':''} value="ref">Referencia</option><option${l.type==='comp'?' selected':''} value="comp">Competidor</option></select><input placeholder="https://..." value="${l.url||''}" data-lu="${i}"/><button class="link-del" data-ld="${i}"><i class="ti ti-x"></i></button></div>`).join('')}</div><button class="btn" onclick="addLink()" style="margin-top:6px"><i class="ti ti-plus"></i> Agregar link</button><div class="nav-btns"><button class="btn" onclick="goStep(3)"><i class="ti ti-arrow-left"></i> Atrás</button><button class="btn btn-primary" onclick="goStep(5)"><i class="ti ti-brain"></i> Ir al análisis</button></div></div>`;}
+
+function sAnal(p){
+  const ch=activeChat();const msgs=ch?.messages||[];
+  return`<div class="chat-wrap" id="chat-wrap">${msgs.length===0
+    ?`<div class="empty-state"><i class="ti ti-search" style="font-size:32px;color:var(--accent)"></i><span>Sherlock está listo para analizar.</span><button class="btn btn-primary" onclick="runAnalysis()" style="margin-top:10px"><i class="ti ti-sparkles"></i> Generar análisis</button></div>`
+    :msgs.map(m=>{
+      if(m.role==='questions')return`<div><div class="agent-label"><i class="ti ti-help-circle"></i> Sherlock necesita más info</div><div class="question-bubble"><div class="q-header">${m.intro}</div>${m.questions.map((q,i)=>`<div class="q-item"><div class="q-num-row"><span class="q-num">${i+1}</span><div class="q-text">${q}</div></div><textarea class="q-answer" id="qa-${i}" placeholder="Tu respuesta..." rows="2"></textarea><div class="q-presets">${(PRESETS[i]||PRESETS[0]).map(ps=>`<button class="q-preset" onclick="setPreset(${i},\`${ps}\`)">↗ ${ps}</button>`).join('')}</div></div>`).join('')}<div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn btn-primary" onclick="submitAnswers()"><i class="ti ti-check"></i> Listo, analizá</button></div></div></div>`;
+      if(m.role==='agent')return`<div><div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="agent-bubble">${rBubble(m.content)}</div>${m.chips?.length?`<div class="chips-row">${m.chips.map(c=>`<button class="chip" onclick="sendMsg(${JSON.stringify(c)})">${c}</button>`).join('')}</div>`:''}</div>`;
+      return`<div style="display:flex;justify-content:flex-end"><div class="user-bubble">${esc(m.content)}</div></div>`;
+    }).join('')}
+  </div>
   <div class="chat-bar">
     <button class="recalc-btn" onclick="runAnalysis()"><i class="ti ti-refresh"></i> Recalcular</button>
     <textarea id="chat-in" placeholder="Seguí refinando con Sherlock..." onkeydown="chatKey(event)" rows="1"></textarea>
@@ -584,145 +479,134 @@ function stepAnal(p){
   </div>`;
 }
 
-function setPreset(idx,text){const ta=document.getElementById('qa-'+idx);if(ta)ta.value=text;}
+function setPreset(i,t){const el=document.getElementById('qa-'+i);if(el)el.value=t;}
 
-function renderBubble(text){
+function rBubble(text){
   text=(text||'').replace(/\\\[[\s\S]*?\\\]/g,'').replace(/\\\(.*?\\\)/g,'').replace(/\$\$[\s\S]*?\$\$/g,'').replace(/\$[^$\n]+?\$/g,'').replace(/^#{1,6}\s+/gm,'');
-  const lines=text.split('\n');let html='';let curSection=null;let curItems=[];let paraLines=[];
-  const flushPara=()=>{if(paraLines.length){const t=paraLines.join(' ').trim();if(t)html+=`<p class="bubble-p">${fmtInline(t)}</p>`;paraLines=[];}};
-  const flushItems=()=>{if(curItems.length){html+=`<ul class="bubble-list">${curItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;curItems=[];}};
-  const flushSection=()=>{if(curSection!==null){let inner='';if(curItems.length){inner=`<ul class="bubble-list">${curItems.map(it=>`<li>${fmtInline(it)}</li>`).join('')}</ul>`;curItems=[];}html+=`<div class="bubble-section"><div class="bubble-h">${curSection}</div>${inner}</div>`;curSection=null;}};
+  const lines=text.split('\n');let html='',cs=null,ci=[],pl=[];
+  const fp=()=>{if(pl.length){const t=pl.join(' ').trim();if(t)html+=`<p class="bubble-p">${fi(t)}</p>`;pl=[];}};
+  const fit=()=>{if(ci.length){html+=`<ul class="bubble-list">${ci.map(x=>`<li>${fi(x)}</li>`).join('')}</ul>`;ci=[];}};
+  const fs=()=>{if(cs!==null){let inner='';if(ci.length){inner=`<ul class="bubble-list">${ci.map(x=>`<li>${fi(x)}</li>`).join('')}</ul>`;ci=[];}html+=`<div class="bubble-section"><div class="bubble-h">${cs}</div>${inner}</div>`;cs=null;}};
   for(const l of lines){
-    const trim=l.trim();if(!trim){flushPara();continue;}
-    if(/^\*\*[^*]+\*\*:?\s*$/.test(trim)){flushPara();flushItems();flushSection();curSection=trim.replace(/\*\*/g,'').replace(/:$/,'');continue;}
-    if(/^[-*•]\s+/.test(trim)||/^\d+\.\s+/.test(trim)){flushPara();const c=trim.replace(/^[-*•]\s+/,'').replace(/^\d+\.\s+/,'');if(curSection!==null)curItems.push(c);else{flushItems();curItems.push(c);}continue;}
-    if(curSection!==null)flushSection();paraLines.push(trim);
+    const t=l.trim();if(!t){fp();continue;}
+    if(/^\*\*[^*]+\*\*:?\s*$/.test(t)){fp();fit();fs();cs=t.replace(/\*\*/g,'').replace(/:$/,'');continue;}
+    if(/^[-*•]\s+/.test(t)||/^\d+\.\s+/.test(t)){fp();const c=t.replace(/^[-*•]\s+/,'').replace(/^\d+\.\s+/,'');if(cs!==null)ci.push(c);else{fit();ci.push(c);}continue;}
+    if(cs!==null)fs();pl.push(t);
   }
-  flushPara();flushItems();flushSection();
-  return html||`<p class="bubble-p">${fmtInline(text)}</p>`;
+  fp();fit();fs();return html||`<p class="bubble-p">${fi(text)}</p>`;
 }
-function fmtInline(t){return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');}
-function escHtml(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fi(t){return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');}
+function esc(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 function attachStep(p){
   const mfi=document.getElementById('mat-fi');if(mfi)mfi.addEventListener('change',e=>handleFiles(e.target.files,'mat'));
   const cfi=document.getElementById('ctx-fi');if(cfi)cfi.addEventListener('change',e=>handleFiles(e.target.files,'ctx'));
-  // Save text fields on input without re-rendering
-  const ctxEl=document.getElementById('ctx');
-  if(ctxEl){ctxEl.addEventListener('input',e=>{p.context=e.target.value;debounceSaveProj(p);});}
-  const objEl=document.getElementById('obj');
-  if(objEl){objEl.addEventListener('input',e=>{p.objective=e.target.value;debounceSaveProj(p);});}
-  const ltEl=document.getElementById('lt');if(ltEl)ltEl.addEventListener('input',e=>{p.limitTech=e.target.value;debounceSaveProj(p);});
-  const lcEl=document.getElementById('lc');if(lcEl)lcEl.addEventListener('input',e=>{p.limitCtx=e.target.value;debounceSaveProj(p);});
-  document.querySelectorAll('[data-fi]').forEach(inp=>inp.addEventListener('input',e=>{p.materials[+e.target.dataset.fi].note=e.target.value;debounceSaveProj(p);}));
-  document.querySelectorAll('[data-lu]').forEach(inp=>inp.addEventListener('input',e=>{p.links[+e.target.dataset.lu].url=e.target.value;debounceSaveProj(p);}));
-  document.querySelectorAll('[data-lt]').forEach(sel=>sel.addEventListener('change',e=>{p.links[+e.target.dataset.lt].type=e.target.value;debounceSaveProj(p);}));
-  document.querySelectorAll('[data-ld]').forEach(btn=>btn.addEventListener('click',()=>{p.links.splice(+btn.dataset.ld,1);debounceSaveProj(p);renderStep();}));
+  // Live save text fields
+  ['ctx','obj','lt','lc'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',e=>{if(id==='ctx')p.context=e.target.value;else if(id==='obj')p.objective=e.target.value;else if(id==='lt')p.limitTech=e.target.value;else p.limitCtx=e.target.value;dbp(p);});});
+  document.querySelectorAll('[data-fi]').forEach(inp=>inp.addEventListener('input',e=>{p.materials[+e.target.dataset.fi].note=e.target.value;dbp(p);}));
+  document.querySelectorAll('[data-lu]').forEach(inp=>inp.addEventListener('input',e=>{p.links[+e.target.dataset.lu].url=e.target.value;dbp(p);}));
+  document.querySelectorAll('[data-lt]').forEach(sel=>sel.addEventListener('change',e=>{p.links[+e.target.dataset.lt].type=e.target.value;dbp(p);}));
+  document.querySelectorAll('[data-ld]').forEach(btn=>btn.addEventListener('click',()=>{p.links.splice(+btn.dataset.ld,1);dbp(p);renderStep();}));
   if(step===5&&(activeChat()?.messages||[]).length===0)setTimeout(runAnalysis,400);
   const cw=document.getElementById('chat-wrap');if(cw)cw.scrollTop=cw.scrollHeight;
 }
-async function toggleKpi(el,k){const p=activeProj();if(!p.kpis)p.kpis=[];if(p.kpis.includes(k)){p.kpis=p.kpis.filter(x=>x!==k);el.classList.remove('on');}else{p.kpis.push(k);el.classList.add('on');}debounceSaveProj(p);}
-function toggleCustom(){const i=document.getElementById('kc');if(i){i.style.display=i.style.display==='none'?'block':'none';if(i.style.display==='block')i.focus();}}
+
+async function tKpi(el,k){const p=activeProj();if(!p.kpis)p.kpis=[];if(p.kpis.includes(k)){p.kpis=p.kpis.filter(x=>x!==k);el.classList.remove('on');}else{p.kpis.push(k);el.classList.add('on');}dbp(p);}
+function tCustom(){const i=document.getElementById('kc');if(i){i.style.display=i.style.display==='none'?'block':'none';if(i.style.display==='block')i.focus();}}
 function addLink(){const p=activeProj();if(!p)return;p.links.push({url:'',type:'bench'});renderStep();}
-async function delMat(i){const p=activeProj();p.materials.splice(i,1);showAllFiles.mat=false;await saveProject(p);renderStep();}
-async function delCtx(i){const p=activeProj();p.contextFiles.splice(i,1);showAllFiles.ctx=false;await saveProject(p);renderStep();}
+
+async function delMat(idOrIdx){
+  const p=activeProj();if(!p)return;
+  const f=typeof idOrIdx==='string'?p.materials.find(x=>x.id===idOrIdx):p.materials[idOrIdx];
+  if(!f)return;
+  if(f.id){setSS('syncing');try{await sbDelete('file_contents','id=eq.'+f.id);setSS('ok');}catch{setSS('error');}}
+  p.materials=p.materials.filter(x=>x!==f);showAll.mat=false;renderStep();
+}
+async function delCtx(idOrIdx){
+  const p=activeProj();if(!p)return;
+  const f=typeof idOrIdx==='string'?p.contextFiles.find(x=>x.id===idOrIdx):p.contextFiles[idOrIdx];
+  if(!f)return;
+  if(f.id){setSS('syncing');try{await sbDelete('file_contents','id=eq.'+f.id);setSS('ok');}catch{setSS('error');}}
+  p.contextFiles=p.contextFiles.filter(x=>x!==f);showAll.ctx=false;renderStep();
+}
 
 async function readFile(file){
   return new Promise(res=>{
     const n=file.name.toLowerCase();
     if(n.endsWith('.xlsx')||n.endsWith('.xls')){
       const r=new FileReader();
-      r.onload=e=>{
-        try{
-          const wb=XLSX.read(e.target.result,{type:'array'});
-          let out='';let truncated=false;
-          wb.SheetNames.forEach(sn=>{
-            const ws=wb.Sheets[sn];
-            const json=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-            const rows=json.slice(0,MAX_ROWS);
-            if(json.length>MAX_ROWS)truncated=true;
-            const csv=rows.map(r=>r.join(',')).join('\n');
-            if(csv.trim())out+=`[Hoja: ${sn} — ${rows.length} filas${json.length>MAX_ROWS?' de '+json.length:''}]\n${csv}\n\n`;
-          });
-          const final=out.slice(0,MAX_CHARS);
-          res({text:final,truncated:truncated||out.length>MAX_CHARS});
-        }catch{res({text:'[Error leyendo Excel]',truncated:false});}
-      };
+      r.onload=e=>{try{
+        const wb=XLSX.read(e.target.result,{type:'array'});
+        let out='',trunc=false;
+        wb.SheetNames.forEach(sn=>{const ws=wb.Sheets[sn];const json=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});const rows=json.slice(0,MAX_ROWS);if(json.length>MAX_ROWS)trunc=true;const csv=rows.map(r=>r.map(c=>String(c||'').replace(/,/g,';')).join(',')).join('\n');if(csv.trim())out+=`[Hoja: ${sn} — ${rows.length} filas${json.length>MAX_ROWS?' de '+json.length:''}]\n${csv}\n\n`;});
+        const final=out.slice(0,MAX_CHARS);res({text:final,truncated:trunc||out.length>MAX_CHARS});
+      }catch{res({text:'[Error leyendo Excel]',truncated:false});}}
       r.readAsArrayBuffer(file);
     }else if(n.endsWith('.csv')||n.endsWith('.txt')||n.endsWith('.md')){
-      const r=new FileReader();
-      r.onload=e=>{
-        const full=e.target.result||'';
-        // For CSV, also limit rows
-        const lines=full.split('\n').slice(0,MAX_ROWS+1);
-        const text=lines.join('\n').slice(0,MAX_CHARS);
-        res({text,truncated:full.length>MAX_CHARS||full.split('\n').length>MAX_ROWS});
-      };
-      r.readAsText(file);
-    }else res({text:`[${file.name} — tipo no soportado]`,truncated:false});
+      const r=new FileReader();r.onload=e=>{const full=e.target.result||'';const lines=full.split('\n').slice(0,MAX_ROWS);const text=lines.join('\n').slice(0,MAX_CHARS);res({text,truncated:full.split('\n').length>MAX_ROWS||full.length>MAX_CHARS});};r.readAsText(file);
+    }else res({text:`[${file.name}]`,truncated:false});
   });
 }
 
 async function handleFiles(files,type){
   const p=activeProj();if(!p)return;
-  // Collect current text field values BEFORE re-render
-  const ctxVal=document.getElementById('ctx')?.value;
-  if(ctxVal!==undefined&&ctxVal!==null)p.context=ctxVal;
-  const objVal=document.getElementById('obj')?.value;
-  if(objVal!==undefined&&objVal!==null)p.objective=objVal;
+  // Preserve current text before any re-render
+  const ctxEl=document.getElementById('ctx');if(ctxEl)p.context=ctxEl.value;
+  const objEl=document.getElementById('obj');if(objEl)p.objective=objEl.value;
 
-  let pending=files.length;
-  Array.from(files).forEach(async f=>{
+  const arr=Array.from(files);
+  for(const f of arr){
     const {text,truncated}=await readFile(f);
-    if(type==='mat')p.materials.push({name:f.name,note:'',size:f.size,content:text,truncated});
-    else{if(!p.contextFiles)p.contextFiles=[];p.contextFiles.push({name:f.name,size:f.size,content:text,truncated});}
-    pending--;
-    if(pending===0){
-      await saveProject(p);
-      renderStep();
-      showToast(`${files.length} archivo${files.length>1?'s':''} cargado${files.length>1?'s':''}${truncated?' (truncado a '+MAX_ROWS+' filas)':''}`);
-    }
-  });
+    const fid='f'+Date.now()+Math.random().toString(36).slice(2);
+    const rec={id:fid,name:f.name,note:'',size:f.size,truncated,content:text};
+    setSS('syncing');
+    try{
+      await sbPost('file_contents',{id:fid,project_id:p.id,file_type:type,name:f.name,note:'',size:f.size,truncated,content:text});
+      setSS('ok');
+    }catch{setSS('error');}
+    if(type==='mat')p.materials.push(rec);
+    else{if(!p.contextFiles)p.contextFiles=[];p.contextFiles.push(rec);}
+  }
+  renderStep();
+  showToast(`${arr.length} archivo${arr.length>1?'s':''} guardado${arr.length>1?'s':''} en la nube`);
 }
 
 const SYS=`Sos Sherlock, agente experto en UX/UI y métricas para e-commerce y retail latinoamericano.
-Perfil: especialista en usabilidad, diseño de interacción, research y análisis de métricas. Obsesivo con los números. Tono directo, colega-a-colega.
-REGLAS DE FORMATO (nunca las rompas):
-- Jamás uses #, ##, ### ni ####
+Perfil: especialista en usabilidad, diseño de interacción, research y métricas. Obsesivo con los números. Tono directo, colega-a-colega.
+REGLAS DE FORMATO (crítico):
+- Jamás uses #, ##, ###
 - Jamás uses LaTeX ni notación matemática con \[ \] ni \( \)
-- Para títulos de sección usá solo **Título** en una línea sola
-- Para listas usá - item
-- Calculá los números directamente y escribilos: "1.31%" no fórmulas
-- Dejá líneas en blanco entre secciones
-FLUJO DE ANÁLISIS INICIAL:
-Antes del análisis hacé 2-3 preguntas clave. Respondé exactamente así:
-PREGUNTAS:{"intro":"frase breve","questions":["pregunta 1","pregunta 2","pregunta 3"]}
-Luego del análisis y en cada refinamiento incluí al final:
+- Para títulos de sección: **Título** en línea sola
+- Para listas: - item
+- Calculá los números y escribilos directamente
+- Líneas en blanco entre secciones
+FLUJO: Antes del análisis hacé 2-3 preguntas. Formato:
+PREGUNTAS:{"intro":"frase","questions":["p1","p2","p3"]}
+Al final de análisis y refinamientos incluí:
 CHIPS:["sugerencia 1","sugerencia 2","pregunta de profundización"]`;
 
-function truncate(s,n=MAX_CHARS){if(!s)return'';return s.length>n?s.slice(0,n)+'\n[truncado]':s;}
+function trunc(s,n=MAX_CHARS){if(!s)return'';return s.length>n?s.slice(0,n)+'\n[truncado]':s;}
 
-function buildPrompt(p,chat,userMsg){
+function buildPrompt(p,ch,userMsg){
   const focus=FOCUSES[activeFocus];
   const focusBg=settings.focusBg?.[focus]||'';
-  const globalRules=settings.globalRules||'';
-  // Use in-memory content (not the metadata saved to DB)
-  const matContent=(p.materials||[]).map(f=>`=== ARCHIVO: ${f.name}${f.note?' ('+f.note+')':''} ===\n${f.content||'[sin contenido — archivo solo guardado por nombre]'}`).join('\n\n');
-  const ctxContent=(p.contextFiles||[]).map(f=>`=== CONTEXTO: ${f.name} ===\n${f.content||''}`).join('\n\n');
-  const connCtx=projects.filter(x=>p.connectedTo?.includes(x.id)).map(x=>`[${x.name}] Objetivo: ${x.objective||'—'}`).join('\n');
-  const history=(chat?.messages||[]).filter(m=>m.role==='agent'||m.role==='user').slice(-6).map(m=>`${m.role==='agent'?'Sherlock':'Usuario'}: ${(typeof m.content==='string'?m.content:'[preguntas]').slice(0,500)}`).join('\n');
-  return`${globalRules?`REGLAS MÁXIMAS:\n${globalRules}\n\n`:''}${focusBg?`BACKGROUND ${focus}:\n${focusBg}\n\n`:''}PROYECTO: ${p.name} · ${focus}
+  const gr=settings.globalRules||'';
+  const matTxt=(p.materials||[]).map(f=>`=== ARCHIVO: ${f.name}${f.note?' ('+f.note+')':''} ===\n${f.content||'[sin contenido]'}`).join('\n\n');
+  const ctxTxt=(p.contextFiles||[]).map(f=>`=== CONTEXTO: ${f.name} ===\n${f.content||''}`).join('\n\n');
+  const connTxt=projects.filter(x=>p.connectedTo?.includes(x.id)).map(x=>`[${x.name}] Objetivo: ${x.objective||'—'}`).join('\n');
+  const hist=(ch?.messages||[]).filter(m=>m.role==='agent'||m.role==='user').slice(-6).map(m=>`${m.role==='agent'?'Sherlock':'Usuario'}: ${(typeof m.content==='string'?m.content:'[respuestas]').slice(0,500)}`).join('\n');
+  return`${gr?`REGLAS MÁXIMAS:\n${gr}\n\n`:''}${focusBg?`BACKGROUND ${focus}:\n${focusBg}\n\n`:''}PROYECTO: ${p.name} · ${focus}
 OBJETIVO: ${p.objective||'(no especificado)'}
 KPIs: ${[...(p.kpis||[]),p.kpiCustom].filter(Boolean).join(', ')||'(no especificados)'}
-CONTEXTO: ${truncate(p.context||'(no especificado)',1200)}${ctxContent?'\n\n'+ctxContent:''}
-DATOS Y MATERIALES:\n${matContent||'(sin archivos cargados en esta sesión)'}
+CONTEXTO: ${trunc(p.context||'(no especificado)',1200)}${ctxTxt?'\n\n'+ctxTxt:''}
+DATOS Y MATERIALES:\n${matTxt||'(sin archivos)'}
 LIMITANTES TÉC: ${p.limitTech||'(ninguna)'}
 LIMITANTES CTX: ${p.limitCtx||'(ninguna)'}
-REFS: ${(p.links||[]).map(l=>`[${l.type}] ${l.url}`).join(', ')||'(ninguna)'}${connCtx?'\n\nCONECTADOS:\n'+connCtx:''}${history?'\n\nCONVERSACIÓN:\n'+history:''}
-${userMsg?'USUARIO: '+userMsg:'INSTRUCCIÓN: Iniciá con las preguntas previas al análisis.'}`;
+REFS: ${(p.links||[]).map(l=>`[${l.type}] ${l.url}`).join(', ')||'(ninguna)'}${connTxt?'\n\nCONECTADOS:\n'+connTxt:''}${hist?'\n\nCONVERSACIÓN:\n'+hist:''}
+${userMsg?'USUARIO: '+userMsg:'INSTRUCCIÓN: Iniciá con las preguntas previas.'}`;
 }
 
-function parsePreguntas(raw){const m=raw.match(/PREGUNTAS:(\{[\s\S]*?\})/);if(!m)return null;try{return JSON.parse(m[1]);}catch{return null;}}
+function parsePre(raw){const m=raw.match(/PREGUNTAS:(\{[\s\S]*?\})/);if(!m)return null;try{return JSON.parse(m[1]);}catch{return null;}}
 function parseChips(raw){const m=raw.match(/CHIPS:\[(.+?)\]/s);if(!m)return[];try{return JSON.parse('['+m[1]+']');}catch{return[];}}
 function cleanRaw(raw){return raw.replace(/PREGUNTAS:\{[\s\S]*?\}/s,'').replace(/CHIPS:\[.+?\]/s,'').trim();}
 
@@ -730,73 +614,49 @@ async function callGroq(content){
   const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:SYS,messages:[{role:'user',content}]})});
   const d=await r.json();if(d.error)throw new Error(d.error);return d.text;
 }
-function addThinking(){
-  const wrap=document.getElementById('chat-wrap');if(!wrap)return null;
-  const d=document.createElement('div');d.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Analizando...</div>`;
-  wrap.appendChild(d);wrap.scrollTop=wrap.scrollHeight;return d;
-}
+function addThinking(){const w=document.getElementById('chat-wrap');if(!w)return null;const d=document.createElement('div');d.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Analizando...</div>`;w.appendChild(d);w.scrollTop=w.scrollHeight;return d;}
+
 async function runAnalysis(){
-  collectCurrent();const p=activeProj();const chat=activeChat();if(!p||!chat)return;
-  chat.messages=[];const wrap=document.getElementById('chat-wrap');if(wrap)wrap.innerHTML='';
+  cc();const p=activeProj();const ch=activeChat();if(!p||!ch)return;
+  ch.messages=[];const w=document.getElementById('chat-wrap');if(w)w.innerHTML='';
   const t=addThinking();
-  try{
-    const raw=await callGroq(buildPrompt(p,chat,null));
-    const preguntas=parsePreguntas(raw);
-    if(preguntas)chat.messages.push({role:'questions',intro:preguntas.intro,questions:preguntas.questions});
-    else{const chips=parseChips(raw);chat.messages.push({role:'agent',content:cleanRaw(raw),chips});}
-    await saveChat(chat);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
-  }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
+  try{const raw=await callGroq(buildPrompt(p,ch,null));const pre=parsePre(raw);if(pre)ch.messages.push({role:'questions',intro:pre.intro,questions:pre.questions});else{const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});}await spChat(ch);renderStep();setTimeout(()=>{const w2=document.getElementById('chat-wrap');if(w2)w2.scrollTop=w2.scrollHeight;},100);}
+  catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
 async function submitAnswers(){
-  const chat=activeChat();if(!chat)return;
-  const lastQ=chat.messages.findLast(m=>m.role==='questions');if(!lastQ)return;
-  const answers=lastQ.questions.map((_,i)=>{const el=document.getElementById('qa-'+i);return el?el.value.trim():'';});
-  const answersText=lastQ.questions.map((q,i)=>`${q}\nRespuesta: ${answers[i]||'(sin respuesta)'}`).join('\n\n');
-  chat.messages.push({role:'user',content:`Respuestas:\n${answersText}`});
-  renderStep();const t=addThinking();
-  try{
-    const raw=await callGroq(buildPrompt(activeProj(),chat,`El usuario respondió las preguntas. Entregá el análisis completo.\n\n${answersText}`));
-    const chips=parseChips(raw);chat.messages.push({role:'agent',content:cleanRaw(raw),chips});
-    await saveChat(chat);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
-  }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
+  const ch=activeChat();if(!ch)return;
+  const lastQ=ch.messages.findLast(m=>m.role==='questions');if(!lastQ)return;
+  const ans=lastQ.questions.map((_,i)=>{const el=document.getElementById('qa-'+i);return el?el.value.trim():'';});
+  const txt=lastQ.questions.map((q,i)=>`${q}\nRespuesta: ${ans[i]||'(sin respuesta)'}`).join('\n\n');
+  ch.messages.push({role:'user',content:`Respuestas:\n${txt}`});renderStep();const t=addThinking();
+  try{const raw=await callGroq(buildPrompt(activeProj(),ch,`El usuario respondió. Entregá el análisis completo.\n\n${txt}`));const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});await spChat(ch);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);}
+  catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
 async function sendMsg(msg){
-  const p=activeProj();const chat=activeChat();if(!p||!chat)return;
+  const p=activeProj();const ch=activeChat();if(!p||!ch)return;
   const inp=document.getElementById('chat-in');const text=msg||(inp?.value?.trim());if(!text)return;
-  chat.messages.push({role:'user',content:text});if(inp)inp.value='';renderStep();
-  const t=addThinking();const wrap=document.getElementById('chat-wrap');if(wrap)wrap.scrollTop=wrap.scrollHeight;
-  try{
-    const raw=await callGroq(buildPrompt(p,chat,text));
-    const chips=parseChips(raw);chat.messages.push({role:'agent',content:cleanRaw(raw),chips});
-    await saveChat(chat);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);
-  }catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
+  ch.messages.push({role:'user',content:text});if(inp)inp.value='';renderStep();
+  const t=addThinking();const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;
+  try{const raw=await callGroq(buildPrompt(p,ch,text));const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});await spChat(ch);renderStep();setTimeout(()=>{const w2=document.getElementById('chat-wrap');if(w2)w2.scrollTop=w2.scrollHeight;},100);}
+  catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}
 }
 function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
 
 function toggleQuick(){qpOpen=!qpOpen;document.getElementById('qpanel').classList.toggle('open',qpOpen);}
 function qpKey(e){if(e.key==='Enter')qpSend();}
 async function qpSend(){
-  const inp=document.getElementById('qp-in');const msg=inp?.value?.trim();if(!msg)return;
-  inp.value='';qpMsgs.push({r:'user',t:msg});renderQP();
-  const wrap=document.getElementById('qp-msgs');const d=document.createElement('div');d.className='qp-agent';d.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';wrap?.appendChild(d);if(wrap)wrap.scrollTop=wrap.scrollHeight;
+  const inp=document.getElementById('qp-in');const msg=inp?.value?.trim();if(!msg)return;inp.value='';qpMsgs.push({r:'user',t:msg});renderQP();
+  const w=document.getElementById('qp-msgs');const d=document.createElement('div');d.className='qp-agent';d.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';w?.appendChild(d);if(w)w.scrollTop=w.scrollHeight;
   const focus=FOCUSES[activeFocus];const sys=`${SYS}\nFoco: ${focus}${settings.globalRules?'\nReglas: '+settings.globalRules:''}${settings.focusBg?.[focus]?'\nBackground: '+settings.focusBg[focus]:''}`;
-  try{
-    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:sys,messages:[...qpMsgs.slice(-6).map(m=>({role:m.r==='agent'?'assistant':'user',content:m.t})),{role:'user',content:msg}]})});
-    const data=await r.json();const text=cleanRaw(data.text||'');
-    qpMsgs.push({r:'agent',t:text});renderQP();
-  }catch(e){d.textContent='Error: '+e.message;}
+  try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:sys,messages:[...qpMsgs.slice(-6).map(m=>({role:m.r==='agent'?'assistant':'user',content:m.t})),{role:'user',content:msg}]})});const data=await r.json();const text=cleanRaw(data.text||'');qpMsgs.push({r:'agent',t:text});renderQP();}
+  catch(e){d.textContent='Error: '+e.message;}
 }
-function renderQP(){const wrap=document.getElementById('qp-msgs');if(!wrap)return;wrap.innerHTML=qpMsgs.map(m=>m.r==='agent'?`<div class="qp-agent">${renderBubble(m.t)}</div>`:`<div class="qp-user">${escHtml(m.t)}</div>`).join('');wrap.scrollTop=wrap.scrollHeight;}
+function renderQP(){const w=document.getElementById('qp-msgs');if(!w)return;w.innerHTML=qpMsgs.map(m=>m.r==='agent'?`<div class="qp-agent">${rBubble(m.t)}</div>`:`<div class="qp-user">${esc(m.t)}</div>`).join('');w.scrollTop=w.scrollHeight;}
 
 function fmtSz(b){if(!b)return'';if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB';}
 function showToast(msg){const t=document.getElementById('toast');const m=document.getElementById('toast-msg');if(!t||!m)return;m.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
-(async()=>{
-  await loadAll();
-  document.getElementById('loading-screen').style.display='none';
-  document.getElementById('shell').style.display='flex';
-  render();
-})();
+(async()=>{await loadAll();document.getElementById('loading-screen').style.display='none';document.getElementById('shell').style.display='flex';render();})();
 </script>
 </body>
 </html>
