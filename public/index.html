@@ -229,7 +229,7 @@ textarea:focus,.txt-in:focus{border-color:var(--accent)}
    <button class="quick-chat-btn" onclick="toggleQuick()"><i class="ti ti-message-circle"></i> Chat rápido</button>
    <div class="dark-row"><span class="dark-label"><i class="ti ti-moon"></i> Modo oscuro</span><label class="toggle-sw"><input type="checkbox" id="dark-chk" onchange="toggleDark()"/><div class="toggle-track"></div><div class="toggle-thumb"></div></label></div>
    <div class="sync-indicator"><span class="sync-dot" id="sync-dot"></span><span id="sync-txt">Sincronizado</span></div>
-   <div class="sb-ver"><span>v1.2.1</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
+   <div class="sb-ver"><span>v1.2.2</span><button class="settings-btn" onclick="openSettings()"><i class="ti ti-settings"></i> Config</button></div>
   </div>
  </div>
  <div class="main">
@@ -258,7 +258,7 @@ const COLORS=['#4f46e5','#0d9488','#d97706','#dc2626','#7c3aed','#059669','#0891
 const STEPS=['Objetivo & KPIs','Contexto','Materiales','Limitantes','Referencias','Análisis'];
 const PROJ_ICONS=['ti-shopping-cart','ti-pill','ti-device-mobile','ti-chart-bar','ti-users','ti-bulb','ti-microscope','ti-target','ti-trending-up','ti-folder','ti-map','ti-rocket','ti-star','ti-heart','ti-package','ti-tag','ti-brush','ti-layout','ti-database','ti-eye','ti-flask','ti-gift','ti-home','ti-truck','ti-camera','ti-globe','ti-settings','ti-search'];
 const MODEL='llama-3.3-70b-versatile';
-const MAX_ROWS=400;
+const MAX_ROWS=150;
 const PRESETS=[['Es el análisis inicial','Quiero identificar fricciones','Busco oportunidades de mejora'],['Tengo datos de los últimos 3 meses','Solo tengo datos del último mes','Tengo datos históricos de +6 meses'],['El equipo puede iterar en 2 semanas','Hay restricciones de sprint','Tenemos disponibilidad inmediata']];
 let projects=[],settings={globalRules:'',focusBg:{}};
 let dark=false,activeFocus=0,activeId=null,activeChatId=null,step=0;
