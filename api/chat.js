@@ -9,25 +9,20 @@ export default async function handler(req, res) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'API key not configured' });
 
-  // Try models in order of preference, fallback if one fails
   const modelsToTry = [
     model || 'llama-3.3-70b-versatile',
     'llama-3.1-8b-instant',
-    'gemma2-9b-it'
+    'qwen-qwq-32b'
   ];
 
-  // Truncate system + messages to stay under ~9000 tokens (~36000 chars)
-  const MAX_TOTAL_CHARS = 32000;
-  let systemContent = (system || '').slice(0, 4000);
+  // Hard cap to stay under token limits
+  const MAX_CHARS = 28000;
+  const systemContent = (system || '').slice(0, 2500);
   let userContent = messages?.[messages.length - 1]?.content || '';
-  
-  // If total is too big, truncate user content
-  const available = MAX_TOTAL_CHARS - systemContent.length;
+  const available = MAX_CHARS - systemContent.length;
   if (userContent.length > available) {
     userContent = userContent.slice(0, available) + '\n[... contenido truncado para respetar límite de tokens]';
   }
-
-  const truncatedMessages = [{ role: 'user', content: userContent }];
 
   for (const mdl of modelsToTry) {
     try {
@@ -39,21 +34,21 @@ export default async function handler(req, res) {
           max_tokens: 1500,
           messages: [
             { role: 'system', content: systemContent },
-            ...truncatedMessages
+            { role: 'user', content: userContent }
           ]
         })
       });
       const data = await groqRes.json();
       if (!groqRes.ok) {
-        // If token limit error, try next model
-        if (data.error?.message?.includes('too large') || data.error?.message?.includes('tokens')) continue;
-        return res.status(groqRes.status).json({ error: data.error?.message || 'Groq error' });
+        const msg = data.error?.message || '';
+        if (msg.includes('too large') || msg.includes('tokens') || msg.includes('decommissioned') || msg.includes('deprecated')) continue;
+        return res.status(groqRes.status).json({ error: msg || 'Groq error' });
       }
       return res.status(200).json({ text: data.choices?.[0]?.message?.content || '', model: mdl });
     } catch (e) {
       continue;
     }
   }
-  
-  return res.status(500).json({ error: 'Todos los modelos fallaron. Intentá reducir el tamaño de los archivos.' });
+
+  return res.status(500).json({ error: 'No se pudo procesar el request. Intentá reducir el contenido de los archivos.' });
 }
