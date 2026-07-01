@@ -349,7 +349,7 @@ function renderMain(){
     if(tb)tb.style.display='none';if(sn)sn.style.display='none';
     if(sb)sb.innerHTML=`<div class="global-empty"><div class="global-empty-icon"><i class="ti ti-search"></i></div><h2>Sin proyectos en ${FOCUSES[activeFocus]}</h2><p>Creá tu primer proyecto para empezar a analizar con Sherlock.</p><button class="btn btn-primary" onclick="newProject()" style="margin-top:4px;font-size:13px;padding:8px 18px"><i class="ti ti-plus"></i> Crear proyecto</button></div>`;
   }else{if(tb)tb.style.display='flex';if(sn)sn.style.display='flex';renderStep();}
-}
+} 
 
 function switchProj(id){cc();activeId=id;const p=activeProj();activeChatId=p?.chats?.[0]?.id||null;step=0;showAll={mat:false,ctx:false};sl();render();}
 function switchChat(id){activeChatId=id;sl();renderSidebar();if(step===5)renderStep();}
