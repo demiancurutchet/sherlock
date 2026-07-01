@@ -513,7 +513,27 @@ function parseChips(raw){const m=raw.match(/CHIPS:\[(.+?)\]/s);if(!m)return[];tr
 function cleanRaw(raw){return raw.replace(/PREGUNTAS:\{[\s\S]*?\}/s,'').replace(/CHIPS:\[.+?\]/s,'').trim();}
 async function callGroq(content){const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:MODEL,system:SYS,messages:[{role:'user',content}]})});const d=await r.json();if(d.error)throw new Error(d.error);return d.text;}
 function addThinking(){const w=document.getElementById('chat-wrap');if(!w)return null;const d=document.createElement('div');d.innerHTML=`<div class="agent-label"><i class="ti ti-eye"></i> Sherlock</div><div class="thinking"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Analizando...</div>`;w.appendChild(d);w.scrollTop=w.scrollHeight;return d;}
-async function runAnalysis(){cc();const p=activeProj();const ch=activeChat();if(!p||!ch)return;ch.messages=[];const w=document.getElementById('chat-wrap');if(w)w.innerHTML='';const t=addThinking();try{const raw=await callGroq(buildPrompt(p,ch,null));const pre=parsePre(raw);if(pre)ch.messages.push({role:'questions',intro:pre.intro,questions:pre.questions});else{const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});}await spChat(ch,p.id);renderStep();setTimeout(()=>{const w2=document.getElementById('chat-wrap');if(w2)w2.scrollTop=w2.scrollHeight;},100);}catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}}
+async function runAnalysis(){
+  cc();const p=activeProj();const ch=activeChat();if(!p||!ch)return;
+  // Save existing messages before clearing — restore if Groq fails
+  const prevMessages=[...ch.messages];
+  ch.messages=[];
+  const w=document.getElementById('chat-wrap');if(w)w.innerHTML='';
+  const t=addThinking();
+  try{
+    const raw=await callGroq(buildPrompt(p,ch,null));
+    const pre=parsePre(raw);
+    if(pre)ch.messages.push({role:'questions',intro:pre.intro,questions:pre.questions});
+    else{const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});}
+    await spChat(ch,p.id);renderStep();
+    setTimeout(()=>{const w2=document.getElementById('chat-wrap');if(w2)w2.scrollTop=w2.scrollHeight;},100);
+  }catch(e){
+    // Restore previous messages on error
+    ch.messages=prevMessages;
+    renderStep();
+    showToast('Error al analizar: '+e.message);
+  }
+}
 async function submitAnswers(){const ch=activeChat();if(!ch)return;const lastQ=ch.messages.findLast(m=>m.role==='questions');if(!lastQ)return;const ans=lastQ.questions.map((_,i)=>{const el=document.getElementById('qa-'+i);return el?el.value.trim():'';});const txt=lastQ.questions.map((q,i)=>`${q}\nRespuesta: ${ans[i]||'(sin respuesta)'}`).join('\n\n');ch.messages.push({role:'user',content:`Respuestas:\n${txt}`});renderStep();const t=addThinking();try{const raw=await callGroq(buildPrompt(activeProj(),ch,`El usuario respondió. Entregá el análisis completo.\n\n${txt}`));const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});await spChat(ch,activeProj().id);renderStep();setTimeout(()=>{const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;},100);}catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}}
 async function sendMsg(msg){const p=activeProj();const ch=activeChat();if(!p||!ch)return;const inp=document.getElementById('chat-in');const text=msg||(inp?.value?.trim());if(!text)return;ch.messages.push({role:'user',content:text});if(inp)inp.value='';renderStep();const t=addThinking();const w=document.getElementById('chat-wrap');if(w)w.scrollTop=w.scrollHeight;try{const raw=await callGroq(buildPrompt(p,ch,text));const chips=parseChips(raw);ch.messages.push({role:'agent',content:cleanRaw(raw),chips});await spChat(ch,p.id);renderStep();setTimeout(()=>{const w2=document.getElementById('chat-wrap');if(w2)w2.scrollTop=w2.scrollHeight;},100);}catch(e){if(t)t.innerHTML=`<div class="agent-bubble" style="color:var(--danger)">Error: ${e.message}</div>`;}}
 function chatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
